@@ -15,6 +15,7 @@
 		D8ED324E2806BD1B00191093 /* LivestormBarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8ED324D2806BD1B00191093 /* LivestormBarTests.swift */; };
 		D8ED32582806BD1B00191093 /* LivestormBarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8ED32572806BD1B00191093 /* LivestormBarUITests.swift */; };
 		D8ED325A2806BD1B00191093 /* LivestormBarUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8ED32592806BD1B00191093 /* LivestormBarUITestsLaunchTests.swift */; };
+		D8ED32682806BFEA00191093 /* OAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = D8ED32672806BFEA00191093 /* OAuth2 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8ED32682806BFEA00191093 /* OAuth2 in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,6 +142,9 @@
 			dependencies = (
 			);
 			name = LivestormBar;
+			packageProductDependencies = (
+				D8ED32672806BFEA00191093 /* OAuth2 */,
+			);
 			productName = LivestormBar;
 			productReference = D8ED32352806BD1800191093 /* LivestormBar.app */;
 			productType = "com.apple.product-type.application";
@@ -212,6 +217,9 @@
 				Base,
 			);
 			mainGroup = D8ED322C2806BD1800191093;
+			packageReferences = (
+				D8ED32662806BFEA00191093 /* XCRemoteSwiftPackageReference "OAuth2" */,
+			);
 			productRefGroup = D8ED32362806BD1800191093 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -575,6 +583,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D8ED32662806BFEA00191093 /* XCRemoteSwiftPackageReference "OAuth2" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/p2/OAuth2";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D8ED32672806BFEA00191093 /* OAuth2 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8ED32662806BFEA00191093 /* XCRemoteSwiftPackageReference "OAuth2" */;
+			productName = OAuth2;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		D8ED323C2806BD1800191093 /* LivestormBar.xcdatamodeld */ = {
