@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
+        <capability name="NSView safe area layout guides" minToolsVersion="12.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -683,7 +684,7 @@
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
+                <windowController storyboardIdentifier="mainWindowController" id="B8D-0N-5wS" sceneMemberID="viewController">
                     <window key="window" title="LivestormBar" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -701,26 +702,26 @@
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
         </scene>
-        <!--View Controller-->
+        <!--mainWindowController-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="LivestormBar" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="mainWindowController" id="XfG-lQ-9wD" customClass="ViewController" customModule="LivestormBar" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="500" height="500"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <tabView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZvR-Um-KAP">
-                                <rect key="frame" x="5" y="0.0" width="462" height="243"/>
+                                <rect key="frame" x="5" y="0.0" width="482" height="454"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
                                     <tabViewItem label="Connection" identifier="" id="F58-Lr-6Z5">
                                         <view key="view" id="o9T-Xj-kNk">
-                                            <rect key="frame" x="10" y="33" width="442" height="197"/>
+                                            <rect key="frame" x="10" y="33" width="462" height="408"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UoQ-Mk-7gy">
-                                                    <rect key="frame" x="85" y="145" width="272" height="32"/>
+                                                    <rect key="frame" x="85" y="356" width="272" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="push" title="Connect to your Google Calendar" bezelStyle="rounded" image="Google_Calendar" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="39h-Sl-HxG">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -732,18 +733,23 @@
                                     </tabViewItem>
                                     <tabViewItem label="Settings" identifier="" id="Csm-5r-N5S">
                                         <view key="view" id="2Og-US-V12">
-                                            <rect key="frame" x="10" y="33" width="442" height="197"/>
+                                            <rect key="frame" x="10" y="33" width="462" height="408"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                     </tabViewItem>
                                 </tabViewItems>
                             </tabView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="1yU-fC-j5H"/>
+                        <viewLayoutGuide key="layoutMargins" id="gT9-xu-l8U"/>
                     </view>
+                    <connections>
+                        <outlet property="test" destination="UoQ-Mk-7gy" id="Oda-d8-iCu"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="75" y="863"/>
         </scene>
     </scenes>
     <resources>
