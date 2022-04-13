@@ -14,6 +14,13 @@ class ViewController: NSViewController {
 
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        //view.window?.styleMask.remove(.resizable)
+        //view.window?.styleMask.remove(.miniaturizable)
+        //view.window?.center()
+    }
 
     override var representedObject: Any? {
         didSet {

@@ -12,31 +12,20 @@ import SwiftUI
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     var statusItem: NSStatusItem?
-    var popOver = NSPopover()
     var statusBarItem: StatusBarItemController!
-    var preferencesWindow = NSWindowController()
+    
+    var isPreferencesWindowOpened = false
+
 
 
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         statusBarItem = StatusBarItemController()
         statusBarItem.setAppDelegate(appdelegate: self)
-        
-        let mainStoryboard = NSStoryboard.init(name: NSStoryboard.Name("Main"), bundle: nil)
-        preferencesWindow = mainStoryboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("mainWindowController")) as! NSWindowController
-        preferencesWindow.close()
-        
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
-    }
-    
-    @objc func MenuButtonToggle(){
-            //Showing Popoverr
-        if let menuButton = statusItem?.button{
-            self.popOver.show(relativeTo: menuButton.bounds, of: menuButton, preferredEdge: NSRectEdge.minY)
-        }
     }
     
     
@@ -234,10 +223,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return .terminateNow
     }
     
+    
     @objc
     func openPreferencesWindow(_: NSStatusBarButton?) {
         NSLog("Open preferences window")
-        preferencesWindow.showWindow(self)
+        
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        guard let vc = storyboard.instantiateController(withIdentifier: .init(stringLiteral: "preferencesID")) as? ViewController else { return }
+        
+        let window = NSWindow(contentViewController: vc)
+        window.makeKeyAndOrderFront(nil)
+        window.orderFrontRegardless()
+        isPreferencesWindowOpened = true
         //
         
         //        if preferencesWindow != nil {

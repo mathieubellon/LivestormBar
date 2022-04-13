@@ -48,6 +48,7 @@
 		D8ED32532806BD1B00191093 /* LivestormBarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LivestormBarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8ED32572806BD1B00191093 /* LivestormBarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivestormBarUITests.swift; sourceTree = "<group>"; };
 		D8ED32592806BD1B00191093 /* LivestormBarUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivestormBarUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D8ED326B28070D5000191093 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +100,7 @@
 		D8ED32372806BD1800191093 /* LivestormBar */ = {
 			isa = PBXGroup;
 			children = (
+				D8ED326B28070D5000191093 /* Info.plist */,
 				D8ED32382806BD1800191093 /* AppDelegate.swift */,
 				D8ED323A2806BD1800191093 /* ViewController.swift */,
 				D8ED323F2806BD1B00191093 /* Assets.xcassets */,
@@ -435,6 +437,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LivestormBar/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -460,6 +463,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LivestormBar/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
