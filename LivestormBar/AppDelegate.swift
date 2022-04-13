@@ -6,20 +6,57 @@
 //
 
 import Cocoa
+import SwiftUI
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    
+    var statusItem: NSStatusItem?
+    var popOver = NSPopover()
 
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
+        createMenuBar()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
+    
+    @objc func MenuButtonToggle(){
+            //Showing Popoverr
+        if let menuButton = statusItem?.button{
+            self.popOver.show(relativeTo: menuButton.bounds, of: menuButton, preferredEdge: NSRectEdge.minY)
+        }
+    }
+    
+    
+    func createMenuBar() -> Void {
+        let menuView = MenuBarView()
+        popOver.behavior = .transient
+        popOver.animates = true
+        popOver.contentViewController = NSViewController()
+        popOver.contentViewController?.view = NSHostingView(rootView: menuView)
+        
+        // Creating status bar button
+        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+        
+        // Safe check if statusbar is created
+        guard let logo = NSImage(named: NSImage.Name("logo-primary-svg")) else { return }
+
+        let resizedLogo = NSImage(size: NSSize(width: 18, height: 18), flipped: false) { (dstRect) -> Bool in
+            logo.draw(in: dstRect)
+            return true
+        }
+        if let MenuButton = statusItem?.button{
+            MenuButton.image = resizedLogo
+            MenuButton.action = #selector(MenuButtonToggle)
+        }
+    }
+    
+    
+    
+    
 
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
         return true

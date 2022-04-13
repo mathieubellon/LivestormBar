@@ -16,6 +16,7 @@
 		D8ED32582806BD1B00191093 /* LivestormBarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8ED32572806BD1B00191093 /* LivestormBarUITests.swift */; };
 		D8ED325A2806BD1B00191093 /* LivestormBarUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8ED32592806BD1B00191093 /* LivestormBarUITestsLaunchTests.swift */; };
 		D8ED32682806BFEA00191093 /* OAuth2 in Frameworks */ = {isa = PBXBuildFile; productRef = D8ED32672806BFEA00191093 /* OAuth2 */; };
+		D8ED326A2806C2CB00191093 /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8ED32692806C2CB00191093 /* MenuBarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		D8ED32532806BD1B00191093 /* LivestormBarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LivestormBarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8ED32572806BD1B00191093 /* LivestormBarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivestormBarUITests.swift; sourceTree = "<group>"; };
 		D8ED32592806BD1B00191093 /* LivestormBarUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivestormBarUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D8ED32692806C2CB00191093 /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				D8ED32412806BD1B00191093 /* Main.storyboard */,
 				D8ED32442806BD1B00191093 /* LivestormBar.entitlements */,
 				D8ED323C2806BD1800191093 /* LivestormBar.xcdatamodeld */,
+				D8ED32692806C2CB00191093 /* MenuBarView.swift */,
 			);
 			path = LivestormBar;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8ED323B2806BD1800191093 /* ViewController.swift in Sources */,
+				D8ED326A2806C2CB00191093 /* MenuBarView.swift in Sources */,
 				D8ED32392806BD1800191093 /* AppDelegate.swift in Sources */,
 				D8ED323E2806BD1800191093 /* LivestormBar.xcdatamodeld in Sources */,
 			);
