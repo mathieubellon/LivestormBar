@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D8A2B4062807231100D9C741 /* GoogleLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B4052807231100D9C741 /* GoogleLoader.swift */; };
+		D8A2B4082807416F00D9C741 /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B4072807416F00D9C741 /* EventModel.swift */; };
+		D8A2B40A28084D6F00D9C741 /* StatusBarItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B40928084D6F00D9C741 /* StatusBarItemController.swift */; };
 		D8ED32392806BD1800191093 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8ED32382806BD1800191093 /* AppDelegate.swift */; };
 		D8ED323B2806BD1800191093 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8ED323A2806BD1800191093 /* ViewController.swift */; };
 		D8ED323E2806BD1800191093 /* LivestormBar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D8ED323C2806BD1800191093 /* LivestormBar.xcdatamodeld */; };
@@ -36,6 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D8A2B4052807231100D9C741 /* GoogleLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoader.swift; sourceTree = "<group>"; };
+		D8A2B4072807416F00D9C741 /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
+		D8A2B40928084D6F00D9C741 /* StatusBarItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarItemController.swift; sourceTree = "<group>"; };
 		D8ED32352806BD1800191093 /* LivestormBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LivestormBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8ED32382806BD1800191093 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D8ED323A2806BD1800191093 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +113,9 @@
 				D8ED32412806BD1B00191093 /* Main.storyboard */,
 				D8ED32442806BD1B00191093 /* LivestormBar.entitlements */,
 				D8ED323C2806BD1800191093 /* LivestormBar.xcdatamodeld */,
+				D8A2B4052807231100D9C741 /* GoogleLoader.swift */,
+				D8A2B4072807416F00D9C741 /* EventModel.swift */,
+				D8A2B40928084D6F00D9C741 /* StatusBarItemController.swift */,
 			);
 			path = LivestormBar;
 			sourceTree = "<group>";
@@ -264,9 +273,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8A2B40A28084D6F00D9C741 /* StatusBarItemController.swift in Sources */,
 				D8ED323B2806BD1800191093 /* ViewController.swift in Sources */,
 				D8ED32392806BD1800191093 /* AppDelegate.swift in Sources */,
 				D8ED323E2806BD1800191093 /* LivestormBar.xcdatamodeld in Sources */,
+				D8A2B4082807416F00D9C741 /* EventModel.swift in Sources */,
+				D8A2B4062807231100D9C741 /* GoogleLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,6 +448,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MTL54JQNU5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LivestormBar/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -462,6 +475,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MTL54JQNU5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LivestormBar/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";

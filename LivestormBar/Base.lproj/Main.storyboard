@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
+        <plugIn identifier="com.apple.imagekit.ibplugin" version="20037"/>
         <capability name="NSView safe area layout guides" minToolsVersion="12.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -690,13 +691,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <tabView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZvR-Um-KAP">
-                                <rect key="frame" x="5" y="0.0" width="482" height="454"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <rect key="frame" x="0.0" y="0.0" width="500" height="454"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
                                     <tabViewItem label="Connection" identifier="" id="F58-Lr-6Z5">
                                         <view key="view" id="o9T-Xj-kNk">
-                                            <rect key="frame" x="10" y="33" width="462" height="408"/>
+                                            <rect key="frame" x="10" y="33" width="480" height="408"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UoQ-Mk-7gy">
@@ -706,13 +707,30 @@
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
+                                                    <connections>
+                                                        <action selector="connectToYourGoogleCalendar:" target="XfG-lQ-9wD" id="vCH-qd-TIi"/>
+                                                    </connections>
                                                 </button>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TXg-FY-4Jx">
+                                                    <rect key="frame" x="-5" y="213" width="467" height="16"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Non authenticated yet" id="v5P-sS-dRK">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                                <ikImageView wantsLayer="YES" fixedFrame="YES" editable="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oSZ-Td-T7n">
+                                                    <rect key="frame" x="171" y="243" width="100" height="100"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <color key="backgroundColor" red="0.50002289" green="0.50002289" blue="0.50002289" alpha="1" colorSpace="deviceRGB"/>
+                                                </ikImageView>
                                             </subviews>
                                         </view>
                                     </tabViewItem>
                                     <tabViewItem label="Settings" identifier="" id="Csm-5r-N5S">
                                         <view key="view" id="2Og-US-V12">
-                                            <rect key="frame" x="10" y="33" width="462" height="408"/>
+                                            <rect key="frame" x="10" y="33" width="480" height="408"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                     </tabViewItem>
@@ -723,7 +741,9 @@
                         <viewLayoutGuide key="layoutMargins" id="gT9-xu-l8U"/>
                     </view>
                     <connections>
-                        <outlet property="test" destination="UoQ-Mk-7gy" id="Oda-d8-iCu"/>
+                        <outlet property="ConnectToCalendarButton" destination="UoQ-Mk-7gy" id="p1b-7z-zd7"/>
+                        <outlet property="ikAvatar" destination="oSZ-Td-T7n" id="l1D-MQ-nxG"/>
+                        <outlet property="nameLabel" destination="TXg-FY-4Jx" id="1ws-9D-LMH"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
