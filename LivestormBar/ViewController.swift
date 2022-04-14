@@ -40,7 +40,7 @@ class ViewController: NSViewController {
     }
 
     @IBAction func connectToYourGoogleCalendar(_ sender: Any) {
-        
+
         // show what is happening
         ConnectToCalendarButton?.title = "Authorizing..."
         ConnectToCalendarButton?.isEnabled = false
@@ -89,7 +89,7 @@ class ViewController: NSViewController {
                 try loader.oauth2.handleRedirectURL(url)
             }
             catch let error {
-                print(error)
+                print("handleRedirect: \(error)")
             }
         }
         else {

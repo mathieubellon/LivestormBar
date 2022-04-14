@@ -65,8 +65,55 @@ class GoogleLoader: OAuth2DataLoader {
         }
     }
     
+    func requestTodayEvents(path: String, callback: @escaping ((CalendarResponse?, Error?) -> Void)) {
+        let url = baseURL.appendingPathComponent(path)
+        
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = "www.googleapis.com"
+        urlComponents.path = path
+        urlComponents.queryItems = [
+           URLQueryItem(name: "timeMax", value: "2022-04-14T23:59:59Z"),
+           URLQueryItem(name: "timeMin", value: "2022-04-14T00:00:00Z"),
+        ]
+        print(urlComponents.url!)
+        
+        let req = oauth2.request(forURL: urlComponents.url!)
+        
+        perform(request: req) { response in
+            do {
+                let data = try response.responseData()
+//                print(try response.responseJSON())
+                let error = response.error
+                let decoder = JSONDecoder()
+                let calResponse = try decoder.decode(CalendarResponse.self, from: data)
+                
+                
+                if error != nil {
+                    DispatchQueue.main.async {
+                        print(error)
+                    }
+                }
+                else {
+                    DispatchQueue.main.async {
+                        callback(calResponse, nil)
+                    }
+                }
+            }
+            catch let error {
+                DispatchQueue.main.async {
+                    callback(nil, error)
+                }
+            }
+        }
+    }
+    
     func requestUserdata(callback: @escaping ((_ dict: OAuth2JSON?, _ error: Error?) -> Void)) {
         request(path: "/oauth2/v1/userinfo", callback: callback)
+    }
+    
+    func requestTodayEvents(calendarID: String, callback: @escaping ((_ dict: CalendarResponse?, _ error: Error?) -> Void)) {
+        requestTodayEvents(path: "/calendar/v3/calendars/\(calendarID)/events", callback: callback)
     }
 }
 

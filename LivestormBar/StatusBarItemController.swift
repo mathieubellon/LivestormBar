@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import OAuth2
 
 
 class StatusBarItemController: NSObject, NSMenuDelegate {
@@ -35,12 +36,11 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
     override
     init() {
         super.init()
-
+        let loader = GoogleLoader()
         statusItem = NSStatusBar.system.statusItem(
             withLength: NSStatusItem.variableLength
         )
         
-        let allitems = getTodayEvents()
         
 
 
@@ -49,13 +49,30 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         statusItemMenu.addItem(NSMenuItem.separator())
         statusItemMenu.addItem(withTitle: "Mes prochaine réunions",
                      action: #selector(NSText.selectAll(_:)), keyEquivalent: "")
-        for event in allitems {
-            statusItemMenu.addItem(
-                withTitle: event.summary,
-                action: #selector(AppDelegate.openPreferencesWindow),
-                keyEquivalent: ","
-            )
-        }
+        
+        
+        loader.requestTodayEvents(calendarID: "ecriretech@gmail.com", callback: { calendarResponse, error in
+            if let error = error {
+                switch error {
+                case OAuth2Error.requestCancelled:
+                    print("first error : \(error)")
+                default:
+                    print("second error : \(error)")
+                }
+            }
+            else {
+                
+
+                for event in calendarResponse?.items ?? [] {
+                    self.statusItemMenu.addItem(
+                        withTitle: "  \(event.start?.dateTime! ?? "")// \(event.end?.dateTime! ?? "") -- \(event.summary ?? "")",
+                        action: #selector(AppDelegate.openPreferencesWindow),
+                        keyEquivalent: ""
+                    )
+                }
+            }
+        })
+        
         statusItemMenu.addItem(NSMenuItem.separator())
         statusItemMenu.addItem(withTitle: "Créer une réunion",
                                action: #selector(AppDelegate.openPreferencesWindow), keyEquivalent: "M")
@@ -101,6 +118,9 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
     func setAppDelegate(appdelegate: AppDelegate) {
         self.appdelegate = appdelegate
     }
+    let loader = GoogleLoader()
+    
+    
     @objc
     func statusMenuBarAction(sender _: NSStatusItem) {
         NSLog("User clicked menuBar to open")
