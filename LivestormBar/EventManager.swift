@@ -19,6 +19,7 @@ struct CalendarItem: Decodable {
     let htmlLink: String?
     let end: End?
     let start: Start?
+    let description: String?
 }
 
 struct End: Decodable {

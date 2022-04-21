@@ -41,7 +41,7 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
             withLength: NSStatusItem.variableLength
         )
         enableButtonAction()
-        
+ 
 
         loader.requestTodayEvents(calendarID: "mathieu@livestorm.co", callback: { calendarResponse, error in
             if let error = error {
@@ -130,7 +130,8 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         guard let startDate = event.start?.dateTime else {
             return
         }
-       
+        let now = Date()
+        var styles = [NSAttributedString.Key: Any]()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm  "
         let dateToSHow = dateFormatter.string(from:startDate)
@@ -143,6 +144,22 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         )
         eventMenuItem.isEnabled = true
         
+        if event.start!.dateTime! < now {
+            eventMenuItem.state = .on
+            eventMenuItem.onStateImage = nil
+            styles[NSAttributedString.Key.foregroundColor] = NSColor.disabledControlTextColor
+            styles[NSAttributedString.Key.font] = NSFont.systemFont(ofSize: 14)
+            styles[NSAttributedString.Key.strikethroughStyle] = NSUnderlineStyle.thick.rawValue
+
+            eventMenuItem.attributedTitle = NSAttributedString(
+                string: dateTitle,
+                attributes: styles
+            )
+        }
+        
+        
+        // SUBMENU
+        
         eventMenuItem.submenu = NSMenu(title: "Bientôt une liste d'action diverses ici")
         
         eventMenuItem.submenu!.addItem(
@@ -150,8 +167,18 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
             action: #selector(AppDelegate.openPreferencesWindow),
             keyEquivalent: ""
         )
+        
+
      
         eventMenuItem.submenu!.addItem(NSMenuItem.separator())
+        
+        if event.description != nil {
+            eventMenuItem.submenu!.addItem(
+                withTitle: event.description!,
+                action: #selector(AppDelegate.openPreferencesWindow),
+                keyEquivalent: "N"
+            )
+        }
         
         eventMenuItem.submenu!.addItem(
             withTitle: "Take notes",
