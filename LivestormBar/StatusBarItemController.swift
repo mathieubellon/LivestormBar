@@ -31,6 +31,7 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         button.sendAction(on: [NSEvent.EventTypeMask.rightMouseDown, NSEvent.EventTypeMask.leftMouseUp, NSEvent.EventTypeMask.leftMouseDown])
         menuIsOpen = false
     }
+
     
     override
     init() {
@@ -39,6 +40,7 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         statusItem = NSStatusBar.system.statusItem(
             withLength: NSStatusItem.variableLength
         )
+        enableButtonAction()
         
 
         loader.requestTodayEvents(calendarID: "mathieu@livestorm.co", callback: { calendarResponse, error in
@@ -57,112 +59,34 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
            
                 self.statusItemMenu.addItem(withTitle: "Réunions du jour",
                              action: #selector(NSText.selectAll(_:)), keyEquivalent: "")
+                
 
+
+                
+                var eventsArray: [CalendarItem] = []
                 for event in calendarResponse?.items ?? [] {
-                    
-                    print(event.start?.dateTime ?? "")
-                    
-                    let str = event.start?.dateTime
-                    let formatter = ISO8601DateFormatter()
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = "HH:mm  "
-                    var dateString: String?
-                    if str != nil{
-                        if let yourDate = formatter.date(from: str!){
-                            dateString = dateFormatter.string(from: yourDate)
-                        }
+                    if event.start != nil  && event.start?.dateTime != nil {
+                        eventsArray.append(event)
                     }
-                    let dateTitle = "\(dateString ?? "????") \(event.summary ?? "No title")"
-                   
-                    
-                    let eventMenuItem = self.statusItemMenu.addItem(
-                        withTitle: dateTitle,
-                        action: nil,
-                        keyEquivalent: ""
-                    )
-                    eventMenuItem.isEnabled = true
-                    
-
-                    
-                    
-                    eventMenuItem.submenu = NSMenu(title: "Bientôt une liste d'action diverses ici")
-                    
-                    eventMenuItem.submenu!.addItem(
-                        withTitle: dateTitle,
-                        action: #selector(AppDelegate.openPreferencesWindow),
-                        keyEquivalent: ""
-                    )
-                    eventMenuItem.submenu!.addItem(NSMenuItem.separator())
-                    let descr = eventMenuItem.submenu!.addItem(
-                        withTitle: "Description",
-                        action: nil,
-                        keyEquivalent: ""
-                    )
-                    let yellowView = NSView(frame: NSRect(x: 10, y: 10, width: 220, height: 22))
-                    yellowView.wantsLayer = true
-                    yellowView.layer?.backgroundColor = NSColor.yellow.cgColor
-                    descr.view = yellowView
-                    
-             
-                    eventMenuItem.submenu!.addItem(
-                        withTitle: "Let's meet agian for a new round of talks concerning our NDA",
-                        action: #selector(AppDelegate.openPreferencesWindow),
-                        keyEquivalent: ""
-                    )
-                 
-                    eventMenuItem.submenu!.addItem(NSMenuItem.separator())
-                    
-                    eventMenuItem.submenu!.addItem(
-                        withTitle: "Take notes",
-                        action: #selector(AppDelegate.openPreferencesWindow),
-                        keyEquivalent: "N"
-                    )
-                  
-                    eventMenuItem.submenu!.addItem(
-                        withTitle: "Participants insights (Linkedin)",
-                        action: #selector(AppDelegate.openPreferencesWindow),
-                        keyEquivalent: "I"
-                    )
-                 
-
-
-                    
-    
+                }
+                eventsArray.sort(by: {$0.start!.dateTime!.compare($1.start!.dateTime!) == .orderedAscending})
+               
+                
+                for event in eventsArray {
+                    self.createEventsSection(event)
                 }
                 
-                self.statusItemMenu.addItem(NSMenuItem.separator())
-                self.statusItemMenu.addItem(withTitle: "Créer une réunion",
-                                       action: #selector(AppDelegate.openPreferencesWindow), keyEquivalent: "M")
-                let quickActionsItem = self.statusItemMenu.addItem(
-                    withTitle: "Actions rapides",
-                    action: nil,
-                    keyEquivalent: ""
-                )
-                quickActionsItem.isEnabled = true
-                quickActionsItem.submenu = NSMenu(title: "Bientôt une liste d'action diverses ici")
-                let openLinkFromClipboardItem = NSMenuItem()
-                openLinkFromClipboardItem.title = "status_bar_section_join_from_clipboard"
-                openLinkFromClipboardItem.action = #selector(AppDelegate.openPreferencesWindow)
-                openLinkFromClipboardItem.keyEquivalent = ""
-                quickActionsItem.submenu!.addItem(openLinkFromClipboardItem)
-                self.statusItemMenu.addItem(NSMenuItem.separator())
-                self.statusItemMenu.addItem(
-                    withTitle: "Préférence",
-                    action: #selector(AppDelegate.openPreferencesWindow),
-                    keyEquivalent: ","
-                )
+                self.createMeetingSection()
+                self.createActionsSection()
+         
 
-                self.statusItemMenu.addItem(
-                    withTitle: "Quitter LivestormBar",
-                    action: #selector(AppDelegate.quit),
-                    keyEquivalent: "q"
-                )
+                
             }
         })
         
 
 
-        enableButtonAction()
+
     }
 
     @objc
@@ -197,5 +121,70 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
                 statusItem.button?.performClick(nil) // ...and click
             }
         }
+    }
+    
+    func createEventsSection(_ event: CalendarItem){
+        
+        print(event.start?.dateTime ?? "")
+        
+        guard let startDate = event.start?.dateTime else {
+            return
+        }
+       
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm  "
+        let dateToSHow = dateFormatter.string(from:startDate)
+        
+        let dateTitle = "\(dateToSHow) \(event.summary ?? "No title")"
+        let eventMenuItem = self.statusItemMenu.addItem(
+            withTitle: dateTitle,
+            action: nil,
+            keyEquivalent: ""
+        )
+        eventMenuItem.isEnabled = true
+        
+        eventMenuItem.submenu = NSMenu(title: "Bientôt une liste d'action diverses ici")
+        
+        eventMenuItem.submenu!.addItem(
+            withTitle: dateTitle,
+            action: #selector(AppDelegate.openPreferencesWindow),
+            keyEquivalent: ""
+        )
+     
+        eventMenuItem.submenu!.addItem(NSMenuItem.separator())
+        
+        eventMenuItem.submenu!.addItem(
+            withTitle: "Take notes",
+            action: #selector(AppDelegate.openPreferencesWindow),
+            keyEquivalent: "N"
+        )
+      
+        eventMenuItem.submenu!.addItem(
+            withTitle: "Participants insights (Linkedin)",
+            action: #selector(AppDelegate.openPreferencesWindow),
+            keyEquivalent: "I"
+        )
+     
+    }
+    
+    func createMeetingSection(){
+        self.statusItemMenu.addItem(NSMenuItem.separator())
+        self.statusItemMenu.addItem(withTitle: "Créer une réunion",
+                               action: #selector(AppDelegate.openPreferencesWindow), keyEquivalent: "M")
+    }
+    
+    func createActionsSection(){
+        self.statusItemMenu.addItem(NSMenuItem.separator())
+        self.statusItemMenu.addItem(
+            withTitle: "Préférence",
+            action: #selector(AppDelegate.openPreferencesWindow),
+            keyEquivalent: ","
+        )
+
+        self.statusItemMenu.addItem(
+            withTitle: "Quitter LivestormBar",
+            action: #selector(AppDelegate.quit),
+            keyEquivalent: "q"
+        )
     }
 }

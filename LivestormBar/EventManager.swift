@@ -27,7 +27,7 @@ struct End: Decodable {
 }
 
 struct Start: Decodable {
-    let dateTime: String?
+    let dateTime: Date?
     let timeZone: String?
 }
 

@@ -77,6 +77,7 @@ class GoogleLoader: OAuth2DataLoader {
         urlComponents.queryItems = [
            URLQueryItem(name: "timeMax", value: "\(todayDate)T23:59:59Z"),
            URLQueryItem(name: "timeMin", value: "\(todayDate)T00:00:00Z"),
+           URLQueryItem(name: "singleEvents", value: "true"),
         ]
         print(urlComponents.url!)
         
@@ -88,6 +89,7 @@ class GoogleLoader: OAuth2DataLoader {
 //                print(try response.responseJSON())
                 let error = response.error
                 let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .iso8601
                 let calResponse = try decoder.decode(CalendarResponse.self, from: data)
                 
                 

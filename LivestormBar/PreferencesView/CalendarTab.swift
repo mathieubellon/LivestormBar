@@ -12,12 +12,16 @@ import SwiftUI
 
 struct CalendarTab: View {
     
-
+    init(){
+        print("Open calendar tab")
+        
+    }
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
 
-            Divider()
+            
             yourCalendar()
+            Spacer()
 
         }.padding()
     }
@@ -25,6 +29,9 @@ struct CalendarTab: View {
 
 struct yourCalendar: View {
     @State var showingModal = false
+    
+    
+
 
     var body: some View {
         HStack {
@@ -32,15 +39,21 @@ struct yourCalendar: View {
 
 
             Text("preferences_general_shortcut_join_next")
-          
+            
+            
+            
+            Button("Disconnect") {
+                forgetTokens()
+            }
 
             Spacer()
+            
 
-            Button(action: { self.showingModal.toggle() }) {
-                Text("preferences_general_all_shortcut")
-            }.sheet(isPresented: $showingModal) {
-                Text("modal___")
-            }
+//            Button(action: { self.showingModal.toggle() }) {
+//                Text("Disconnect")
+//            }.sheet(isPresented: $showingModal) {
+//                Text("Are you sure")
+//            }
         }
     }
 }
@@ -50,4 +63,9 @@ struct yourCalendar_Previews: PreviewProvider{
     static var previews: some View{
         PreferencesView()
     }
+}
+
+func forgetTokens() {
+    NSLog("Deleting token")
+    loader.oauth2.forgetTokens()
 }

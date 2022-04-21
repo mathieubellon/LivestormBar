@@ -36,10 +36,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         statusBarItem = StatusBarItemController()
         statusBarItem.setAppDelegate(appdelegate: self)
-//        let ud = UserDefaults.standard
-//        ud.set("john", forKey: "name")
-//        
-//        print(UserDefaults.standard.value(forKey: "name"))
         
     }
 

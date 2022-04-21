@@ -744,11 +744,50 @@
                         <outlet property="ConnectToCalendarButton" destination="UoQ-Mk-7gy" id="p1b-7z-zd7"/>
                         <outlet property="ikAvatar" destination="oSZ-Td-T7n" id="l1D-MQ-nxG"/>
                         <outlet property="nameLabel" destination="TXg-FY-4Jx" id="1ws-9D-LMH"/>
+                        <outlet property="viewwww" destination="2Og-US-V12" id="rgO-KG-JfU"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="81" y="429"/>
+        </scene>
+        <!--Event Detail Controller-->
+        <scene sceneID="D4u-Vw-6l4">
+            <objects>
+                <viewController id="Fsv-gW-nh4" customClass="EventDetailController" customModule="LivestormBar" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="cnv-Lr-7qi">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oZU-nE-1Zu">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <subviews>
+                                    <customView fixedFrame="YES" id="5oH-7P-ygZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="221" height="300"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </customView>
+                                    <customView fixedFrame="YES" id="i4k-89-ptS">
+                                        <rect key="frame" x="231" y="0.0" width="219" height="300"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </customView>
+                                </subviews>
+                                <holdingPriorities>
+                                    <real value="250"/>
+                                    <real value="250"/>
+                                </holdingPriorities>
+                            </splitView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="oZU-nE-1Zu" secondAttribute="bottom" id="8YJ-0p-fzB"/>
+                            <constraint firstItem="oZU-nE-1Zu" firstAttribute="leading" secondItem="cnv-Lr-7qi" secondAttribute="leading" id="aBm-Cb-sVS"/>
+                            <constraint firstItem="oZU-nE-1Zu" firstAttribute="top" secondItem="cnv-Lr-7qi" secondAttribute="top" id="fyN-3F-Zx5"/>
+                            <constraint firstAttribute="trailing" secondItem="oZU-nE-1Zu" secondAttribute="trailing" id="gQz-zg-2T8"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="WBa-CW-9rl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="74" y="1021"/>
         </scene>
     </scenes>
     <resources>
