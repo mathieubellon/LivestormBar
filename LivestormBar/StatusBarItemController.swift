@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 import OAuth2
 
-
 class StatusBarItemController: NSObject, NSMenuDelegate {
     var statusItem: NSStatusItem!
     var statusItemMenu: NSMenu!
@@ -36,18 +35,13 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
     override
     init() {
         super.init()
-        let loader = GoogleLoader()
+
         statusItem = NSStatusBar.system.statusItem(
             withLength: NSStatusItem.variableLength
         )
         
-        
 
-
-
-        
-        
-        loader.requestTodayEvents(calendarID: "ecriretech@gmail.com", callback: { calendarResponse, error in
+        loader.requestTodayEvents(calendarID: "mathieu@livestorm.co", callback: { calendarResponse, error in
             if let error = error {
                 switch error {
                 case OAuth2Error.requestCancelled:
@@ -60,7 +54,8 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
                 self.statusItemMenu = NSMenu(title: "LivestormBar in Status Bar Menu")
                 self.statusItemMenu.delegate = self
                 self.statusItemMenu.addItem(NSMenuItem.separator())
-                self.statusItemMenu.addItem(withTitle: "Mes prochaine réunions",
+           
+                self.statusItemMenu.addItem(withTitle: "Réunions du jour",
                              action: #selector(NSText.selectAll(_:)), keyEquivalent: "")
 
                 for event in calendarResponse?.items ?? [] {
@@ -69,21 +64,15 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
                     
                     let str = event.start?.dateTime
                     let formatter = ISO8601DateFormatter()
-                    
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "HH:mm  "
-                    var dateString: String
-                    if let yourDate = formatter.date(from: str!){
-                        dateString = dateFormatter.string(from: yourDate)
-                    }else{
-                        dateString = "     "
+                    var dateString: String?
+                    if str != nil{
+                        if let yourDate = formatter.date(from: str!){
+                            dateString = dateFormatter.string(from: yourDate)
+                        }
                     }
-                
-            
-            
-
-                    
-                    let dateTitle = "\(dateString) \(event.summary ?? "No title")"
+                    let dateTitle = "\(dateString ?? "????") \(event.summary ?? "No title")"
                    
                     
                     let eventMenuItem = self.statusItemMenu.addItem(
@@ -92,6 +81,10 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
                         keyEquivalent: ""
                     )
                     eventMenuItem.isEnabled = true
+                    
+
+                    
+                    
                     eventMenuItem.submenu = NSMenu(title: "Bientôt une liste d'action diverses ici")
                     
                     eventMenuItem.submenu!.addItem(
@@ -100,11 +93,16 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
                         keyEquivalent: ""
                     )
                     eventMenuItem.submenu!.addItem(NSMenuItem.separator())
-                    eventMenuItem.submenu!.addItem(
+                    let descr = eventMenuItem.submenu!.addItem(
                         withTitle: "Description",
                         action: nil,
                         keyEquivalent: ""
                     )
+                    let yellowView = NSView(frame: NSRect(x: 10, y: 10, width: 220, height: 22))
+                    yellowView.wantsLayer = true
+                    yellowView.layer?.backgroundColor = NSColor.yellow.cgColor
+                    descr.view = yellowView
+                    
              
                     eventMenuItem.submenu!.addItem(
                         withTitle: "Let's meet agian for a new round of talks concerning our NDA",

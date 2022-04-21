@@ -9,6 +9,20 @@ import Cocoa
 import SwiftUI
 import OAuth2
 
+
+func getTodayDate() -> String{
+    let date = Date()
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    return dateFormatter.string(from: date)
+}
+
+
+
+
+
+
+
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
 
@@ -17,11 +31,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var preferencesWindow: NSWindow! = nil
     var isPreferencesWindowOpened = false
     
-    
+
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         statusBarItem = StatusBarItemController()
         statusBarItem.setAppDelegate(appdelegate: self)
+//        let ud = UserDefaults.standard
+//        ud.set("john", forKey: "name")
+//        
+//        print(UserDefaults.standard.value(forKey: "name"))
+        
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -59,44 +78,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @objc
     func openPreferencesWindow(_: NSStatusBarButton?) {
         NSLog("Open preferences window")
-        
-        let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        guard let vc = storyboard.instantiateController(withIdentifier: .init(stringLiteral: "preferencesID")) as? ViewController else { return }
-        
-        let window = NSWindow(contentViewController: vc)
-        window.makeKeyAndOrderFront(nil)
-        window.orderFrontRegardless()
-        isPreferencesWindowOpened = true
-        //
-        
-        //        if preferencesWindow != nil {
-//            preferencesWindow.close()
-//        }
-//        preferencesWindow = NSWindow(
-//            contentRect: NSRect(x: 0, y: 0, width: 700, height: 610),
-//            styleMask: [.closable, .titled, .resizable],
-//            backing: .buffered,
-//            defer: false
-//        )
-//
-//        preferencesWindow.title = "Bar Settings"
-//
-//
-//        let storyboard: NSStoryboard = NSStoryboard(name: "Main", bundle: nil)
-//
-//
-//
-//
-//
-//        preferencesWindow.makeKeyAndOrderFront(nil)
-//        // allow the preference window can be focused automatically when opened
-//        NSApplication.shared.activate(ignoringOtherApps: true)
-//
-//        let controller = NSWindowController(window: preferencesWindow)
-//        controller.showWindow(self)
-//
-//        preferencesWindow.center()
-//        preferencesWindow.orderFrontRegardless()
+        let contentView = PreferencesView()
+        if preferencesWindow != nil {
+            preferencesWindow.close()
+        }
+        preferencesWindow = NSWindow(
+            contentRect: NSRect(x: 0, y: 0, width: 700, height: 610),
+            styleMask: [.closable, .titled, .resizable],
+            backing: .buffered,
+            defer: false
+        )
+
+        preferencesWindow.title = "Settings"
+        preferencesWindow.contentView = NSHostingView(rootView: contentView)
+        preferencesWindow.makeKeyAndOrderFront(nil)
+        // allow the preference window can be focused automatically when opened
+        NSApplication.shared.activate(ignoringOtherApps: true)
+
+        let controller = NSWindowController(window: preferencesWindow)
+        controller.showWindow(self)
+
+        preferencesWindow.center()
+        preferencesWindow.orderFrontRegardless()
     }
 
     

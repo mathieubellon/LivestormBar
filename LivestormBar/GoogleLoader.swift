@@ -8,6 +8,7 @@
 import Foundation
 import OAuth2
 
+let loader = GoogleLoader()
 
 class GoogleLoader: OAuth2DataLoader {
     
@@ -68,11 +69,7 @@ class GoogleLoader: OAuth2DataLoader {
     func requestTodayEvents(path: String, callback: @escaping ((CalendarResponse?, Error?) -> Void)) {
         //let url = baseURL.appendingPathComponent(path)
         
-        let date = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let todayDate = dateFormatter.string(from: date)
-        
+        let todayDate = getTodayDate()
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "www.googleapis.com"

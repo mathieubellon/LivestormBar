@@ -31,6 +31,6 @@ struct Start: Decodable {
     let timeZone: String?
 }
 
-let loader = GoogleLoader()
+
 
 

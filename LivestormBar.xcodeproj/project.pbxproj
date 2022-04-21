@@ -10,8 +10,11 @@
 		D8A2B4062807231100D9C741 /* GoogleLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B4052807231100D9C741 /* GoogleLoader.swift */; };
 		D8A2B4082807416F00D9C741 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B4072807416F00D9C741 /* EventManager.swift */; };
 		D8A2B40A28084D6F00D9C741 /* StatusBarItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B40928084D6F00D9C741 /* StatusBarItemController.swift */; };
+		D8A2B40F2810439A00D9C741 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B40E2810439A00D9C741 /* Preferences.swift */; };
+		D8A2B4112810460500D9C741 /* GeneralTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B4102810460500D9C741 /* GeneralTab.swift */; };
+		D8A2B413281047A100D9C741 /* CalendarTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B412281047A100D9C741 /* CalendarTab.swift */; };
+		D8A2B41528115E3B00D9C741 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B41428115E3B00D9C741 /* ViewController.swift */; };
 		D8ED32392806BD1800191093 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8ED32382806BD1800191093 /* AppDelegate.swift */; };
-		D8ED323B2806BD1800191093 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8ED323A2806BD1800191093 /* ViewController.swift */; };
 		D8ED323E2806BD1800191093 /* LivestormBar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D8ED323C2806BD1800191093 /* LivestormBar.xcdatamodeld */; };
 		D8ED32402806BD1B00191093 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8ED323F2806BD1B00191093 /* Assets.xcassets */; };
 		D8ED32432806BD1B00191093 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8ED32412806BD1B00191093 /* Main.storyboard */; };
@@ -42,9 +45,12 @@
 		D8A2B4052807231100D9C741 /* GoogleLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoader.swift; sourceTree = "<group>"; };
 		D8A2B4072807416F00D9C741 /* EventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 		D8A2B40928084D6F00D9C741 /* StatusBarItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarItemController.swift; sourceTree = "<group>"; };
+		D8A2B40E2810439A00D9C741 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		D8A2B4102810460500D9C741 /* GeneralTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTab.swift; sourceTree = "<group>"; };
+		D8A2B412281047A100D9C741 /* CalendarTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTab.swift; sourceTree = "<group>"; };
+		D8A2B41428115E3B00D9C741 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D8ED32352806BD1800191093 /* LivestormBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LivestormBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8ED32382806BD1800191093 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D8ED323A2806BD1800191093 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D8ED323D2806BD1800191093 /* LivestormBar.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LivestormBar.xcdatamodel; sourceTree = "<group>"; };
 		D8ED323F2806BD1B00191093 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D8ED32422806BD1B00191093 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -83,6 +89,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D8A2B40D2810438500D9C741 /* PreferencesWindow */ = {
+			isa = PBXGroup;
+			children = (
+				D8A2B40E2810439A00D9C741 /* Preferences.swift */,
+				D8A2B4102810460500D9C741 /* GeneralTab.swift */,
+				D8A2B412281047A100D9C741 /* CalendarTab.swift */,
+			);
+			path = PreferencesWindow;
+			sourceTree = "<group>";
+		};
 		D8ED322C2806BD1800191093 = {
 			isa = PBXGroup;
 			children = (
@@ -106,9 +122,9 @@
 		D8ED32372806BD1800191093 /* LivestormBar */ = {
 			isa = PBXGroup;
 			children = (
+				D8A2B40D2810438500D9C741 /* PreferencesWindow */,
 				D8ED326B28070D5000191093 /* Info.plist */,
 				D8ED32382806BD1800191093 /* AppDelegate.swift */,
-				D8ED323A2806BD1800191093 /* ViewController.swift */,
 				D8ED323F2806BD1B00191093 /* Assets.xcassets */,
 				D8ED32412806BD1B00191093 /* Main.storyboard */,
 				D8ED32442806BD1B00191093 /* LivestormBar.entitlements */,
@@ -116,6 +132,7 @@
 				D8A2B4052807231100D9C741 /* GoogleLoader.swift */,
 				D8A2B4072807416F00D9C741 /* EventManager.swift */,
 				D8A2B40928084D6F00D9C741 /* StatusBarItemController.swift */,
+				D8A2B41428115E3B00D9C741 /* ViewController.swift */,
 			);
 			path = LivestormBar;
 			sourceTree = "<group>";
@@ -273,8 +290,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8A2B4112810460500D9C741 /* GeneralTab.swift in Sources */,
 				D8A2B40A28084D6F00D9C741 /* StatusBarItemController.swift in Sources */,
-				D8ED323B2806BD1800191093 /* ViewController.swift in Sources */,
+				D8A2B40F2810439A00D9C741 /* Preferences.swift in Sources */,
+				D8A2B41528115E3B00D9C741 /* ViewController.swift in Sources */,
+				D8A2B413281047A100D9C741 /* CalendarTab.swift in Sources */,
 				D8ED32392806BD1800191093 /* AppDelegate.swift in Sources */,
 				D8ED323E2806BD1800191093 /* LivestormBar.xcdatamodeld in Sources */,
 				D8A2B4082807416F00D9C741 /* EventManager.swift in Sources */,
