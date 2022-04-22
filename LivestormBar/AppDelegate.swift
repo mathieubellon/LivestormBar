@@ -29,6 +29,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusBarItem.setAppDelegate(appdelegate: self)
         
         
+        
         loader.oauth2.authConfig.authorizeContext = self
         NotificationCenter.default.removeObserver(self, name: OAuth2AppDidReceiveCallbackNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.handleRedirect(_:)), name: OAuth2AppDidReceiveCallbackNotification, object: nil)

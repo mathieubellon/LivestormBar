@@ -42,6 +42,15 @@ struct UserInfo: Decodable {
     let locale: String
 }
 
+//
+//class calEvent: ObservableObject{
+//    let id: String
+//    let summary: String?
+//    let htmlLink: String?
+//    let end: End?
+//    let start: Start?
+//    let description: String?
+//}
 
 
 

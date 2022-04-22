@@ -37,28 +37,19 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
     override
     init() {
         super.init()
-
         statusItem = NSStatusBar.system.statusItem(
             withLength: NSStatusItem.variableLength
         )
         enableButtonAction()
-                        self.statusItemMenu = NSMenu(title: "LivestormBar in Status Bar Menu")
-                        self.statusItemMenu.delegate = self
-                        self.statusItemMenu.addItem(NSMenuItem.separator())
-        self.statusItemMenu.addItem(withTitle: "Réunions du jour",
-                                     action: #selector(NSText.selectAll(_:)), keyEquivalent: "")
- 
-        
-
-                        self.createMeetingSection()
-                        self.createActionsSection()
-
+        self.statusItemMenu = NSMenu(title: "LivestormBar in Status Bar Menu")
+        self.statusItemMenu.delegate = self
     }
 
     @objc
     func menuWillOpen(_: NSMenu) {
         menuIsOpen = true
-        fetchEvents()
+        
+        updateMenu()
     }
 
     @objc
@@ -88,7 +79,18 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         }
     }
     
-    func fetchEvents(){
+    func updateMenu(){
+        self.statusItemMenu.autoenablesItems = false
+        self.statusItemMenu.removeAllItems()
+        self.statusItemMenu.addItem(NSMenuItem.separator())
+        self.statusItemMenu.addItem(withTitle: "Réunions du jour",
+                                     action: #selector(NSText.selectAll(_:)), keyEquivalent: "")
+
+        self.createEventsSection()
+
+    }
+    
+    func createEventsSection(){
         loader.requestTodayEvents(calendarID: email, callback: { calendarResponse, error in
             if let error = error {
                 switch error {
@@ -99,14 +101,6 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
                 }
             }
             else {
-
-
-                self.statusItemMenu.addItem(withTitle: "Réunions du jour",
-                             action: #selector(NSText.selectAll(_:)), keyEquivalent: "")
-
-
-
-
                 var eventsArray: [CalendarItem] = []
                 for event in calendarResponse?.items ?? [] {
                     if event.start != nil  && event.start?.dateTime != nil {
@@ -115,20 +109,17 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
                 }
                 eventsArray.sort(by: {$0.start!.dateTime!.compare($1.start!.dateTime!) == .orderedAscending})
 
-
                 for event in eventsArray {
-                    self.createEventsSection(event)
+                    self.createEventMenuItem(event)
                 }
-
-
-
-
-
+                self.createMeetingSection()
+                self.createActionsSection()
             }
+
         })
     }
     
-    func createEventsSection(_ event: CalendarItem){
+    func createEventMenuItem(_ event: CalendarItem){
         
         print(event.start?.dateTime ?? "")
         
