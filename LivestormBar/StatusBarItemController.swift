@@ -8,13 +8,14 @@
 import Foundation
 import SwiftUI
 import OAuth2
+import Defaults
 
 class StatusBarItemController: NSObject, NSMenuDelegate {
     var statusItem: NSStatusItem!
     var statusItemMenu: NSMenu!
     var menuIsOpen = false
     weak var appdelegate: AppDelegate!
-
+    @Default(.email) var email
     
     func enableButtonAction() {
         let button: NSStatusBarButton = statusItem.button!
@@ -47,8 +48,48 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         self.statusItemMenu.addItem(withTitle: "Réunions du jour",
                                      action: #selector(NSText.selectAll(_:)), keyEquivalent: "")
  
+        
 
-        loader.requestTodayEvents(calendarID: "mathieu@livestorm.co", callback: { calendarResponse, error in
+                        self.createMeetingSection()
+                        self.createActionsSection()
+
+    }
+
+    @objc
+    func menuWillOpen(_: NSMenu) {
+        menuIsOpen = true
+        fetchEvents()
+    }
+
+    @objc
+    func menuDidClose(_: NSMenu) {
+        // remove menu when closed so we can override left click behavior
+        statusItem.menu = nil
+        menuIsOpen = false
+    }
+    func setAppDelegate(appdelegate: AppDelegate) {
+        self.appdelegate = appdelegate
+    }
+    
+    
+    @objc
+    func statusMenuBarAction(sender _: NSStatusItem) {
+        if !menuIsOpen, statusItem.menu == nil {
+            let event = NSApp.currentEvent
+
+            // Right button click
+            if event?.type == NSEvent.EventType.rightMouseUp {
+                print("rightclikc")
+            } else if event == nil || event?.type == NSEvent.EventType.leftMouseDown || event?.type == NSEvent.EventType.leftMouseUp {
+                // show the menu as normal
+                statusItem.menu = statusItemMenu
+                statusItem.button?.performClick(nil) // ...and click
+            }
+        }
+    }
+    
+    func fetchEvents(){
+        loader.requestTodayEvents(calendarID: email, callback: { calendarResponse, error in
             if let error = error {
                 switch error {
                 case OAuth2Error.requestCancelled:
@@ -85,44 +126,6 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
 
             }
         })
-        
-
-                        self.createMeetingSection()
-                        self.createActionsSection()
-
-    }
-
-    @objc
-    func menuWillOpen(_: NSMenu) {
-        menuIsOpen = true
-    }
-
-    @objc
-    func menuDidClose(_: NSMenu) {
-        // remove menu when closed so we can override left click behavior
-        statusItem.menu = nil
-        menuIsOpen = false
-    }
-    func setAppDelegate(appdelegate: AppDelegate) {
-        self.appdelegate = appdelegate
-    }
-    let loader = GoogleLoader()
-    
-    
-    @objc
-    func statusMenuBarAction(sender _: NSStatusItem) {
-        if !menuIsOpen, statusItem.menu == nil {
-            let event = NSApp.currentEvent
-
-            // Right button click
-            if event?.type == NSEvent.EventType.rightMouseUp {
-                print("rightclikc")
-            } else if event == nil || event?.type == NSEvent.EventType.leftMouseDown || event?.type == NSEvent.EventType.leftMouseUp {
-                // show the menu as normal
-                statusItem.menu = statusItemMenu
-                statusItem.button?.performClick(nil) // ...and click
-            }
-        }
     }
     
     func createEventsSection(_ event: CalendarItem){

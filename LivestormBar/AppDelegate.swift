@@ -8,6 +8,8 @@
 import Cocoa
 import SwiftUI
 import OAuth2
+import Defaults
+
 
 var preferencesWindow: NSWindow! = nil
 let loader = GoogleLoader()
