@@ -144,7 +144,7 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
             eventMenuItem.onStateImage = nil
             styles[NSAttributedString.Key.foregroundColor] = NSColor.disabledControlTextColor
             styles[NSAttributedString.Key.font] = NSFont.systemFont(ofSize: 14)
-            styles[NSAttributedString.Key.strikethroughStyle] = NSUnderlineStyle.thick.rawValue
+//            styles[NSAttributedString.Key.strikethroughStyle] = NSUnderlineStyle.thick.rawValue
 
             eventMenuItem.attributedTitle = NSAttributedString(
                 string: dateTitle,
@@ -157,29 +157,29 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         
         eventMenuItem.submenu = NSMenu(title: "Bientôt une liste d'action diverses ici")
         
-        eventMenuItem.submenu!.addItem(
-            withTitle: dateTitle,
-            action: #selector(AppDelegate.openPreferencesWindow),
-            keyEquivalent: ""
-        )
-        
 
-     
-        eventMenuItem.submenu!.addItem(NSMenuItem.separator())
-
-        if event.description != nil {
-            eventMenuItem.submenu!.addItem(
-                withTitle: event.description!,
-                action: #selector(AppDelegate.openPreferencesWindow),
-                keyEquivalent: "N"
-            )
-        }
         if event.extractedLink != nil {
-            eventMenuItem.submenu!.addItem(
-                withTitle: event.extractedLink!,
+            let LSLink = eventMenuItem.submenu!.addItem(
+                withTitle: "Open in default browser",
                 action: #selector(AppDelegate.openLinkInDefaultBrowser(sender:)),
                 keyEquivalent: "O"
             )
+            LSLink.representedObject = event
+        }else{
+            eventMenuItem.submenu!.addItem(
+                withTitle: "No Livestorm meeting link found",
+                action: nil,
+                keyEquivalent: ""
+            )
+        }
+        
+        if event.htmlLink != nil {
+            let GoogleLink = eventMenuItem.submenu!.addItem(
+                withTitle: "Open event in Google Calendar",
+                action: #selector(AppDelegate.openLinkInGoogleCalendar(sender:)),
+                keyEquivalent: "G"
+            )
+            GoogleLink.representedObject = event
         }
 
         

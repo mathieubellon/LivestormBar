@@ -96,8 +96,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @objc
     func openLinkInDefaultBrowser(sender: NSMenuItem){
-        NSWorkspace.shared.open(URL(string: sender.title)!)
-        print(sender.title)
+        if let event: CalendarItem = sender.representedObject as? CalendarItem {
+            NSWorkspace.shared.open(URL(string: event.extractedLink!)!)
+        }
+    }
+    
+    @objc
+    func openLinkInGoogleCalendar(sender: NSMenuItem){
+        if let event: CalendarItem = sender.representedObject as? CalendarItem {
+            NSWorkspace.shared.open(URL(string: event.htmlLink!)!)
+        }
     }
 
     
