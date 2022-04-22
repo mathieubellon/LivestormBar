@@ -20,6 +20,21 @@ struct CalendarItem: Decodable {
     let end: End?
     let start: Start?
     let description: String?
+    let location: String?
+    let conferenceData: Conference?
+    
+    var extractedLink: String?
+    
+}
+
+struct Conference: Decodable{
+    let conferenceId: String
+    let entryPoints: [entryPoint]
+}
+
+struct entryPoint: Decodable{
+    let entryPointType: String
+    let uri: String
 }
 
 struct End: Decodable {

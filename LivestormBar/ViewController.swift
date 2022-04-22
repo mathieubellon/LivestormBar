@@ -84,16 +84,16 @@ class ViewController: NSViewController {
     
     @objc func handleRedirect(_ notification: Notification) {
         if let url = notification.object as? URL {
-            print("Handling redirect...")
+            NSLog("Handling redirect...")
             do {
                 try loader.oauth2.handleRedirectURL(url)
             }
             catch let error {
-                print("handleRedirect: \(error)")
+                NSLog("handleRedirect: \(error)")
             }
         }
         else {
-            print("ici une erreur")
+            NSLog("ici une erreur")
             //show(NSError(domain: NSCocoaErrorDomain, code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid notification: did not contain a URL"]))
         }
     }

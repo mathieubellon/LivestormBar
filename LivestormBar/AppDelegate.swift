@@ -28,8 +28,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusBarItem = StatusBarItemController()
         statusBarItem.setAppDelegate(appdelegate: self)
         
-        
-        
         loader.oauth2.authConfig.authorizeContext = self
         NotificationCenter.default.removeObserver(self, name: OAuth2AppDidReceiveCallbackNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.handleRedirect(_:)), name: OAuth2AppDidReceiveCallbackNotification, object: nil)
@@ -94,6 +92,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         preferencesWindow.center()
         preferencesWindow.orderFrontRegardless()
+    }
+    
+    @objc
+    func openLinkInDefaultBrowser(sender: NSMenuItem){
+        NSWorkspace.shared.open(URL(string: sender.title)!)
+        print(sender.title)
     }
 
     

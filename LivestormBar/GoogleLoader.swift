@@ -5,7 +5,7 @@
 //  Created by Mathieu Bellon on 13/04/2022.
 //
 
-import Foundation
+import SwiftUI
 import OAuth2
 
 
@@ -83,14 +83,13 @@ class GoogleLoader: OAuth2DataLoader {
            URLQueryItem(name: "timeMin", value: "\(todayDate)T00:00:00Z"),
            URLQueryItem(name: "singleEvents", value: "true"),
         ]
-        print(urlComponents.url!)
+        NSLog("url Components: \(urlComponents.url!)") 
         
         let req = oauth2.request(forURL: urlComponents.url!)
         
         perform(request: req) { response in
             do {
                 let data = try response.responseData()
-//                print(try response.responseJSON())
                 let error = response.error
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .iso8601
@@ -99,7 +98,7 @@ class GoogleLoader: OAuth2DataLoader {
                 
                 if error != nil {
                     DispatchQueue.main.async {
-                        print(error!)
+                        NSLog("Error from response Jsondecoder: \(error!)")
                     }
                 }
                 else {

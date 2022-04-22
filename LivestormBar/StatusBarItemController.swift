@@ -48,7 +48,6 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
     @objc
     func menuWillOpen(_: NSMenu) {
         menuIsOpen = true
-        
         updateMenu()
     }
 
@@ -67,10 +66,9 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
     func statusMenuBarAction(sender _: NSStatusItem) {
         if !menuIsOpen, statusItem.menu == nil {
             let event = NSApp.currentEvent
-
             // Right button click
             if event?.type == NSEvent.EventType.rightMouseUp {
-                print("rightclikc")
+                
             } else if event == nil || event?.type == NSEvent.EventType.leftMouseDown || event?.type == NSEvent.EventType.leftMouseUp {
                 // show the menu as normal
                 statusItem.menu = statusItemMenu
@@ -84,7 +82,7 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         self.statusItemMenu.removeAllItems()
         self.statusItemMenu.addItem(NSMenuItem.separator())
         self.statusItemMenu.addItem(withTitle: "Réunions du jour",
-                                     action: #selector(NSText.selectAll(_:)), keyEquivalent: "")
+                                    action: #selector(NSText.selectAll(_:)), keyEquivalent: "")
 
         self.createEventsSection()
 
@@ -95,15 +93,19 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
             if let error = error {
                 switch error {
                 case OAuth2Error.requestCancelled:
-                    print("first error : \(error)")
+                    NSLog("first error : \(error)")
                 default:
-                    print("second error : \(error)")
+                    NSLog("second error : \(error)")
                 }
             }
             else {
                 var eventsArray: [CalendarItem] = []
-                for event in calendarResponse?.items ?? [] {
+                for var event in calendarResponse?.items ?? [] {
                     if event.start != nil  && event.start?.dateTime != nil {
+                        
+                        // extract link from description, location or url
+                        event.extractedLink = getMeetingLink(event)?.url.absoluteString
+                        
                         eventsArray.append(event)
                     }
                 }
@@ -120,9 +122,6 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
     }
     
     func createEventMenuItem(_ event: CalendarItem){
-        
-        print(event.start?.dateTime ?? "")
-        
         guard let startDate = event.start?.dateTime else {
             return
         }
@@ -167,7 +166,7 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
 
      
         eventMenuItem.submenu!.addItem(NSMenuItem.separator())
-        
+
         if event.description != nil {
             eventMenuItem.submenu!.addItem(
                 withTitle: event.description!,
@@ -175,6 +174,14 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
                 keyEquivalent: "N"
             )
         }
+        if event.extractedLink != nil {
+            eventMenuItem.submenu!.addItem(
+                withTitle: event.extractedLink!,
+                action: #selector(AppDelegate.openLinkInDefaultBrowser(sender:)),
+                keyEquivalent: "O"
+            )
+        }
+
         
         eventMenuItem.submenu!.addItem(
             withTitle: "Take notes",

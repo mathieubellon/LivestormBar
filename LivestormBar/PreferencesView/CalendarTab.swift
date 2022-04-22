@@ -27,8 +27,7 @@ let ud = UserDefaults.standard
 struct CalendarTab: View {
     
     init(){
-        print("Open calendar tab")
-        
+        NSLog("Open calendar tab")
     }
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
@@ -107,7 +106,7 @@ struct yourCalendarView_Previews: PreviewProvider{
 func forgetTokens() {
     NSLog("Deleting token")
     loader.oauth2.forgetTokens()
-    print(Bundle.main.bundleIdentifier!)
+    // print(Bundle.main.bundleIdentifier!)
     // TODO : forEach key or Defaults.removeAll(suite: UserDefaults = .standard)
     Defaults.reset("username", "email", "picture", "isauthenticated")
 }
