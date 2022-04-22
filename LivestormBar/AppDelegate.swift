@@ -9,18 +9,8 @@ import Cocoa
 import SwiftUI
 import OAuth2
 
-
-func getTodayDate() -> String{
-    let date = Date()
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd"
-    return dateFormatter.string(from: date)
-}
-
-
-
-
-
+var preferencesWindow: NSWindow! = nil
+let loader = GoogleLoader()
 
 
 @main
@@ -28,7 +18,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     var statusItem: NSStatusItem?
     var statusBarItem: StatusBarItemController!
-    var preferencesWindow: NSWindow! = nil
     var isPreferencesWindowOpened = false
     
 
@@ -36,6 +25,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         statusBarItem = StatusBarItemController()
         statusBarItem.setAppDelegate(appdelegate: self)
+        
+        
+        loader.oauth2.authConfig.authorizeContext = self
+        NotificationCenter.default.removeObserver(self, name: OAuth2AppDidReceiveCallbackNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.handleRedirect(_:)), name: OAuth2AppDidReceiveCallbackNotification, object: nil)
+      
         
     }
 

@@ -32,6 +32,16 @@ struct Start: Decodable {
     let timeZone: String?
 }
 
+struct UserInfo: Decodable {
+    let id: String
+    let email: String
+    let name: String?
+    let given_name: String?
+    let family_name: String?
+    let picture: String?
+    let locale: String
+}
+
 
 
 

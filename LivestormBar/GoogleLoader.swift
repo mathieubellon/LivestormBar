@@ -8,7 +8,7 @@
 import Foundation
 import OAuth2
 
-let loader = GoogleLoader()
+
 
 class GoogleLoader: OAuth2DataLoader {
     
@@ -47,6 +47,10 @@ class GoogleLoader: OAuth2DataLoader {
                 if let avatar = dict["picture"] as? String {
                     profile["picture"] = avatar
                 }
+                if let email = dict["email"] as? String {
+                    profile["email"] = email
+                }
+
                 if let error = (dict["error"] as? OAuth2JSON)?["message"] as? String {
                     DispatchQueue.main.async {
                         callback(nil, OAuth2Error.generic(error))
@@ -95,7 +99,7 @@ class GoogleLoader: OAuth2DataLoader {
                 
                 if error != nil {
                     DispatchQueue.main.async {
-                        print(error)
+                        print(error!)
                     }
                 }
                 else {

@@ -41,6 +41,11 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
             withLength: NSStatusItem.variableLength
         )
         enableButtonAction()
+                        self.statusItemMenu = NSMenu(title: "LivestormBar in Status Bar Menu")
+                        self.statusItemMenu.delegate = self
+                        self.statusItemMenu.addItem(NSMenuItem.separator())
+        self.statusItemMenu.addItem(withTitle: "Réunions du jour",
+                                     action: #selector(NSText.selectAll(_:)), keyEquivalent: "")
  
 
         loader.requestTodayEvents(calendarID: "mathieu@livestorm.co", callback: { calendarResponse, error in
@@ -53,16 +58,14 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
                 }
             }
             else {
-                self.statusItemMenu = NSMenu(title: "LivestormBar in Status Bar Menu")
-                self.statusItemMenu.delegate = self
-                self.statusItemMenu.addItem(NSMenuItem.separator())
-           
+
+
                 self.statusItemMenu.addItem(withTitle: "Réunions du jour",
                              action: #selector(NSText.selectAll(_:)), keyEquivalent: "")
-                
 
 
-                
+
+
                 var eventsArray: [CalendarItem] = []
                 for event in calendarResponse?.items ?? [] {
                     if event.start != nil  && event.start?.dateTime != nil {
@@ -70,22 +73,22 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
                     }
                 }
                 eventsArray.sort(by: {$0.start!.dateTime!.compare($1.start!.dateTime!) == .orderedAscending})
-               
-                
+
+
                 for event in eventsArray {
                     self.createEventsSection(event)
                 }
-                
-                self.createMeetingSection()
-                self.createActionsSection()
-         
 
-                
+
+
+
+
             }
         })
         
 
-
+                        self.createMeetingSection()
+                        self.createActionsSection()
 
     }
 
@@ -108,7 +111,6 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
     
     @objc
     func statusMenuBarAction(sender _: NSStatusItem) {
-        NSLog("User clicked menuBar to open")
         if !menuIsOpen, statusItem.menu == nil {
             let event = NSApp.currentEvent
 

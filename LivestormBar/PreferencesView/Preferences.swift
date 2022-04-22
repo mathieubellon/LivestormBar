@@ -11,8 +11,8 @@ struct PreferencesView: View {
     var body: some View {
         VStack {
             TabView {
-                GeneralTab().tabItem { Text("General") }
                 CalendarTab().tabItem { Text("Connect your calendar") }
+                GeneralTab().tabItem { Text("General") }
             }
         }.padding()
     }
