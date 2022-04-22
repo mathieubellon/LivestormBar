@@ -14,6 +14,7 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
     var statusItem: NSStatusItem!
     var statusItemMenu: NSMenu!
     var menuIsOpen = false
+    var eventsArray: [CalendarItem] = []
     weak var appdelegate: AppDelegate!
     @Default(.email) var email
     
@@ -90,32 +91,34 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
     
     func createEventsSection(){
         loader.requestTodayEvents(calendarID: email, callback: { calendarResponse, error in
-            if let error = error {
-                switch error {
-                case OAuth2Error.requestCancelled:
-                    NSLog("first error : \(error)")
-                default:
-                    NSLog("second error : \(error)")
-                }
-            }
-            else {
-                var eventsArray: [CalendarItem] = []
-                for var event in calendarResponse?.items ?? [] {
-                    if event.start != nil  && event.start?.dateTime != nil {
-                        
-                        // extract link from description, location or url
-                        event.extractedLink = getMeetingLink(event)?.url.absoluteString
-                        
-                        eventsArray.append(event)
+            if Defaults[.email] != "No email" {
+                if let error = error {
+                    switch error {
+                    case OAuth2Error.requestCancelled:
+                        NSLog("first error : \(error)")
+                    default:
+                        NSLog("second error : \(error)")
                     }
-                }
-                eventsArray.sort(by: {$0.start!.dateTime!.compare($1.start!.dateTime!) == .orderedAscending})
+                }else {
+                    self.eventsArray = []
+                    for var event in calendarResponse?.items ?? [] {
+                        if event.start != nil  && event.start?.dateTime != nil {
+                            
+                            // extract link from description, location or url
+                            event.extractedLink = getMeetingLink(event)?.url.absoluteString
+                            
+                            self.eventsArray.append(event)
+                        }
+                    }
+                    self.eventsArray.sort(by: {$0.start!.dateTime!.compare($1.start!.dateTime!) == .orderedAscending})
 
-                for event in eventsArray {
-                    self.createEventMenuItem(event)
-                }
-                self.createMeetingSection()
-                self.createActionsSection()
+                    for event in self.eventsArray {
+                        self.createEventMenuItem(event)
+                    }
+            }
+        
+            self.createMeetingSection()
+            self.createActionsSection()
             }
 
         })
@@ -183,17 +186,12 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         }
 
         
-        eventMenuItem.submenu!.addItem(
+        let noteTaking = eventMenuItem.submenu!.addItem(
             withTitle: "Take notes",
-            action: #selector(AppDelegate.openPreferencesWindow),
+            action: #selector(AppDelegate.openNoteTakingWindow(_:)),
             keyEquivalent: "N"
         )
-      
-        eventMenuItem.submenu!.addItem(
-            withTitle: "Participants insights (Linkedin)",
-            action: #selector(AppDelegate.openPreferencesWindow),
-            keyEquivalent: "I"
-        )
+        noteTaking.representedObject = event
      
     }
     

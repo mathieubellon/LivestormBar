@@ -12,6 +12,8 @@ import Defaults
 
 
 var preferencesWindow: NSWindow! = nil
+var noteTakingWindow: NSWindow! = nil
+
 let loader = GoogleLoader()
 
 
@@ -92,6 +94,34 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         preferencesWindow.center()
         preferencesWindow.orderFrontRegardless()
+    }
+    
+    @objc
+    func openNoteTakingWindow(_ sender: NSMenuItem) {
+        NSLog("Open preferences window")
+        let contentView = NoteTakingView()
+        if noteTakingWindow != nil {
+            noteTakingWindow.close()
+        }
+        noteTakingWindow = NSWindow(
+            contentRect: NSRect(x: 0, y: 0, width: 700, height: 610),
+            styleMask: [.closable, .titled, .resizable],
+            backing: .buffered,
+            defer: false
+        )
+        let event = sender.representedObject as? CalendarItem
+        noteTakingWindow.title = "Notes for \(event?.summary ?? "")"
+        noteTakingWindow.backgroundColor = .white
+        noteTakingWindow.contentView = NSHostingView(rootView: contentView)
+        noteTakingWindow.makeKeyAndOrderFront(nil)
+        // allow the preference window can be focused automatically when opened
+        NSApplication.shared.activate(ignoringOtherApps: true)
+
+        let controller = NSWindowController(window: noteTakingWindow)
+        controller.showWindow(self)
+
+        noteTakingWindow.center()
+        noteTakingWindow.orderFrontRegardless()
     }
     
     @objc
