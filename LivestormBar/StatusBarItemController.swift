@@ -14,26 +14,10 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
     var statusItem: NSStatusItem!
     var statusItemMenu: NSMenu!
     var menuIsOpen = false
-    var eventsArray: [CalendarItem] = []
-    weak var appdelegate: AppDelegate!
-    @Default(.email) var email
     
-    func enableButtonAction() {
-        let button: NSStatusBarButton = statusItem.button!
-        // Safe check if statusbar is created
-        guard let logo = NSImage(named: NSImage.Name("logo-primary-svg")) else { return }
-
-        let resizedLogo = NSImage(size: NSSize(width: 18, height: 18), flipped: false) { (dstRect) -> Bool in
-            logo.draw(in: dstRect)
-            return true
-        }
-        button.image = resizedLogo
-        button.target = self
-        button.action = #selector(statusMenuBarAction)
-        button.sendAction(on: [NSEvent.EventTypeMask.rightMouseDown, NSEvent.EventTypeMask.leftMouseUp, NSEvent.EventTypeMask.leftMouseDown])
-        menuIsOpen = false
-    }
-
+    weak var appdelegate: AppDelegate!
+   
+    
     
     override
     init() {
@@ -45,19 +29,41 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         self.statusItemMenu = NSMenu(title: "LivestormBar in Status Bar Menu")
         self.statusItemMenu.delegate = self
     }
-
+    
+    
+    
+    func enableButtonAction() {
+        let button: NSStatusBarButton = statusItem.button!
+        // Safe check if statusbar is created
+        guard let logo = NSImage(named: NSImage.Name("logo-primary-svg")) else { return }
+        
+        let resizedLogo = NSImage(size: NSSize(width: 18, height: 18), flipped: false) { (dstRect) -> Bool in
+            logo.draw(in: dstRect)
+            return true
+        }
+        button.image = resizedLogo
+        button.target = self
+        button.action = #selector(statusMenuBarAction)
+        button.sendAction(on: [NSEvent.EventTypeMask.rightMouseDown, NSEvent.EventTypeMask.leftMouseUp, NSEvent.EventTypeMask.leftMouseDown])
+        menuIsOpen = false
+    }
+    
+    
+    
+    
     @objc
     func menuWillOpen(_: NSMenu) {
         menuIsOpen = true
         updateMenu()
     }
-
+    
     @objc
     func menuDidClose(_: NSMenu) {
         // remove menu when closed so we can override left click behavior
         statusItem.menu = nil
         menuIsOpen = false
     }
+    
     func setAppDelegate(appdelegate: AppDelegate) {
         self.appdelegate = appdelegate
     }
@@ -84,45 +90,33 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         self.statusItemMenu.addItem(NSMenuItem.separator())
         self.statusItemMenu.addItem(withTitle: "Réunions du jour",
                                     action: #selector(NSText.selectAll(_:)), keyEquivalent: "")
-
-        self.createEventsSection()
-
+        
+        if Defaults[.email] == nil {
+            self.createEmptyMenu("Vous n'êtes pas connecté")
+        }else if em.eventsArray.isEmpty{
+            self.createEmptyMenu("Aucun meeting")
+        }else{
+            for event in em.eventsArray {
+                self.createEventMenuItem(event)
+            }
+        }
+        self.createMeetingSection()
+        self.createActionsSection()
+        
     }
     
-    func createEventsSection(){
-        loader.requestTodayEvents(calendarID: email, callback: { calendarResponse, error in
-            if Defaults[.email] != "No email" {
-                if let error = error {
-                    switch error {
-                    case OAuth2Error.requestCancelled:
-                        NSLog("first error : \(error)")
-                    default:
-                        NSLog("second error : \(error)")
-                    }
-                }else {
-                    self.eventsArray = []
-                    for var event in calendarResponse?.items ?? [] {
-                        if event.start != nil  && event.start?.dateTime != nil {
-                            
-                            // extract link from description, location or url
-                            event.extractedLink = getMeetingLink(event)?.url.absoluteString
-                            
-                            self.eventsArray.append(event)
-                        }
-                    }
-                    self.eventsArray.sort(by: {$0.start!.dateTime!.compare($1.start!.dateTime!) == .orderedAscending})
-
-                    for event in self.eventsArray {
-                        self.createEventMenuItem(event)
-                    }
-            }
-        
-            self.createMeetingSection()
-            self.createActionsSection()
-            }
-
-        })
+    
+    
+    func createEmptyMenu(_ title: String){
+        self.statusItemMenu.addItem(
+            withTitle: title,
+            action: nil,
+            keyEquivalent: ""
+        )
     }
+   
+    
+
     
     func createEventMenuItem(_ event: CalendarItem){
         guard let startDate = event.start?.dateTime else {
@@ -147,8 +141,8 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
             eventMenuItem.onStateImage = nil
             styles[NSAttributedString.Key.foregroundColor] = NSColor.disabledControlTextColor
             styles[NSAttributedString.Key.font] = NSFont.systemFont(ofSize: 14)
-//            styles[NSAttributedString.Key.strikethroughStyle] = NSUnderlineStyle.thick.rawValue
-
+            //            styles[NSAttributedString.Key.strikethroughStyle] = NSUnderlineStyle.thick.rawValue
+            
             eventMenuItem.attributedTitle = NSAttributedString(
                 string: dateTitle,
                 attributes: styles
@@ -160,7 +154,7 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         
         eventMenuItem.submenu = NSMenu(title: "Bientôt une liste d'action diverses ici")
         
-
+        
         if event.extractedLink != nil {
             let LSLink = eventMenuItem.submenu!.addItem(
                 withTitle: "Open in default browser",
@@ -184,7 +178,7 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
             )
             GoogleLink.representedObject = event
         }
-
+        
         
         let noteTaking = eventMenuItem.submenu!.addItem(
             withTitle: "Take notes",
@@ -192,13 +186,13 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
             keyEquivalent: "N"
         )
         noteTaking.representedObject = event
-     
+        
     }
     
     func createMeetingSection(){
         self.statusItemMenu.addItem(NSMenuItem.separator())
         self.statusItemMenu.addItem(withTitle: "Créer une réunion",
-                               action: #selector(AppDelegate.openPreferencesWindow), keyEquivalent: "M")
+                                    action: #selector(AppDelegate.openPreferencesWindow), keyEquivalent: "M")
     }
     
     func createActionsSection(){
@@ -208,7 +202,7 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
             action: #selector(AppDelegate.openPreferencesWindow),
             keyEquivalent: ","
         )
-
+        
         self.statusItemMenu.addItem(
             withTitle: "Quitter LivestormBar",
             action: #selector(AppDelegate.quit),

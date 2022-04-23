@@ -13,28 +13,39 @@ import Defaults
 
 var preferencesWindow: NSWindow! = nil
 var noteTakingWindow: NSWindow! = nil
+let OAuth2AppDidReceiveCallbackNotification = NSNotification.Name(rawValue: "OAuth2AppDidReceiveCallback")
 
 let loader = GoogleLoader()
+
+let em = evenManager()
+
+var statusBarItem: StatusBarItemController!
+var isPreferencesWindowOpened = false
 
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    var statusItem: NSStatusItem?
-    var statusBarItem: StatusBarItemController!
-    var isPreferencesWindowOpened = false
-    
 
-    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         statusBarItem = StatusBarItemController()
         statusBarItem.setAppDelegate(appdelegate: self)
         
         loader.oauth2.authConfig.authorizeContext = self
         NotificationCenter.default.removeObserver(self, name: OAuth2AppDidReceiveCallbackNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.handleRedirect(_:)), name: OAuth2AppDidReceiveCallbackNotification, object: nil)
-      
+        NotificationCenter.default.addObserver(self, selector: #selector(handleRedirect(_:)), name: OAuth2AppDidReceiveCallbackNotification, object: nil)
         
+        _ = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.updateEvents), userInfo: nil, repeats: true)
+
+    }
+    
+    @objc
+    private func updateEvents() {
+        NSLog("Firing updateEvents")
+        if Defaults[.email] != nil {
+            NSLog("Do fetch events")
+            em.fetchEvents()
+        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -62,6 +73,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         else {
             NSLog("No valid URL to handle")
+        }
+    }
+    
+    @objc func handleRedirect(_ notification: Notification) {
+        if let url = notification.object as? URL {
+            NSLog("Handling redirect...")
+            do {
+                try loader.oauth2.handleRedirectURL(url)
+            }
+            catch let error {
+                NSLog("handleRedirect: \(error)")
+            }
+        }
+        else {
+            NSLog("ici une erreur")
+            //show(NSError(domain: NSCocoaErrorDomain, code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid notification: did not contain a URL"]))
         }
     }
 

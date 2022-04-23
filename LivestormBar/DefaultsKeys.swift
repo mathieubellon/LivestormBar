@@ -9,8 +9,8 @@ import Foundation
 import Defaults
 
 extension Defaults.Keys {
-    static let username = Key<String?>("username", default: "No username")
-    static let email = Key<String>("email", default: "No email")
+    static let username = Key<String?>("username", default: nil)
+    static let email = Key<String?>("email", default: nil)
     static let picture = Key<String?>("picture", default: nil)
     static let isAuthenticated = Key<Bool>("isauthenticated", default: false)
 }

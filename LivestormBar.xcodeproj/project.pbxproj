@@ -13,7 +13,6 @@
 		D8A2B40F2810439A00D9C741 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B40E2810439A00D9C741 /* Preferences.swift */; };
 		D8A2B4112810460500D9C741 /* GeneralTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B4102810460500D9C741 /* GeneralTab.swift */; };
 		D8A2B413281047A100D9C741 /* CalendarTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B412281047A100D9C741 /* CalendarTab.swift */; };
-		D8A2B41528115E3B00D9C741 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B41428115E3B00D9C741 /* ViewController.swift */; };
 		D8A2B4182811869100D9C741 /* NoteTakingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B4172811869100D9C741 /* NoteTakingView.swift */; };
 		D8E3B41A281290A8006B423A /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E3B419281290A8006B423A /* Helpers.swift */; };
 		D8E3B41D2812B34B006B423A /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = D8E3B41C2812B34B006B423A /* Defaults */; };
@@ -52,7 +51,6 @@
 		D8A2B40E2810439A00D9C741 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		D8A2B4102810460500D9C741 /* GeneralTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTab.swift; sourceTree = "<group>"; };
 		D8A2B412281047A100D9C741 /* CalendarTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTab.swift; sourceTree = "<group>"; };
-		D8A2B41428115E3B00D9C741 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D8A2B4172811869100D9C741 /* NoteTakingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTakingView.swift; sourceTree = "<group>"; };
 		D8E3B419281290A8006B423A /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		D8E3B41E2812B4CA006B423A /* DefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsKeys.swift; sourceTree = "<group>"; };
@@ -149,7 +147,6 @@
 				D8A2B4052807231100D9C741 /* GoogleLoader.swift */,
 				D8A2B4072807416F00D9C741 /* EventModel.swift */,
 				D8A2B40928084D6F00D9C741 /* StatusBarItemController.swift */,
-				D8A2B41428115E3B00D9C741 /* ViewController.swift */,
 				D8E3B419281290A8006B423A /* Helpers.swift */,
 				D8E3B41E2812B4CA006B423A /* DefaultsKeys.swift */,
 			);
@@ -315,7 +312,6 @@
 				D8E3B41F2812B4CA006B423A /* DefaultsKeys.swift in Sources */,
 				D8A2B40A28084D6F00D9C741 /* StatusBarItemController.swift in Sources */,
 				D8A2B40F2810439A00D9C741 /* Preferences.swift in Sources */,
-				D8A2B41528115E3B00D9C741 /* ViewController.swift in Sources */,
 				D8E3B41A281290A8006B423A /* Helpers.swift in Sources */,
 				D8A2B413281047A100D9C741 /* CalendarTab.swift in Sources */,
 				D8ED32392806BD1800191093 /* AppDelegate.swift in Sources */,

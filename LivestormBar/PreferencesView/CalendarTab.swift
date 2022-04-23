@@ -81,8 +81,9 @@ struct yourCalendarView: View {
                 }
                 
                 VStack(alignment: .leading,spacing: 5){
-                    Text(username!).font(.system(size: 16, weight: .bold))
-                    Text(email).foregroundColor(.purple)
+                    Text(username ?? "No username").font(.system(size: 16, weight: .bold))
+                    Text(email ?? "No email").foregroundColor(.purple)
+                        
                 }
                 Spacer()
                 
@@ -108,7 +109,8 @@ func forgetTokens() {
     loader.oauth2.forgetTokens()
     // print(Bundle.main.bundleIdentifier!)
     // TODO : forEach key or Defaults.removeAll(suite: UserDefaults = .standard)
-    Defaults.reset("username", "email", "picture", "isauthenticated")
+    Defaults.reset("username", "email", "picture", "isAuthenticated")
+    em.eventsArray = []
 }
 
 func oauthDanceLaunch(){
