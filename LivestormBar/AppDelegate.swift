@@ -66,11 +66,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     
-    
+    @IBAction func Preffy(_ sender: NSMenuItem) {
+         openPreferencesWindow()
+         }
     
     
     @objc
-    func openPreferencesWindow(_: NSStatusBarButton?) {
+    func openPreferencesWindow() {
         NSLog("Open preferences window")
         let contentView = PreferencesView()
         if preferencesWindow != nil {

@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
-        <plugIn identifier="com.apple.imagekit.ibplugin" version="20037"/>
-        <capability name="NSView safe area layout guides" minToolsVersion="12.0"/>
-        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -24,7 +22,11 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
+                                            <connections>
+                                                <action selector="Preffy:" target="Voe-Tx-rLC" id="0aN-Fo-ExO"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                                         <menuItem title="Services" id="NMo-om-nkz">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -682,115 +684,5 @@
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>
-        <!--Settinsg and properties-->
-        <scene sceneID="hIz-AP-VOD">
-            <objects>
-                <viewController title="Settinsg and properties" storyboardIdentifier="preferencesID" id="XfG-lQ-9wD" customClass="ViewController" customModule="LivestormBar" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="500" height="500"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <tabView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZvR-Um-KAP">
-                                <rect key="frame" x="0.0" y="0.0" width="500" height="454"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <font key="font" metaFont="system"/>
-                                <tabViewItems>
-                                    <tabViewItem label="Connection" identifier="" id="F58-Lr-6Z5">
-                                        <view key="view" id="o9T-Xj-kNk">
-                                            <rect key="frame" x="10" y="33" width="480" height="408"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <subviews>
-                                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UoQ-Mk-7gy">
-                                                    <rect key="frame" x="85" y="356" width="272" height="32"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                    <buttonCell key="cell" type="push" title="Connect to your Google Calendar" bezelStyle="rounded" image="Google_Calendar" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="39h-Sl-HxG">
-                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                        <font key="font" metaFont="system"/>
-                                                    </buttonCell>
-                                                    <connections>
-                                                        <action selector="connectToYourGoogleCalendar:" target="XfG-lQ-9wD" id="vCH-qd-TIi"/>
-                                                    </connections>
-                                                </button>
-                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TXg-FY-4Jx">
-                                                    <rect key="frame" x="-5" y="213" width="467" height="16"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Non authenticated yet" id="v5P-sS-dRK">
-                                                        <font key="font" metaFont="system"/>
-                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                </textField>
-                                                <ikImageView wantsLayer="YES" fixedFrame="YES" zoomFactor="0.0" editable="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oSZ-Td-T7n">
-                                                    <rect key="frame" x="171" y="243" width="100" height="100"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <color key="backgroundColor" red="0.50002289" green="0.50002289" blue="0.50002289" alpha="1" colorSpace="deviceRGB"/>
-                                                </ikImageView>
-                                            </subviews>
-                                        </view>
-                                    </tabViewItem>
-                                    <tabViewItem label="Settings" identifier="" id="Csm-5r-N5S">
-                                        <view key="view" id="2Og-US-V12">
-                                            <rect key="frame" x="10" y="33" width="480" height="408"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        </view>
-                                    </tabViewItem>
-                                </tabViewItems>
-                            </tabView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="1yU-fC-j5H"/>
-                        <viewLayoutGuide key="layoutMargins" id="gT9-xu-l8U"/>
-                    </view>
-                    <connections>
-                        <outlet property="ConnectToCalendarButton" destination="UoQ-Mk-7gy" id="p1b-7z-zd7"/>
-                        <outlet property="ikAvatar" destination="oSZ-Td-T7n" id="l1D-MQ-nxG"/>
-                        <outlet property="nameLabel" destination="TXg-FY-4Jx" id="1ws-9D-LMH"/>
-                        <outlet property="viewwww" destination="2Og-US-V12" id="rgO-KG-JfU"/>
-                    </connections>
-                </viewController>
-                <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="81" y="429"/>
-        </scene>
-        <!--Event Detail Controller-->
-        <scene sceneID="D4u-Vw-6l4">
-            <objects>
-                <viewController id="Fsv-gW-nh4" customClass="EventDetailController" customModule="LivestormBar" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="cnv-Lr-7qi">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oZU-nE-1Zu">
-                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                                <subviews>
-                                    <customView fixedFrame="YES" id="5oH-7P-ygZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="221" height="300"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                    </customView>
-                                    <customView fixedFrame="YES" id="i4k-89-ptS">
-                                        <rect key="frame" x="231" y="0.0" width="219" height="300"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                    </customView>
-                                </subviews>
-                                <holdingPriorities>
-                                    <real value="250"/>
-                                    <real value="250"/>
-                                </holdingPriorities>
-                            </splitView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="oZU-nE-1Zu" secondAttribute="bottom" id="8YJ-0p-fzB"/>
-                            <constraint firstItem="oZU-nE-1Zu" firstAttribute="leading" secondItem="cnv-Lr-7qi" secondAttribute="leading" id="aBm-Cb-sVS"/>
-                            <constraint firstItem="oZU-nE-1Zu" firstAttribute="top" secondItem="cnv-Lr-7qi" secondAttribute="top" id="fyN-3F-Zx5"/>
-                            <constraint firstAttribute="trailing" secondItem="oZU-nE-1Zu" secondAttribute="trailing" id="gQz-zg-2T8"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <customObject id="WBa-CW-9rl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="74" y="1021"/>
-        </scene>
     </scenes>
-    <resources>
-        <image name="Google_Calendar" width="76" height="76"/>
-    </resources>
 </document>
