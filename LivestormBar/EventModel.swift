@@ -103,7 +103,6 @@ class evenManager: NSObject {
                 }
                 self.eventsArray.sort(by: {$0.start!.dateTime!.compare($1.start!.dateTime!) == .orderedAscending})
             }
-            print(self.eventsArray)
             statusBarItem.updateMenu()
         })
     }

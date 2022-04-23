@@ -8,10 +8,11 @@
 import Foundation
 
 
-func getTodayDate() -> String{
+func getTodayDate(choosenFormat: String = "yyyy-MM-dd", locale: String = "FR-fr") -> String{
     let date = Date()
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd"
+    dateFormatter.locale    = Locale(identifier: locale)
+    dateFormatter.dateFormat = choosenFormat
     return dateFormatter.string(from: date)
 }
 

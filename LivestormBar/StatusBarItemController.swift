@@ -88,8 +88,8 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         self.statusItemMenu.autoenablesItems = false
         self.statusItemMenu.removeAllItems()
         self.statusItemMenu.addItem(NSMenuItem.separator())
-        self.statusItemMenu.addItem(withTitle: "Réunions du jour",
-                                    action: #selector(NSText.selectAll(_:)), keyEquivalent: "")
+
+        self.createEventSectionHeader()
         
         if Defaults[.email] == nil {
             self.createEmptyMenu("Vous n'êtes pas connecté")
@@ -105,14 +105,54 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         
     }
     
-    
-    
-    func createEmptyMenu(_ title: String){
-        self.statusItemMenu.addItem(
+    func createEventSectionHeader(){
+        let title = "Réunions du "
+        let menuHeader = self.statusItemMenu.addItem(
             withTitle: title,
             action: nil,
             keyEquivalent: ""
         )
+        menuHeader.state = .off
+        menuHeader.isEnabled = false
+        let menuTitle = NSMutableAttributedString()
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 0.9
+        paragraphStyle.alignment = .left
+        var styles = [NSAttributedString.Key: Any]()
+        styles[NSAttributedString.Key.font] = NSFont.systemFont(ofSize: 16)
+        styles[NSAttributedString.Key.foregroundColor] = NSColor.black
+        menuTitle.append(NSAttributedString(string: title, attributes: styles))
+        
+        
+       
+        menuTitle.append(NSAttributedString(
+            string: getTodayDate(choosenFormat: "dd MMMM"),
+            attributes: [NSAttributedString.Key.font: NSFont.systemFont(ofSize: 16),
+                         NSAttributedString.Key.foregroundColor: NSColor.black])
+        )
+
+        menuTitle.addAttributes([NSAttributedString.Key.paragraphStyle: paragraphStyle], range: NSRange(location: 0, length: menuTitle.length))
+        menuHeader.attributedTitle = menuTitle
+    }
+    
+    
+    
+    func createEmptyMenu(_ title: String){
+        let empty = self.statusItemMenu.addItem(
+            withTitle: title,
+            action: nil,
+            keyEquivalent: ""
+        )
+        empty.isEnabled = false
+//        let menuTitle = NSMutableAttributedString()
+//        let paragraphStyle = NSMutableParagraphStyle()
+//        paragraphStyle.lineHeightMultiple = 0.7
+//        paragraphStyle.alignment = .center
+//        var styles = [NSAttributedString.Key: Any]()
+//        styles[NSAttributedString.Key.font] = NSFont.systemFont(ofSize: 16)
+//        styles[NSAttributedString.Key.foregroundColor] = NSColor.white
+//        menuTitle.append(NSAttributedString(string: title, attributes: styles))
+//        empty.attributedTitle = menuTitle
     }
    
     
