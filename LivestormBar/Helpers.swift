@@ -29,6 +29,7 @@ func getMeetingLink(_ event: CalendarItem) -> MeetingLink? {
     var searchFields: [String] = []
 
     if let location = event.location {
+        print("search for location \(location)")
         searchFields.append(location)
     }
 
@@ -54,8 +55,8 @@ func detectLink(_ field: inout String) -> MeetingLink? {
 
     
     let patterns = [
-        #"https?://app\.livestorm\.co/p/.*/live.*"#,
-        #"https?://app\.livestorm\.co/livestorm/meet/.*"#
+        #"https?:\/\/app\.livestorm\.co\/.*\/live.*"#,
+        #"https?:\/\/app\.livestorm\.co\/livestorm\/meet\/.*"#
     ]
 
     for pattern in patterns {
