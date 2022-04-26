@@ -109,5 +109,11 @@ class evenManager: NSObject {
         })
     }
     
+    func getNextEvent() -> CalendarItem? {
+        if self.eventsArray.isEmpty {return nil}
+        return self.eventsArray.first!
+    }
+    //func isEventCurrent() -> Bool {}
+    
 }
 

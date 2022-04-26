@@ -35,27 +35,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         NotificationCenter.default.removeObserver(self, name: OAuth2AppDidReceiveCallbackNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleRedirect(_:)), name: OAuth2AppDidReceiveCallbackNotification, object: nil)
         
-       // _ = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.updateEvents), userInfo: nil, repeats: true)
+        _ = Timer.scheduledTimer(timeInterval: 30.0, target: self, selector: #selector(self.updateEvents), userInfo: nil, repeats: true)
         registerNotificationCategories()
         UNUserNotificationCenter.current().delegate = self
         
 
         em.fetchEvents()
-//        let content = UNMutableNotificationContent()
-//        content.title = "Weekly Staff Meeting"
-//        content.body = "Every Tuesday at 2pm"
-
-        
     }
     
     internal func userNotificationCenter(_: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         switch response.actionIdentifier {
         case "JOIN_ACTION", UNNotificationDefaultActionIdentifier:
-            if response.notification.request.content.categoryIdentifier == "EVENT" || response.notification.request.content.categoryIdentifier == "SNOOZE_EVENT" {
-                if let extractedLink = response.notification.request.content.userInfo["extractedLink"] {
-                    NSLog("Join \(extractedLink) from notication")
-                    openEventInDefaultBrowser(extractedLink as! String)
-                }
+            let link = response.notification.request.content.userInfo["extractedLink"] as? String ?? ""
+            if link != "" {
+                openEventInDefaultBrowser(link)
             }
         default:
             break
@@ -64,13 +57,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         completionHandler()
     }
     
-//    @objc
-//    private func updateEvents() {
-//        if Defaults[.email] != nil {
-//            NSLog("Fetching events")
-//            em.fetchEvents()
-//        }
-//    }
+    @objc
+    private func updateEvents() {
+        if Defaults[.email] != nil {
+            NSLog("Fetching events")
+            em.fetchEvents()
+        }
+    }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application

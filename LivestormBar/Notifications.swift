@@ -39,7 +39,11 @@ func scheduleEventNotification(_ event: CalendarItem) {
     content.body = "⏰ La réunion débute dans 1 minute"
     content.categoryIdentifier = "EVENT"
     content.sound = UNNotificationSound.default
-    content.userInfo = ["eventID": event.id, "extractedLink": event.extractedLink!]
+    content.userInfo = ["eventID": event.id]
+    if event.extractedLink != nil {
+        content.userInfo["extractedLink"] = event.extractedLink! as String
+    }
+        
     content.threadIdentifier = "livestormbar"
 
     let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)

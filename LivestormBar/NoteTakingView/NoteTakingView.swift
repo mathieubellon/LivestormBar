@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct NoteTakingView: View {
-    @State private var fullText: String = "Take some notes for this meeting"
+    @State private var fullText: String = "Take some notes for this meeting - FOR DEMO PURPOSES ONLY, CONTENT NOT SAVED"
 
     var body: some View {
         TextEditor(text: $fullText)
