@@ -81,7 +81,6 @@ class evenManager: NSObject {
     }
     
     func fetchEvents(){
-        NSLog("fetch events")
         loader.requestTodayEvents(calendarID: email!, callback: { calendarResponse, error in
             if let error = error {
                 switch error {
@@ -92,11 +91,14 @@ class evenManager: NSObject {
                 }
             }else {
                 self.eventsArray = []
+                removePendingNotificationRequests()
                 for var event in calendarResponse?.items ?? [] {
                     if event.start != nil  && event.start?.dateTime != nil {
                         
                         // extract link from description, location or url
                         event.extractedLink = getMeetingLink(event)?.url.absoluteString
+                        
+                        scheduleEventNotification(event)
                         
                         self.eventsArray.append(event)
                     }

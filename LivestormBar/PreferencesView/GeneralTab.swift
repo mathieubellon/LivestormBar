@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-
+import Defaults
 
 
 struct GeneralTab: View {
@@ -15,39 +15,27 @@ struct GeneralTab: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 30) {
-
-            Label("Tous les calendriers", systemImage: "42.circle")
-            
-            Divider()
-            ShortcutsSection()
-            CreditsSection()
+            NotificationsSection()
+//            Divider()
             Spacer()
         }.padding()
 
     }
 }
 
-struct ShortcutsSection: View {
-    @State var showingModal = false
-
-    var body: some View {
+struct NotificationsSection: View{
+    
+    @Default(.userWantsNotifications) var userWantsNotifications
+    
+    var body: some View{
         HStack {
-            Text("preferences_general_shortcut_create_meeting")
-
-
-            Text("preferences_general_shortcut_join_next")
-          
-
-            Spacer()
-
-            Button(action: { self.showingModal.toggle() }) {
-                Text("preferences_general_all_shortcut")
-            }.sheet(isPresented: $showingModal) {
-                
-            }
+            Toggle("Envoyer une notification une minute avant le début de la réunion", isOn: $userWantsNotifications)
         }
     }
+    
 }
+
+
 
 struct CreditsSection: View{
     var body: some View{

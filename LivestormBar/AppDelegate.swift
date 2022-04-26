@@ -9,7 +9,7 @@ import Cocoa
 import SwiftUI
 import OAuth2
 import Defaults
-
+import UserNotifications
 
 var preferencesWindow: NSWindow! = nil
 var noteTakingWindow: NSWindow! = nil
@@ -22,9 +22,9 @@ let em = evenManager()
 var statusBarItem: StatusBarItemController!
 var isPreferencesWindowOpened = false
 
-
+let un = UNUserNotificationCenter.current()
 @main
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDelegate {
 
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -35,18 +35,42 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NotificationCenter.default.removeObserver(self, name: OAuth2AppDidReceiveCallbackNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleRedirect(_:)), name: OAuth2AppDidReceiveCallbackNotification, object: nil)
         
-        _ = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.updateEvents), userInfo: nil, repeats: true)
+       // _ = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.updateEvents), userInfo: nil, repeats: true)
+        registerNotificationCategories()
+        UNUserNotificationCenter.current().delegate = self
+        
 
+        em.fetchEvents()
+//        let content = UNMutableNotificationContent()
+//        content.title = "Weekly Staff Meeting"
+//        content.body = "Every Tuesday at 2pm"
+
+        
     }
     
-    @objc
-    private func updateEvents() {
-        NSLog("Firing updateEvents")
-        if Defaults[.email] != nil {
-            NSLog("Do fetch events")
-            em.fetchEvents()
+    internal func userNotificationCenter(_: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        switch response.actionIdentifier {
+        case "JOIN_ACTION", UNNotificationDefaultActionIdentifier:
+            if response.notification.request.content.categoryIdentifier == "EVENT" || response.notification.request.content.categoryIdentifier == "SNOOZE_EVENT" {
+                if let extractedLink = response.notification.request.content.userInfo["extractedLink"] {
+                    NSLog("Join \(extractedLink) from notication")
+                    openEventInDefaultBrowser(extractedLink as! String)
+                }
+            }
+        default:
+            break
         }
+
+        completionHandler()
     }
+    
+//    @objc
+//    private func updateEvents() {
+//        if Defaults[.email] != nil {
+//            NSLog("Fetching events")
+//            em.fetchEvents()
+//        }
+//    }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
@@ -158,6 +182,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let event: CalendarItem = sender.representedObject as? CalendarItem {
             NSWorkspace.shared.open(URL(string: event.extractedLink!)!)
         }
+    }
+    
+    
+    func openEventInDefaultBrowser(_ extractedLink:String){
+        NSWorkspace.shared.open(URL(string: extractedLink)!)
     }
     
     @objc

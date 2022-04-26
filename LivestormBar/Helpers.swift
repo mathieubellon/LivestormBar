@@ -29,7 +29,6 @@ func getMeetingLink(_ event: CalendarItem) -> MeetingLink? {
     var searchFields: [String] = []
 
     if let location = event.location {
-        print("search for location \(location)")
         searchFields.append(location)
     }
 

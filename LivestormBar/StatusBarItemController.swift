@@ -54,7 +54,7 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
     @objc
     func menuWillOpen(_: NSMenu) {
         menuIsOpen = true
-        updateMenu()
+        em.fetchEvents()
     }
     
     @objc
