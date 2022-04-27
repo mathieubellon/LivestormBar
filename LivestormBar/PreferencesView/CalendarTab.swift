@@ -52,45 +52,52 @@ struct yourCalendarView: View {
     
     var body: some View {
         VStack{
-            HStack{
-                Image(systemName: "icloud.slash")
-                    .foregroundColor(.gray)
-                    .imageScale(.large)
-                    .font(.system(size: 30, weight: .semibold))
-                    .scaledToFit()
-                    .frame(width: 90, height: 90)
-                Text("Calendar not connected").font(.system(size: 16, weight: .bold))
-                Spacer()
-                Button("Connect to Google Calendar") {
-                    oauthDanceLaunch()
-                }
-            }
-            HStack(alignment: .center, spacing: 10){
-                if picture != nil{
-                    Image(nsImage: NSImage(contentsOf: URL(string: picture!)!)!)
-                        .resizable()
-                        .frame(width: 90.0, height: 90.0)
-                }else{
+            if email != nil && email != "" {
+                HStack(alignment: .center, spacing: 10){
+                    if picture != nil{
+                        Image(nsImage: NSImage(contentsOf: URL(string: picture!)!)!)
+                            .resizable()
+                            .frame(width: 90.0, height: 90.0)
+                    }else{
+                        
+                        Image(systemName: "person.crop.circle.badge.questionmark")
+                            .foregroundColor(.gray)
+                            .imageScale(.large)
+                            .font(.system(size: 30, weight: .semibold))
+                            .scaledToFit()
+                            .frame(width: 90, height: 90)
+                    }
                     
-                    Image(systemName: "person.crop.circle.badge.questionmark")
+                    VStack(alignment: .leading,spacing: 5){
+                        Text("Vous êtes connecté").font(.system(size: 20, weight: .bold))
+                        Text(username ?? "No username").font(.system(size: 16, weight: .bold))
+                        Text("Connection au calendrier par défaut: ").foregroundColor(.purple)
+                        Text(email ?? "No email").foregroundColor(.purple)
+                            
+                    }
+                    Spacer()
+                    
+                    Button("Disconnect") {
+                        forgetTokens()
+                    }
+                }
+            }else{
+                HStack{
+                    Image(systemName: "icloud.slash")
                         .foregroundColor(.gray)
                         .imageScale(.large)
                         .font(.system(size: 30, weight: .semibold))
                         .scaledToFit()
                         .frame(width: 90, height: 90)
-                }
-                
-                VStack(alignment: .leading,spacing: 5){
-                    Text(username ?? "No username").font(.system(size: 16, weight: .bold))
-                    Text(email ?? "No email").foregroundColor(.purple)
-                        
-                }
-                Spacer()
-                
-                Button("Disconnect") {
-                    forgetTokens()
+                    Text("Calendar not connected").font(.system(size: 16, weight: .bold))
+                    Spacer()
+                    Button("Connect to Google Calendar") {
+                        oauthDanceLaunch()
+                    }
                 }
             }
+            
+            
         }
     }
 }
@@ -141,7 +148,11 @@ func oauthDanceLaunch(){
             if let email = dict?["email"] as? String {
                 
                 Defaults[.email] = email
+                if email != "" && email != "" {
+                    em.fetchEvents()
+                }
             }
+            
         }
     }
 }

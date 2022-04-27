@@ -40,7 +40,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         
         registerNotificationCategories()
         UNUserNotificationCenter.current().delegate = self
-
+        
+        self.updateEvents()
     }
     
     

@@ -198,9 +198,9 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         } else if event.start!.dateTime! < now && now < event.end!.dateTime! {
             eventMenuItem.state = .off
             eventMenuItem.onStateImage = nil
-            styles[NSAttributedString.Key.foregroundColor] = NSColor.black
-            dateTitle = dateTitle + " ⚡️"
-            styles[NSAttributedString.Key.font] = NSFont.systemFont(ofSize: 18)
+            styles[NSAttributedString.Key.foregroundColor] = NSColor.systemIndigo
+            dateTitle = dateTitle + " 🔥"
+            styles[NSAttributedString.Key.font] = NSFont.systemFont(ofSize: 14)
             //            styles[NSAttributedString.Key.strikethroughStyle] = NSUnderlineStyle.thick.rawValue
             
             eventMenuItem.attributedTitle = NSAttributedString(
