@@ -176,11 +176,11 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
             keyEquivalent: ""
         )
         eventMenuItem.isEnabled = true
-        if event.extractedLink != nil {
+        if event.extractedLink != "" {
             eventMenuItem.image = NSImage(named: "AppIcon")!
             eventMenuItem.image?.size = NSSize(width: 14, height: 14)
         }else{
-            eventMenuItem.image = NSImage(named: "AppIcon")!
+            eventMenuItem.image = NSImage(named: "question")!
             eventMenuItem.image?.size = NSSize(width: 14, height: 14)
         }
         
@@ -215,7 +215,7 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         eventMenuItem.submenu = NSMenu(title: "Bientôt une liste d'action diverses ici")
         
         
-        if event.extractedLink != nil {
+        if event.extractedLink != "" {
             let LSLink = eventMenuItem.submenu!.addItem(
                 withTitle: "Open in default browser",
                 action: #selector(AppDelegate.openLinkInDefaultBrowser(sender:)),

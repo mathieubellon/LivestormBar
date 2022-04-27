@@ -181,7 +181,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     @objc
     func openLinkInDefaultBrowser(sender: NSMenuItem){
         if let event: CalendarItem = sender.representedObject as? CalendarItem {
-            NSWorkspace.shared.open(URL(string: event.extractedLink!)!)
+            if event.extractedLink != "" {
+                NSWorkspace.shared.open(URL(string: event.extractedLink!)!)
+            }
         }
     }
     

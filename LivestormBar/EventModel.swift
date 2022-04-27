@@ -97,8 +97,8 @@ class evenManager: NSObject {
                     if event.start != nil  && event.start?.dateTime != nil {
                         
                         // extract link from description, location or url
-                        event.extractedLink = getMeetingLink(event)?.url.absoluteString
-                        removePendingNotificationRequests()
+                        event.extractedLink = getMeetingLink(event)?.url.absoluteString ?? ""
+                        scheduleEventNotification(event)
                         self.eventsArray.append(event)
                     }
                 }
