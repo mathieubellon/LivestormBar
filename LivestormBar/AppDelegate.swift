@@ -36,6 +36,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         NotificationCenter.default.removeObserver(self, name: OAuth2AppDidReceiveCallbackNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleRedirect(_:)), name: OAuth2AppDidReceiveCallbackNotification, object: nil)
         
+        _ = Timer.scheduledTimer(timeInterval: 30.0, target: self, selector: #selector(self.updateEvents), userInfo: nil, repeats: true)
+        
         registerNotificationCategories()
         UNUserNotificationCenter.current().delegate = self
 
@@ -63,7 +65,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     }
     
     @objc
-    private func updateEvents() {
+    func updateEvents() {
         NSLog("Firing updateEvents")
         if Defaults[.email] != nil {
             NSLog("Do fetch events")

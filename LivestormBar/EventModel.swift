@@ -41,7 +41,7 @@ struct entryPoint: Decodable{
 }
 
 struct End: Decodable {
-    let dateTime: String?
+    let dateTime: Date?
     let timeZone: String?
 }
 
@@ -92,12 +92,13 @@ class evenManager: NSObject {
                 }
             }else {
                 self.eventsArray = []
+                removePendingNotificationRequests()
                 for var event in calendarResponse?.items ?? [] {
                     if event.start != nil  && event.start?.dateTime != nil {
                         
                         // extract link from description, location or url
                         event.extractedLink = getMeetingLink(event)?.url.absoluteString
-                        
+                        removePendingNotificationRequests()
                         self.eventsArray.append(event)
                     }
                 }

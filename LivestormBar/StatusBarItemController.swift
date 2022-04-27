@@ -168,19 +168,39 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         dateFormatter.dateFormat = "HH:mm  "
         let dateToSHow = dateFormatter.string(from:startDate)
         
-        let dateTitle = "\(dateToSHow) \(event.summary ?? "No title")"
+        var dateTitle = "\(dateToSHow) \(event.summary ?? "No title")"
+        
         let eventMenuItem = self.statusItemMenu.addItem(
             withTitle: dateTitle,
             action: nil,
             keyEquivalent: ""
         )
         eventMenuItem.isEnabled = true
+        if event.extractedLink != nil {
+            eventMenuItem.image = NSImage(named: "AppIcon")!
+            eventMenuItem.image?.size = NSSize(width: 14, height: 14)
+        }else{
+            eventMenuItem.image = NSImage(named: "AppIcon")!
+            eventMenuItem.image?.size = NSSize(width: 14, height: 14)
+        }
         
-        if event.start!.dateTime! < now {
-            eventMenuItem.state = .on
+        if event.end!.dateTime! < now {
+            eventMenuItem.state = .off
             eventMenuItem.onStateImage = nil
             styles[NSAttributedString.Key.foregroundColor] = NSColor.disabledControlTextColor
             styles[NSAttributedString.Key.font] = NSFont.systemFont(ofSize: 14)
+            //            styles[NSAttributedString.Key.strikethroughStyle] = NSUnderlineStyle.thick.rawValue
+            
+            eventMenuItem.attributedTitle = NSAttributedString(
+                string: dateTitle,
+                attributes: styles
+            )
+        } else if event.start!.dateTime! < now && now < event.end!.dateTime! {
+            eventMenuItem.state = .off
+            eventMenuItem.onStateImage = nil
+            styles[NSAttributedString.Key.foregroundColor] = NSColor.black
+            dateTitle = dateTitle + " ⚡️"
+            styles[NSAttributedString.Key.font] = NSFont.systemFont(ofSize: 18)
             //            styles[NSAttributedString.Key.strikethroughStyle] = NSUnderlineStyle.thick.rawValue
             
             eventMenuItem.attributedTitle = NSAttributedString(
@@ -231,8 +251,8 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
     
     func createMeetingSection(){
         self.statusItemMenu.addItem(NSMenuItem.separator())
-        self.statusItemMenu.addItem(withTitle: "Créer une réunion",
-                                    action: #selector(AppDelegate.openPreferencesWindow), keyEquivalent: "M")
+        self.statusItemMenu.addItem(withTitle: "Refresh events",
+                                    action: #selector(AppDelegate.updateEvents), keyEquivalent: "R")
     }
     
     func createActionsSection(){
