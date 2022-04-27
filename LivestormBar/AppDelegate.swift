@@ -9,6 +9,7 @@ import Cocoa
 import SwiftUI
 import OAuth2
 import Defaults
+import UserNotifications
 
 
 var preferencesWindow: NSWindow! = nil
@@ -24,7 +25,7 @@ var isPreferencesWindowOpened = false
 
 
 @main
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDelegate {
 
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -35,8 +36,30 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NotificationCenter.default.removeObserver(self, name: OAuth2AppDidReceiveCallbackNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleRedirect(_:)), name: OAuth2AppDidReceiveCallbackNotification, object: nil)
         
-        _ = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.updateEvents), userInfo: nil, repeats: true)
+        registerNotificationCategories()
+        UNUserNotificationCenter.current().delegate = self
 
+    }
+    
+    
+    internal func userNotificationCenter(_: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        switch response.actionIdentifier {
+        case "JOIN_ACTION", UNNotificationDefaultActionIdentifier:
+            if response.notification.request.content.categoryIdentifier == "EVENT" || response.notification.request.content.categoryIdentifier == "SNOOZE_EVENT" {
+                if let extractedLink = response.notification.request.content.userInfo["extractedLink"] {
+                    NSLog("Join \(extractedLink) from notication")
+                    openEventInDefaultBrowser(extractedLink as! String)
+                }
+            }
+        default:
+            break
+        }
+
+        completionHandler()
+    }
+    
+    func openEventInDefaultBrowser(_ extractedLink:String){
+        NSWorkspace.shared.open(URL(string: extractedLink)!)
     }
     
     @objc

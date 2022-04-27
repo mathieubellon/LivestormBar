@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D89C88432819A2820099BFBE /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89C88422819A2820099BFBE /* Notifications.swift */; };
 		D8A2B4062807231100D9C741 /* GoogleLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B4052807231100D9C741 /* GoogleLoader.swift */; };
 		D8A2B4082807416F00D9C741 /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B4072807416F00D9C741 /* EventModel.swift */; };
 		D8A2B40A28084D6F00D9C741 /* StatusBarItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B40928084D6F00D9C741 /* StatusBarItemController.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D89C88422819A2820099BFBE /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		D8A2B4052807231100D9C741 /* GoogleLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoader.swift; sourceTree = "<group>"; };
 		D8A2B4072807416F00D9C741 /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
 		D8A2B40928084D6F00D9C741 /* StatusBarItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarItemController.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				D8A2B40928084D6F00D9C741 /* StatusBarItemController.swift */,
 				D8E3B419281290A8006B423A /* Helpers.swift */,
 				D8E3B41E2812B4CA006B423A /* DefaultsKeys.swift */,
+				D89C88422819A2820099BFBE /* Notifications.swift */,
 			);
 			path = LivestormBar;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D89C88432819A2820099BFBE /* Notifications.swift in Sources */,
 				D8A2B4112810460500D9C741 /* GeneralTab.swift in Sources */,
 				D8E3B41F2812B4CA006B423A /* DefaultsKeys.swift in Sources */,
 				D8A2B40A28084D6F00D9C741 /* StatusBarItemController.swift in Sources */,

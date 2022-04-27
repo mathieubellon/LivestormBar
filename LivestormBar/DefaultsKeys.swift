@@ -13,6 +13,7 @@ extension Defaults.Keys {
     static let email = Key<String?>("email", default: nil)
     static let picture = Key<String?>("picture", default: nil)
     static let isAuthenticated = Key<Bool>("isauthenticated", default: false)
+    static let userWantsNotifications = Key<Bool>("userWantsNotifications", default:true)
 }
 
 //
@@ -29,3 +30,9 @@ extension Defaults.Keys {
 //    print(change.newValue)
 //    //=> true
 //}
+let userWantsNotificationsObserver = Defaults.observe(.userWantsNotifications) { change in
+    if change.oldValue != change.newValue {
+        NSLog("Change userWantsNotifications from \(change.oldValue) to \(change.newValue)")
+        removePendingNotificationRequests()
+    }
+}
