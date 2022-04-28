@@ -177,7 +177,7 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         )
         eventMenuItem.isEnabled = true
         if event.extractedLink != "" {
-            eventMenuItem.image = NSImage(named: "AppIcon")!
+            eventMenuItem.image = NSImage(named: "link")!
             eventMenuItem.image?.size = NSSize(width: 14, height: 14)
         }else{
             eventMenuItem.image = NSImage(named: "question")!
@@ -217,7 +217,7 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         
         if event.extractedLink != "" {
             let LSLink = eventMenuItem.submenu!.addItem(
-                withTitle: "Open in default browser",
+                withTitle: "Open meeting link in default browser",
                 action: #selector(AppDelegate.openLinkInDefaultBrowser(sender:)),
                 keyEquivalent: "O"
             )

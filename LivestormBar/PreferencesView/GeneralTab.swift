@@ -14,10 +14,7 @@ struct GeneralTab: View {
 
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 30) {
-
-            Label("Tous les calendriers", systemImage: "42.circle")
-            
+        VStack(alignment: .leading, spacing: 30) {            
             Divider()
             NotificationsSection()
             Divider()
@@ -44,34 +41,34 @@ struct CreditsSection: View{
     var body: some View{
         HStack {
             VStack(alignment: .center) {
-                Image(nsImage: NSImage(named: "AppIcon")!).resizable().frame(width: 120.0, height: 120.0)
+                Image(nsImage: NSImage(named: "AppIcon")!).resizable().frame(width: 100.0, height: 100.0)
                 Text("LivestormBar").font(.system(size: 20)).bold()
                 if Bundle.main.infoDictionary != nil {
                     Text("Version \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown")").foregroundColor(.gray)
                 }
             }.lineLimit(1).minimumScaleFactor(0.5).frame(minWidth: 0, maxWidth: .infinity)
-            VStack {
-                Spacer()
-                Text("preferences_general_meeting_bar_description").multilineTextAlignment(.center)
-                Spacer()
-
-                HStack {
-                    Spacer()
-//                    Button(action: clickPatronage) {
-//                        Text("preferences_general_external_patronage".loco())
-//                    }.sheet(isPresented: $showingPatronageModal) {
-//                        PatronageModal()
+//            VStack {
+//                Spacer()
+//                Text("preferences_general_meeting_bar_description").multilineTextAlignment(.center)
+//                Spacer()
+//
+//                HStack {
+//                    Spacer()
+////                    Button(action: clickPatronage) {
+////                        Text("preferences_general_external_patronage".loco())
+////                    }.sheet(isPresented: $showingPatronageModal) {
+////                        PatronageModal()
+////                    }
+//                    Spacer()
+//                    Button(action: { }) {
+//                        Text("preferences_general_external_gitHub")
 //                    }
-                    Spacer()
-                    Button(action: { }) {
-                        Text("preferences_general_external_gitHub")
-                    }
-                    Spacer()
-           
-                    Spacer()
-                }
-                Spacer()
-            }.frame(minWidth: 360, maxWidth: .infinity)
+//                    Spacer()
+//           
+//                    Spacer()
+//                }
+//                Spacer()
+//            }.frame(minWidth: 360, maxWidth: .infinity)
         }
     }
 }
