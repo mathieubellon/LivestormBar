@@ -33,6 +33,6 @@ extension Defaults.Keys {
 let userWantsNotificationsObserver = Defaults.observe(.userWantsNotifications) { change in
     if change.oldValue != change.newValue {
         NSLog("Change userWantsNotifications from \(change.oldValue) to \(change.newValue)")
-        removePendingNotificationRequests()
+        //removePendingNotificationRequests()
     }
 }

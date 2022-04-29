@@ -100,8 +100,10 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
                 self.createEventMenuItem(event)
             }
         }
-        self.createMeetingSection()
+
         self.createActionsSection()
+        
+        self.createMeetingSection()
         
     }
     
@@ -240,18 +242,18 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         }
         
         
-        let noteTaking = eventMenuItem.submenu!.addItem(
-            withTitle: "Take notes",
-            action: #selector(AppDelegate.openNoteTakingWindow(_:)),
-            keyEquivalent: "N"
-        )
-        noteTaking.representedObject = event
+//        let noteTaking = eventMenuItem.submenu!.addItem(
+//            withTitle: "Take notes",
+//            action: #selector(AppDelegate.openNoteTakingWindow(_:)),
+//            keyEquivalent: "N"
+//        )
+//        noteTaking.representedObject = event
         
     }
     
     func createMeetingSection(){
         self.statusItemMenu.addItem(NSMenuItem.separator())
-        self.statusItemMenu.addItem(withTitle: "Refresh events",
+        self.statusItemMenu.addItem(withTitle: "In case of trouble refresh events (automatically done every 30s)",
                                     action: #selector(AppDelegate.updateEvents), keyEquivalent: "R")
     }
     

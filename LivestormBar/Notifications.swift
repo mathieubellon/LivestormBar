@@ -29,7 +29,7 @@ func scheduleEventNotification(_ event: CalendarItem) {
         return
     }
 
-    removePendingNotificationRequests()
+    //removePendingNotificationRequests()
 
     let center = UNUserNotificationCenter.current()
 

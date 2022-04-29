@@ -119,11 +119,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     }
 
     
-    @IBAction func Preffy(_ sender: NSMenuItem) {
-         openPreferencesWindow()
-         }
-    
-    
     @objc
     func openPreferencesWindow() {
         NSLog("Open preferences window")

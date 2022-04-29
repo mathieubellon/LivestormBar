@@ -92,7 +92,7 @@ class evenManager: NSObject {
                 }
             }else {
                 self.eventsArray = []
-                removePendingNotificationRequests()
+                //removePendingNotificationRequests()
                 for var event in calendarResponse?.items ?? [] {
                     if event.start != nil  && event.start?.dateTime != nil {
                         
