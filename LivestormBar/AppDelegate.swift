@@ -10,6 +10,7 @@ import SwiftUI
 import OAuth2
 import Defaults
 import UserNotifications
+import KeyboardShortcuts
 
 
 var preferencesWindow: NSWindow! = nil
@@ -42,6 +43,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         UNUserNotificationCenter.current().delegate = self
         
         self.updateEvents()
+        
+        KeyboardShortcuts.onKeyUp(for: .openNextEvent) { [self] in
+            openNextEvent()
+        }
     }
     
     
@@ -52,6 +57,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
                 if response.notification.request.content.userInfo["extractedLink"] as? String != ""{
                     NSLog("Join \(response.notification.request.content.userInfo["extractedLink"]!) from notication")
                     openEventInDefaultBrowser(response.notification.request.content.userInfo["extractedLink"] as! String)
+                }else{
+                    openEventInDefaultBrowser(response.notification.request.content.userInfo["htmlLink"] as! String)
                 }
             }
         default:
@@ -61,8 +68,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         completionHandler()
     }
     
-    func openEventInDefaultBrowser(_ extractedLink:String){
-        NSWorkspace.shared.open(URL(string: extractedLink)!)
+    func openEventInDefaultBrowser(_ linkToOpen:String){
+        NSWorkspace.shared.open(URL(string: linkToOpen)!)
     }
     
     @objc
@@ -76,6 +83,21 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
+    }
+    
+    func openNextEvent () {
+        let now = Date()
+        for event in em.eventsArray {
+            if now < event.start!.dateTime!  || (event.start!.dateTime! < now && now < event.end!.dateTime!) {
+                print(event.extractedLink!)
+                if event.extractedLink! != "" {
+                    NSWorkspace.shared.open(URL(string: event.extractedLink!)!)
+                }else{
+                    NSWorkspace.shared.open(URL(string: event.htmlLink!)!)
+                }
+                return
+            }
+        }
     }
     
     

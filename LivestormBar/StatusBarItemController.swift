@@ -48,7 +48,7 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         menuIsOpen = false
     }
     
-    
+
     
     
     @objc

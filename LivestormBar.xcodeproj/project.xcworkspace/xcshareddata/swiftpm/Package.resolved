@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "keyboardshortcuts",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sindresorhus/KeyboardShortcuts",
+      "state" : {
+        "branch" : "main",
+        "revision" : "ee60fcf3fc2f017cf7c60d6063e64be64748cef6"
+      }
+    },
+    {
       "identity" : "oauth2",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/p2/OAuth2",

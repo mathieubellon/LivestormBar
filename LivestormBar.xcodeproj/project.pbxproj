@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D89B8F08281C0FC900EC582F /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = D89B8F07281C0FC900EC582F /* KeyboardShortcuts */; };
+		D89B8F0A281C0FEC00EC582F /* KeyboardShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89B8F09281C0FEC00EC582F /* KeyboardShortcuts.swift */; };
 		D89C88432819A2820099BFBE /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89C88422819A2820099BFBE /* Notifications.swift */; };
 		D8A2B4062807231100D9C741 /* GoogleLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B4052807231100D9C741 /* GoogleLoader.swift */; };
 		D8A2B4082807416F00D9C741 /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B4072807416F00D9C741 /* EventModel.swift */; };
@@ -46,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D89B8F09281C0FEC00EC582F /* KeyboardShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShortcuts.swift; sourceTree = "<group>"; };
 		D89C88422819A2820099BFBE /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		D8A2B4052807231100D9C741 /* GoogleLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoader.swift; sourceTree = "<group>"; };
 		D8A2B4072807416F00D9C741 /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
@@ -77,6 +80,7 @@
 			files = (
 				D8E3B41D2812B34B006B423A /* Defaults in Frameworks */,
 				D8ED32682806BFEA00191093 /* OAuth2 in Frameworks */,
+				D89B8F08281C0FC900EC582F /* KeyboardShortcuts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +107,7 @@
 				D8A2B40E2810439A00D9C741 /* Preferences.swift */,
 				D8A2B4102810460500D9C741 /* GeneralTab.swift */,
 				D8A2B412281047A100D9C741 /* CalendarTab.swift */,
+				D89B8F09281C0FEC00EC582F /* KeyboardShortcuts.swift */,
 			);
 			path = PreferencesView;
 			sourceTree = "<group>";
@@ -192,6 +197,7 @@
 			packageProductDependencies = (
 				D8ED32672806BFEA00191093 /* OAuth2 */,
 				D8E3B41C2812B34B006B423A /* Defaults */,
+				D89B8F07281C0FC900EC582F /* KeyboardShortcuts */,
 			);
 			productName = LivestormBar;
 			productReference = D8ED32352806BD1800191093 /* LivestormBar.app */;
@@ -268,6 +274,7 @@
 			packageReferences = (
 				D8ED32662806BFEA00191093 /* XCRemoteSwiftPackageReference "OAuth2" */,
 				D8E3B41B2812B34B006B423A /* XCRemoteSwiftPackageReference "Defaults" */,
+				D89B8F06281C0FC900EC582F /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
 			);
 			productRefGroup = D8ED32362806BD1800191093 /* Products */;
 			projectDirPath = "";
@@ -319,6 +326,7 @@
 				D8E3B41A281290A8006B423A /* Helpers.swift in Sources */,
 				D8A2B413281047A100D9C741 /* CalendarTab.swift in Sources */,
 				D8ED32392806BD1800191093 /* AppDelegate.swift in Sources */,
+				D89B8F0A281C0FEC00EC582F /* KeyboardShortcuts.swift in Sources */,
 				D8A2B4182811869100D9C741 /* NoteTakingView.swift in Sources */,
 				D8ED323E2806BD1800191093 /* LivestormBar.xcdatamodeld in Sources */,
 				D8A2B4082807416F00D9C741 /* EventModel.swift in Sources */,
@@ -651,6 +659,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D89B8F06281C0FC900EC582F /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/KeyboardShortcuts";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		D8E3B41B2812B34B006B423A /* XCRemoteSwiftPackageReference "Defaults" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sindresorhus/Defaults";
@@ -670,6 +686,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D89B8F07281C0FC900EC582F /* KeyboardShortcuts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D89B8F06281C0FC900EC582F /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
+			productName = KeyboardShortcuts;
+		};
 		D8E3B41C2812B34B006B423A /* Defaults */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D8E3B41B2812B34B006B423A /* XCRemoteSwiftPackageReference "Defaults" */;
