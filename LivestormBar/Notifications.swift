@@ -29,7 +29,7 @@ func scheduleEventNotification(_ event: CalendarItem) {
         return
     }
 
-    //removePendingNotificationRequests()
+    removePendingNotificationRequests()
 
     let center = UNUserNotificationCenter.current()
 
@@ -39,16 +39,16 @@ func scheduleEventNotification(_ event: CalendarItem) {
     content.body = "⏰ La réunion débute dans 1 minute"
     content.categoryIdentifier = "EVENT"
     content.sound = UNNotificationSound.default
-    content.userInfo = ["eventID": event.id, "extractedLink": event.extractedLink!]
+    content.userInfo = ["eventID": event.id, "extractedLink": event.extractedLink ?? ""]
     content.threadIdentifier = "livestormbar"
 
     let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
-    let request = UNNotificationRequest(identifier: "EVENT", content: content, trigger: trigger)
+    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
     center.add(request) { error in
         if let error = error {
             NSLog("%@", "request \(request.identifier) could not be added because of error \(error)")
         }else{
-            print("event registered \(request)")
+            print("event registered \(request.content.title) + link==\(event.extractedLink)")
         }
     }
 }
@@ -65,15 +65,10 @@ func registerNotificationCategories() {
                                                hiddenPreviewsBodyPlaceholder: "",
                                                options: [.customDismissAction, .hiddenPreviewsShowTitle])
 
-    let snoozeEventCategory = UNNotificationCategory(identifier: "SNOOZE_EVENT",
-                                                     actions: [acceptAction],
-                                                     intentIdentifiers: [],
-                                                     hiddenPreviewsBodyPlaceholder: "",
-                                                     options: [.customDismissAction, .hiddenPreviewsShowTitle])
 
     let notificationCenter = UNUserNotificationCenter.current()
 
-    notificationCenter.setNotificationCategories([eventCategory, snoozeEventCategory])
+    notificationCenter.setNotificationCategories([eventCategory])
 
     notificationCenter.getNotificationCategories { categories in
         for category in categories {

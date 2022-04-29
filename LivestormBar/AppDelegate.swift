@@ -48,10 +48,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     internal func userNotificationCenter(_: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         switch response.actionIdentifier {
         case "JOIN_ACTION", UNNotificationDefaultActionIdentifier:
-            if response.notification.request.content.categoryIdentifier == "EVENT" || response.notification.request.content.categoryIdentifier == "SNOOZE_EVENT" {
-                if let extractedLink = response.notification.request.content.userInfo["extractedLink"] {
-                    NSLog("Join \(extractedLink) from notication")
-                    openEventInDefaultBrowser(extractedLink as! String)
+            if response.notification.request.content.categoryIdentifier == "EVENT" {
+                if response.notification.request.content.userInfo["extractedLink"] as? String != ""{
+                    NSLog("Join \(response.notification.request.content.userInfo["extractedLink"]!) from notication")
+                    openEventInDefaultBrowser(response.notification.request.content.userInfo["extractedLink"] as! String)
                 }
             }
         default:
