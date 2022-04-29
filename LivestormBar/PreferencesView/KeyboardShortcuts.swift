@@ -17,7 +17,7 @@ struct SetKeyboardShortcuts: View {
             
             
             Form {
-                KeyboardShortcuts.Recorder("Open next event:", name: .openNextEvent)
+                KeyboardShortcuts.Recorder("Open next event (in Livestorm if link available or Google Calendar):", name: .openNextEvent)
             }
             Spacer()
             
