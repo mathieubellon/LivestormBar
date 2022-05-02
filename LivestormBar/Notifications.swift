@@ -24,12 +24,14 @@ func scheduleEventNotification(_ event: CalendarItem) {
     let now = Date()
     let notificationTime = Double(60.0)
     let timeInterval = event.start!.dateTime!.timeIntervalSince(now) - notificationTime
+    
+    print("👓 timeinterval \(timeInterval)")
 
-    if timeInterval < 0.5 {
+    if timeInterval <= 60.0 {
         return
     }
 
-    removePendingNotificationRequests()
+    //removePendingNotificationRequests()
 
     let center = UNUserNotificationCenter.current()
 
@@ -43,12 +45,15 @@ func scheduleEventNotification(_ event: CalendarItem) {
     content.threadIdentifier = "livestormbar"
 
     let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
-    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+    let request = UNNotificationRequest(identifier: event.id, content: content, trigger: trigger)
     center.add(request) { error in
         if let error = error {
             NSLog("%@", "request \(request.identifier) could not be added because of error \(error)")
         }else{
-            print("event registered \(request.content.title) + link==\(event.extractedLink)")
+            print("🇳🇦--------------------")
+            print("event registered \(request.content.title) + link==\(event.extractedLink ?? "No extracted link")")
+            print(request.trigger!)
+            print(request.identifier)
         }
     }
 }

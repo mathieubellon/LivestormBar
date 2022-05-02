@@ -15,6 +15,7 @@ import KeyboardShortcuts
 
 var preferencesWindow: NSWindow! = nil
 var noteTakingWindow: NSWindow! = nil
+var OnboardingWindow: NSWindow! = nil
 let OAuth2AppDidReceiveCallbackNotification = NSNotification.Name(rawValue: "OAuth2AppDidReceiveCallback")
 
 let loader = GoogleLoader()
@@ -47,6 +48,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         KeyboardShortcuts.onKeyUp(for: .openNextEvent) { [self] in
             openNextEvent()
         }
+        
+        //openOnboardingWindow()
     }
     
     
@@ -170,7 +173,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     
     @objc
     func openNoteTakingWindow(_ sender: NSMenuItem) {
-        NSLog("Open preferences window")
+        NSLog("Open note taking window")
         let contentView = NoteTakingView()
         if noteTakingWindow != nil {
             noteTakingWindow.close()
@@ -194,6 +197,41 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         noteTakingWindow.center()
         noteTakingWindow.orderFrontRegardless()
+    }
+    
+    @objc
+    func openOnboardingWindow() {
+        NSLog("Open onboarding window")
+        let contentView = OnboardingView()
+        if OnboardingWindow != nil {
+            OnboardingWindow.close()
+        }
+        OnboardingWindow = NSWindow(
+            contentRect: NSRect(x: 0, y: 0, width: 700, height: 610),
+            styleMask: [.closable, .titled, .resizable],
+            backing: .buffered,
+            defer: false
+        )
+        
+        let customToolbar = NSToolbar()
+        customToolbar.showsBaselineSeparator = false
+        OnboardingWindow.titlebarAppearsTransparent = true
+        OnboardingWindow.titleVisibility = .hidden
+        OnboardingWindow.toolbar = customToolbar
+        
+        
+        OnboardingWindow.title = "Onboarding"
+        OnboardingWindow.backgroundColor = .white
+        OnboardingWindow.contentView = NSHostingView(rootView: contentView)
+        OnboardingWindow.makeKeyAndOrderFront(nil)
+        // allow the preference window can be focused automatically when opened
+        NSApplication.shared.activate(ignoringOtherApps: true)
+
+        let controller = NSWindowController(window: OnboardingWindow)
+        controller.showWindow(self)
+
+        OnboardingWindow.center()
+        OnboardingWindow.orderFrontRegardless()
     }
     
     @objc

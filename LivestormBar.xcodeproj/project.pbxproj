@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D89B8F08281C0FC900EC582F /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = D89B8F07281C0FC900EC582F /* KeyboardShortcuts */; };
 		D89B8F0A281C0FEC00EC582F /* KeyboardShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89B8F09281C0FEC00EC582F /* KeyboardShortcuts.swift */; };
+		D89B8F0C281C3FB400EC582F /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89B8F0B281C3FB400EC582F /* OnboardingView.swift */; };
 		D89C88432819A2820099BFBE /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89C88422819A2820099BFBE /* Notifications.swift */; };
 		D8A2B4062807231100D9C741 /* GoogleLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B4052807231100D9C741 /* GoogleLoader.swift */; };
 		D8A2B4082807416F00D9C741 /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B4072807416F00D9C741 /* EventModel.swift */; };
@@ -49,6 +50,7 @@
 
 /* Begin PBXFileReference section */
 		D89B8F09281C0FEC00EC582F /* KeyboardShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShortcuts.swift; sourceTree = "<group>"; };
+		D89B8F0B281C3FB400EC582F /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		D89C88422819A2820099BFBE /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		D8A2B4052807231100D9C741 /* GoogleLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoader.swift; sourceTree = "<group>"; };
 		D8A2B4072807416F00D9C741 /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
@@ -112,12 +114,14 @@
 			path = PreferencesView;
 			sourceTree = "<group>";
 		};
-		D8A2B4162811867000D9C741 /* NoteTakingView */ = {
+		D8A2B4162811867000D9C741 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D8A2B40D2810438500D9C741 /* PreferencesView */,
 				D8A2B4172811869100D9C741 /* NoteTakingView.swift */,
+				D89B8F0B281C3FB400EC582F /* OnboardingView.swift */,
 			);
-			path = NoteTakingView;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		D8ED322C2806BD1800191093 = {
@@ -143,8 +147,7 @@
 		D8ED32372806BD1800191093 /* LivestormBar */ = {
 			isa = PBXGroup;
 			children = (
-				D8A2B4162811867000D9C741 /* NoteTakingView */,
-				D8A2B40D2810438500D9C741 /* PreferencesView */,
+				D8A2B4162811867000D9C741 /* Views */,
 				D8ED326B28070D5000191093 /* Info.plist */,
 				D8ED32382806BD1800191093 /* AppDelegate.swift */,
 				D8ED323F2806BD1B00191093 /* Assets.xcassets */,
@@ -331,6 +334,7 @@
 				D8ED323E2806BD1800191093 /* LivestormBar.xcdatamodeld in Sources */,
 				D8A2B4082807416F00D9C741 /* EventModel.swift in Sources */,
 				D8A2B4062807231100D9C741 /* GoogleLoader.swift in Sources */,
+				D89B8F0C281C3FB400EC582F /* OnboardingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,7 +503,7 @@
 				CODE_SIGN_ENTITLEMENTS = LivestormBar/LivestormBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = MTL54JQNU5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LivestormBar/Info.plist;
@@ -512,7 +516,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
-				MARKETING_VERSION = "0.8-alpha-3";
+				MARKETING_VERSION = "0.9-alpha-3";
 				PRODUCT_BUNDLE_IDENTIFIER = co.livestorm.LivestormBar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -528,7 +532,7 @@
 				CODE_SIGN_ENTITLEMENTS = LivestormBar/LivestormBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = MTL54JQNU5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LivestormBar/Info.plist;
@@ -541,7 +545,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
-				MARKETING_VERSION = "0.8-alpha-3";
+				MARKETING_VERSION = "0.9-alpha-3";
 				PRODUCT_BUNDLE_IDENTIFIER = co.livestorm.LivestormBar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
