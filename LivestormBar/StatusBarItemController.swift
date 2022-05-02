@@ -100,10 +100,12 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
                 self.createEventMenuItem(event)
             }
         }
+        
+        self.createMeetingSection()
 
         self.createActionsSection()
         
-        self.createMeetingSection()
+
         
     }
     
@@ -200,7 +202,7 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         } else if event.start!.dateTime! < now && now < event.end!.dateTime! {
             eventMenuItem.state = .off
             eventMenuItem.onStateImage = nil
-            styles[NSAttributedString.Key.foregroundColor] = NSColor.systemIndigo
+            styles[NSAttributedString.Key.foregroundColor] = NSColor.black
             dateTitle = dateTitle + " 🔥"
             styles[NSAttributedString.Key.font] = NSFont.systemFont(ofSize: 14)
             //            styles[NSAttributedString.Key.strikethroughStyle] = NSUnderlineStyle.thick.rawValue
@@ -253,14 +255,20 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
     
     func createMeetingSection(){
         self.statusItemMenu.addItem(NSMenuItem.separator())
-        self.statusItemMenu.addItem(withTitle: "In case of trouble refresh events (automatically done every 30s)",
-                                    action: #selector(AppDelegate.updateEvents), keyEquivalent: "R")
+
+        let actionsMenu = self.statusItemMenu.addItem(withTitle: "More actions",
+                                    action: nil, keyEquivalent: "")
+        
+        actionsMenu.submenu = NSMenu(title: "Actions menu")
+        actionsMenu.submenu!.addItem(withTitle: "Force refresh events",
+                                     action: #selector(AppDelegate.updateEvents), keyEquivalent: "R")
     }
+    
     
     func createActionsSection(){
         self.statusItemMenu.addItem(NSMenuItem.separator())
         self.statusItemMenu.addItem(
-            withTitle: "Préférence",
+            withTitle: "Préférences",
             action: #selector(AppDelegate.openPreferencesWindow),
             keyEquivalent: ","
         )

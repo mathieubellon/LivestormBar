@@ -98,7 +98,19 @@ class evenManager: NSObject {
                         
                         // extract link from description, location or url
                         event.extractedLink = getMeetingLink(event)?.url.absoluteString ?? ""
-                        scheduleEventNotification(event)
+                        
+                        if Defaults[.userWantsNotificationsAtEventStart] {
+                            scheduleEventNotification(event: event, notificationTime: 0, body: "Commence maintenant !! 🔥", notifType: "now")
+                        }
+                        if Defaults[.userWantsNotifications1mnBeforeEventStart] {
+                            scheduleEventNotification(event: event, notificationTime: 60.0, body: "Démarre dans 1 mn", notifType: "oneMinute")
+                        }
+                        if Defaults[.userWantsNotifications5mnBeforeEventStart] {
+                            scheduleEventNotification(event: event, notificationTime: 300.0, body: "Démarre dans 5 mn", notifType: "fiveMinutes")
+                        }
+                        if Defaults[.userWantsNotifications10mnBeforeEventStart] {
+                            scheduleEventNotification(event: event, notificationTime: 600.0, body: "Démarre dans 10 mn", notifType: "tenMinutes")
+                        }
                         self.eventsArray.append(event)
                     }
                 }

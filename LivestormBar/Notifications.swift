@@ -16,13 +16,12 @@ func requestNotificationAuthorization() {
 }
 
 
-func scheduleEventNotification(_ event: CalendarItem) {
+func scheduleEventNotification(event: CalendarItem, notificationTime:Double, body:String, notifType:String) {
     requestNotificationAuthorization() // By the apple best practices
     
     guard event.start != nil, event.start?.dateTime != nil else { return }
 
     let now = Date()
-    let notificationTime = Double(60.0)
     let timeInterval = event.start!.dateTime!.timeIntervalSince(now) - notificationTime
     
     print("👓 timeinterval \(timeInterval)")
@@ -31,29 +30,32 @@ func scheduleEventNotification(_ event: CalendarItem) {
         return
     }
 
-    //removePendingNotificationRequests()
-
     let center = UNUserNotificationCenter.current()
 
     let content = UNMutableNotificationContent()
     content.title = event.summary ?? "No title"
 
-    content.body = "⏰ La réunion débute dans 1 minute"
+    content.body = body
     content.categoryIdentifier = "EVENT"
     content.sound = UNNotificationSound.default
     content.userInfo = ["eventID": event.id, "extractedLink": event.extractedLink ?? "", "htmlLink": event.htmlLink ?? ""]
     content.threadIdentifier = "livestormbar"
 
     let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
-    let request = UNNotificationRequest(identifier: event.id, content: content, trigger: trigger)
+    let request = UNNotificationRequest(identifier: "\(notifType)_\(event.id)", content: content, trigger: trigger)
     center.add(request) { error in
         if let error = error {
             NSLog("%@", "request \(request.identifier) could not be added because of error \(error)")
         }else{
-            print("🇳🇦--------------------")
-            print("event registered \(request.content.title) + link==\(event.extractedLink ?? "No extracted link")")
-            print(request.trigger!)
-            print(request.identifier)
+            let debuggy = """
+🐝--------------------
+Event title: \(request.content.title)
+Notification message: \(body)
+link: \(event.extractedLink ?? "No extracted link")
+trigger: \(request.trigger!)
+identifier: \(request.identifier)
+"""
+            print(debuggy)
         }
     }
 }

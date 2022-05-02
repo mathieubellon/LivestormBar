@@ -86,6 +86,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
+        removePendingNotificationRequests()
+        //removeDeliveredNotifications()
     }
     
     func openNextEvent () {
