@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D82ED1302821811B006F3E50 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = D82ED12F2821811B006F3E50 /* Sparkle */; };
+		D82ED1332821814C006F3E50 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = D82ED1322821814C006F3E50 /* Sparkle */; };
 		D89B8F08281C0FC900EC582F /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = D89B8F07281C0FC900EC582F /* KeyboardShortcuts */; };
 		D89B8F0C281C3FB400EC582F /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89B8F0B281C3FB400EC582F /* OnboardingView.swift */; };
 		D89C88432819A2820099BFBE /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89C88422819A2820099BFBE /* Notifications.swift */; };
@@ -48,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D82ED12D282180E2006F3E50 /* Sparkle-for-Swift-Package-Manager */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Sparkle-for-Swift-Package-Manager"; path = "../../Downloads/Sparkle-for-Swift-Package-Manager"; sourceTree = "<group>"; };
 		D89B8F0B281C3FB400EC582F /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		D89C88422819A2820099BFBE /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		D8A2B4052807231100D9C741 /* GoogleLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoader.swift; sourceTree = "<group>"; };
@@ -78,7 +81,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D82ED1332821814C006F3E50 /* Sparkle in Frameworks */,
 				D8E3B41D2812B34B006B423A /* Defaults in Frameworks */,
+				D82ED1302821811B006F3E50 /* Sparkle in Frameworks */,
 				D8ED32682806BFEA00191093 /* OAuth2 in Frameworks */,
 				D89B8F08281C0FC900EC582F /* KeyboardShortcuts in Frameworks */,
 			);
@@ -101,6 +106,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D82ED12C282180E2006F3E50 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D82ED12D282180E2006F3E50 /* Sparkle-for-Swift-Package-Manager */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D8A2B40D2810438500D9C741 /* PreferencesView */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,6 +141,7 @@
 				D8ED324C2806BD1B00191093 /* LivestormBarTests */,
 				D8ED32562806BD1B00191093 /* LivestormBarUITests */,
 				D8ED32362806BD1800191093 /* Products */,
+				D82ED12C282180E2006F3E50 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -198,6 +212,8 @@
 				D8ED32672806BFEA00191093 /* OAuth2 */,
 				D8E3B41C2812B34B006B423A /* Defaults */,
 				D89B8F07281C0FC900EC582F /* KeyboardShortcuts */,
+				D82ED12F2821811B006F3E50 /* Sparkle */,
+				D82ED1322821814C006F3E50 /* Sparkle */,
 			);
 			productName = LivestormBar;
 			productReference = D8ED32352806BD1800191093 /* LivestormBar.app */;
@@ -275,6 +291,7 @@
 				D8ED32662806BFEA00191093 /* XCRemoteSwiftPackageReference "OAuth2" */,
 				D8E3B41B2812B34B006B423A /* XCRemoteSwiftPackageReference "Defaults" */,
 				D89B8F06281C0FC900EC582F /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
+				D82ED1292821807B006F3E50 /* XCRemoteSwiftPackageReference "Sparkle" */,
 			);
 			productRefGroup = D8ED32362806BD1800191093 /* Products */;
 			projectDirPath = "";
@@ -428,7 +445,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.2;
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -482,7 +499,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.2;
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -500,7 +517,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MTL54JQNU5;
+				DEVELOPMENT_TEAM = CB4U3K2Z5U;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LivestormBar/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
@@ -512,7 +529,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
-				MARKETING_VERSION = "0.9-beta-1";
+				MARKETING_VERSION = "0.9-beta-2";
 				PRODUCT_BUNDLE_IDENTIFIER = co.livestorm.LivestormBar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -529,7 +546,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MTL54JQNU5;
+				DEVELOPMENT_TEAM = CB4U3K2Z5U;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LivestormBar/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
@@ -541,7 +558,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
-				MARKETING_VERSION = "0.9-beta-1";
+				MARKETING_VERSION = "0.9-beta-2";
 				PRODUCT_BUNDLE_IDENTIFIER = co.livestorm.LivestormBar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -659,6 +676,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D82ED1292821807B006F3E50 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				branch = 2.x;
+				kind = branch;
+			};
+		};
 		D89B8F06281C0FC900EC582F /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sindresorhus/KeyboardShortcuts";
@@ -686,6 +711,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D82ED12F2821811B006F3E50 /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D82ED1292821807B006F3E50 /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
+		D82ED1322821814C006F3E50 /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D82ED1292821807B006F3E50 /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
 		D89B8F07281C0FC900EC582F /* KeyboardShortcuts */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D89B8F06281C0FC900EC582F /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;

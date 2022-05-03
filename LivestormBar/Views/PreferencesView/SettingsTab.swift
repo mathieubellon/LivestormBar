@@ -9,14 +9,35 @@
 import SwiftUI
 import Defaults
 import KeyboardShortcuts
+import Sparkle
 
 extension KeyboardShortcuts.Name {
     static let openNextEvent = Self("openNextEvent")
 }
 
 
+// This view model class manages Sparkle's updater and publishes when new updates are allowed to be checked
+final class UpdaterViewModel: ObservableObject {
+    private let updaterController: SPUStandardUpdaterController
+    
+    @Published var canCheckForUpdates = false
+    
+    init() {
+        // If you want to start the updater manually, pass false to startingUpdater and call .startUpdater() later
+        // This is where you can also pass an updater delegate if you need one
+        updaterController = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
+        
+        updaterController.updater.publisher(for: \.canCheckForUpdates)
+            .assign(to: &$canCheckForUpdates)
+    }
+    
+    func checkForUpdates() {
+        updaterController.checkForUpdates(nil)
+    }
+}
 
 struct SettingsTab: View {
+    @StateObject var updaterViewModel = UpdaterViewModel()
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Spacer()
@@ -28,7 +49,7 @@ struct SettingsTab: View {
             Spacer()
             Divider()
             Spacer()
-            CreditsSection()
+            CreditsSection(updaterViewModel: updaterViewModel)
         }.padding()
 
     }
@@ -72,6 +93,7 @@ struct ShortcutsSection: View {
 
 
 struct CreditsSection: View{
+    @ObservedObject var updaterViewModel: UpdaterViewModel
     var body: some View{
         HStack {
             VStack(alignment: .center) {
@@ -80,6 +102,8 @@ struct CreditsSection: View{
                 if Bundle.main.infoDictionary != nil {
                     Text("Version \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown")").foregroundColor(.gray)
                 }
+                Button("Check for Updates…", action: updaterViewModel.checkForUpdates)
+                    .disabled(!updaterViewModel.canCheckForUpdates)
             }.lineLimit(1).minimumScaleFactor(0.5).frame(minWidth: 0, maxWidth: .infinity)
         }
     }
