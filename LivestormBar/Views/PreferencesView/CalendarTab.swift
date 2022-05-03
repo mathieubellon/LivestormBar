@@ -58,6 +58,9 @@ struct yourCalendarView: View {
                         Image(nsImage: NSImage(contentsOf: URL(string: picture!)!)!)
                             .resizable()
                             .frame(width: 90.0, height: 90.0)
+                            .clipShape(Circle())
+                                    .shadow(radius: 10)
+                                    .overlay(Circle().stroke(Color.white, lineWidth: 2))
                     }else{
                         
                         Image(systemName: "person.crop.circle.badge.questionmark")
