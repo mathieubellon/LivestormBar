@@ -72,8 +72,7 @@ struct yourCalendarView: View {
                     }
                     
                     VStack(alignment: .leading,spacing: 5){
-                        Text("Vous êtes connecté").font(.system(size: 20, weight: .bold))
-                        Text(username ?? "No username").font(.system(size: 16, weight: .bold))
+                        Text("Vous êtes connecté \(username ?? "No username")").font(.system(size: 20, weight: .bold))
                         Text("Connection au calendrier par défaut: ").foregroundColor(.purple)
                         Text(email ?? "No email").foregroundColor(.purple)
                             

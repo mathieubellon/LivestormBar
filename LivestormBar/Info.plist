@@ -2,10 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>SUEnableInstallerLauncherService</key>
-	<string>YES</string>
 	<key>LSUIElement</key>
 	<true/>
+	<key>SUEnableInstallerLauncherService</key>
+	<string>YES</string>
 	<key>SUFeedURL</key>
 	<string>https://livestormbar.s3.eu-west-3.amazonaws.com/appcast.xml</string>
 	<key>SUPublicEDKey</key>
