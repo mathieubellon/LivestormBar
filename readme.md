@@ -2,7 +2,7 @@
 
 A MacOs menubar that allow you to quickly jump into your next meeting
 
-![alt text](https://github.com/mathieubellon/livestormbar/blob/main/livestormbar0502.png?raw=true)
+![alt text](https://raw.githubusercontent.com/livestorm/LivestormBar/main/livestormbar0502.png?token=GHSAT0AAAAAABUBBGZ6PB4R3NYYYFT33LWUYTSUSTA)
 
 ## Table of Contents
 
