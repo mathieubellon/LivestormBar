@@ -49,7 +49,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             openNextEvent()
         }
         
-        openOnboardingWindow()
+        //openOnboardingWindow()
     }
     
     
