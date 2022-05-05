@@ -4,8 +4,6 @@
 <dict>
 	<key>LSUIElement</key>
 	<true/>
-	<key>SUEnableInstallerLauncherService</key>
-	<string>YES</string>
 	<key>SUFeedURL</key>
 	<string>https://livestormbar.s3.eu-west-3.amazonaws.com/appcast.xml</string>
 	<key>SUPublicEDKey</key>
