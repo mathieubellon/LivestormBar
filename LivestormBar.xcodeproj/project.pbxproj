@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D82ED1332821814C006F3E50 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = D82ED1322821814C006F3E50 /* Sparkle */; };
+		D844782428244FE800468B6E /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D844782228244FE800468B6E /* Sparkle.framework */; };
+		D844782528244FE800468B6E /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D844782228244FE800468B6E /* Sparkle.framework */; };
+		D84478262824501500468B6E /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D844782228244FE800468B6E /* Sparkle.framework */; };
+		D84478272824501500468B6E /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D844782228244FE800468B6E /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D89B8F08281C0FC900EC582F /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = D89B8F07281C0FC900EC582F /* KeyboardShortcuts */; };
 		D89B8F0C281C3FB400EC582F /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89B8F0B281C3FB400EC582F /* OnboardingView.swift */; };
 		D89C88432819A2820099BFBE /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89C88422819A2820099BFBE /* Notifications.swift */; };
@@ -48,7 +51,22 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		D84478282824501500468B6E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D84478272824501500468B6E /* Sparkle.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		D844782228244FE800468B6E /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		D89B8F0B281C3FB400EC582F /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		D89C88422819A2820099BFBE /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		D8A2B4052807231100D9C741 /* GoogleLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoader.swift; sourceTree = "<group>"; };
@@ -79,10 +97,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D82ED1332821814C006F3E50 /* Sparkle in Frameworks */,
 				D8E3B41D2812B34B006B423A /* Defaults in Frameworks */,
 				D8ED32682806BFEA00191093 /* OAuth2 in Frameworks */,
 				D89B8F08281C0FC900EC582F /* KeyboardShortcuts in Frameworks */,
+				D84478262824501500468B6E /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D844782428244FE800468B6E /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +116,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D844782528244FE800468B6E /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,6 +146,7 @@
 		D8ED322C2806BD1800191093 = {
 			isa = PBXGroup;
 			children = (
+				D844782228244FE800468B6E /* Sparkle.framework */,
 				D8ED32372806BD1800191093 /* LivestormBar */,
 				D8ED324C2806BD1B00191093 /* LivestormBarTests */,
 				D8ED32562806BD1B00191093 /* LivestormBarUITests */,
@@ -182,6 +203,7 @@
 				D8ED32312806BD1800191093 /* Sources */,
 				D8ED32322806BD1800191093 /* Frameworks */,
 				D8ED32332806BD1800191093 /* Resources */,
+				D84478282824501500468B6E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -192,7 +214,6 @@
 				D8ED32672806BFEA00191093 /* OAuth2 */,
 				D8E3B41C2812B34B006B423A /* Defaults */,
 				D89B8F07281C0FC900EC582F /* KeyboardShortcuts */,
-				D82ED1322821814C006F3E50 /* Sparkle */,
 			);
 			productName = LivestormBar;
 			productReference = D8D671832823BE2200496832 /* LivestormBar.app */;
@@ -270,7 +291,6 @@
 				D8ED32662806BFEA00191093 /* XCRemoteSwiftPackageReference "OAuth2" */,
 				D8E3B41B2812B34B006B423A /* XCRemoteSwiftPackageReference "Defaults" */,
 				D89B8F06281C0FC900EC582F /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
-				D82ED1292821807B006F3E50 /* XCRemoteSwiftPackageReference "Sparkle" */,
 			);
 			productRefGroup = D8ED322C2806BD1800191093;
 			projectDirPath = "";
@@ -424,7 +444,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -478,7 +498,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -493,11 +513,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = LivestormBar/LivestormBar.entitlements;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = CB4U3K2Z5U;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LivestormBarUITests",
+					"$(PROJECT_DIR)",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LivestormBar/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
@@ -507,9 +532,10 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.9.3;
+				MARKETING_VERSION = 0.9.4;
 				PRODUCT_BUNDLE_IDENTIFIER = co.livestorm.LivestormBar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -522,13 +548,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = LivestormBar/LivestormBarRelease.entitlements;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_ENTITLEMENTS = LivestormBar/LivestormBar.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = CB4U3K2Z5U;
 				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LivestormBarUITests",
+					"$(PROJECT_DIR)",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LivestormBar/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
@@ -538,9 +569,10 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.9.3;
+				MARKETING_VERSION = 0.9.4;
 				PRODUCT_BUNDLE_IDENTIFIER = co.livestorm.LivestormBar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -555,6 +587,10 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LivestormBarUITests",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 12.2;
 				MARKETING_VERSION = 1.0;
@@ -573,6 +609,10 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LivestormBarUITests",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 12.2;
 				MARKETING_VERSION = 1.0;
@@ -590,6 +630,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LivestormBarUITests",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = co.livestorm.LivestormBarUITests;
@@ -606,6 +650,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LivestormBarUITests",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = co.livestorm.LivestormBarUITests;
@@ -658,14 +706,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		D82ED1292821807B006F3E50 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/sparkle-project/Sparkle";
-			requirement = {
-				branch = 2.x;
-				kind = branch;
-			};
-		};
 		D89B8F06281C0FC900EC582F /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sindresorhus/KeyboardShortcuts";
@@ -693,11 +733,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D82ED1322821814C006F3E50 /* Sparkle */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D82ED1292821807B006F3E50 /* XCRemoteSwiftPackageReference "Sparkle" */;
-			productName = Sparkle;
-		};
 		D89B8F07281C0FC900EC582F /* KeyboardShortcuts */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D89B8F06281C0FC900EC582F /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
