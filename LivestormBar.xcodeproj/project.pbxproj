@@ -49,8 +49,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D868B7B82823983500473F5B /* LivestormBarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = LivestormBarTests.xctest; path = /Users/mathieubellon/Apps/LivestormBar/build/Debug/LivestormBarTests.xctest; sourceTree = "<absolute>"; };
-		D868B7B92823983500473F5B /* LivestormBarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = LivestormBarUITests.xctest; path = /Users/mathieubellon/Apps/LivestormBar/build/Debug/LivestormBarUITests.xctest; sourceTree = "<absolute>"; };
 		D89B8F0B281C3FB400EC582F /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		D89C88422819A2820099BFBE /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		D8A2B4052807231100D9C741 /* GoogleLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoader.swift; sourceTree = "<group>"; };
@@ -60,6 +58,8 @@
 		D8A2B4102810460500D9C741 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
 		D8A2B412281047A100D9C741 /* CalendarTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTab.swift; sourceTree = "<group>"; };
 		D8A2B4172811869100D9C741 /* NoteTakingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTakingView.swift; sourceTree = "<group>"; };
+		D8AE53132823D0B400F0F503 /* LivestormBarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LivestormBarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8AE53142823D0B400F0F503 /* LivestormBarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LivestormBarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8D671832823BE2200496832 /* LivestormBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LivestormBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8E3B419281290A8006B423A /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		D8E3B41E2812B4CA006B423A /* DefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsKeys.swift; sourceTree = "<group>"; };
@@ -130,6 +130,8 @@
 				D8ED324C2806BD1B00191093 /* LivestormBarTests */,
 				D8ED32562806BD1B00191093 /* LivestormBarUITests */,
 				D8D671832823BE2200496832 /* LivestormBar.app */,
+				D8AE53132823D0B400F0F503 /* LivestormBarTests.xctest */,
+				D8AE53142823D0B400F0F503 /* LivestormBarUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -211,7 +213,7 @@
 			);
 			name = LivestormBarTests;
 			productName = LivestormBarTests;
-			productReference = D868B7B82823983500473F5B /* LivestormBarTests.xctest */;
+			productReference = D8AE53132823D0B400F0F503 /* LivestormBarTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		D8ED32522806BD1B00191093 /* LivestormBarUITests */ = {
@@ -229,7 +231,7 @@
 			);
 			name = LivestormBarUITests;
 			productName = LivestormBarUITests;
-			productReference = D868B7B92823983500473F5B /* LivestormBarUITests.xctest */;
+			productReference = D8AE53142823D0B400F0F503 /* LivestormBarUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -494,7 +496,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = CB4U3K2Z5U;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LivestormBar/Info.plist;
@@ -507,7 +509,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.9.2;
+				MARKETING_VERSION = 0.9.3;
 				PRODUCT_BUNDLE_IDENTIFIER = co.livestorm.LivestormBar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -524,7 +526,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = CB4U3K2Z5U;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -538,7 +540,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.9.2;
+				MARKETING_VERSION = 0.9.3;
 				PRODUCT_BUNDLE_IDENTIFIER = co.livestorm.LivestormBar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

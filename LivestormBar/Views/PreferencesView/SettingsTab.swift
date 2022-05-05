@@ -105,6 +105,7 @@ struct CreditsSection: View{
                 }
                 Button("Check for Updates…", action: updaterViewModel.checkForUpdates)
                     .disabled(!updaterViewModel.canCheckForUpdates)
+                //Button("print defaults", action:printUserDefaults)
                 Button("Reset to factory defaults", role: .destructive) {
                       isPresentingConfirm = true
                     }

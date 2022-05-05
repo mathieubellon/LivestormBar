@@ -90,3 +90,9 @@ func resetFactoryDefault(){
     UserDefaults.standard.synchronize()
     print(Array(UserDefaults.standard.dictionaryRepresentation().keys).count)
 }
+
+func printUserDefaults(){
+    let domain = Bundle.main.bundleIdentifier!
+    UserDefaults.standard.synchronize()
+    print(UserDefaults.standard.persistentDomain(forName: domain))
+}
