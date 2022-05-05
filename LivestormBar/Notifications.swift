@@ -23,8 +23,6 @@ func scheduleEventNotification(event: CalendarItem, notificationTime:Double, bod
 
     let now = Date()
     let timeInterval = event.start!.dateTime!.timeIntervalSince(now) - notificationTime
-    
-    print("👓 timeinterval \(timeInterval)")
 
     if timeInterval <= 60.0 {
         return

@@ -30,7 +30,6 @@ func getMeetingLink(_ event: CalendarItem) -> MeetingLink? {
     var searchFields: [String] = []
 
     if let location = event.location {
-        print("search for location \(location)")
         searchFields.append(location)
     }
 
@@ -62,9 +61,17 @@ func detectLink(_ field: inout String) -> MeetingLink? {
 
     for pattern in patterns {
         if let regex = try? NSRegularExpression(pattern: pattern) {
+            // Do we find a Livestorm link
             if let link = getMatch(text: field, regex: regex) {
-                if let url = URL(string: link) {
-                    return MeetingLink(url: url)
+                //Livestorm link found, now extract it because it can be mixed with other data
+                //(like   "location": "https://app.livestorm.co/livestorm/product-sharing-session/live, SSD-1-Brainstorm (8)", )
+                let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
+                let matches = detector.matches(in: link, options: [], range: NSRange(location: 0, length: link.utf16.count))
+
+                guard let range = Range(matches[0].range, in: link) else { continue }
+                let url = link[range]
+                if let LSurl = URL(string: String(url)) {
+                    return MeetingLink(url: LSurl)
                 }
             }
         }
@@ -91,8 +98,8 @@ func resetFactoryDefault(){
     print(Array(UserDefaults.standard.dictionaryRepresentation().keys).count)
 }
 
-func printUserDefaults(){
-    let domain = Bundle.main.bundleIdentifier!
-    UserDefaults.standard.synchronize()
-    print(UserDefaults.standard.persistentDomain(forName: domain))
-}
+//func printUserDefaults(){
+//    let domain = Bundle.main.bundleIdentifier!
+//    UserDefaults.standard.synchronize()
+//    print(UserDefaults.standard.persistentDomain(forName: domain))
+//}
