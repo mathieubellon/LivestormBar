@@ -60,7 +60,7 @@
 		D8A2B4102810460500D9C741 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
 		D8A2B412281047A100D9C741 /* CalendarTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTab.swift; sourceTree = "<group>"; };
 		D8A2B4172811869100D9C741 /* NoteTakingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTakingView.swift; sourceTree = "<group>"; };
-		D8D671812823B09100496832 /* LivestormBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = LivestormBar.app; path = /Users/mathieubellon/Apps/LivestormBar/build/Debug/LivestormBar.app; sourceTree = "<absolute>"; };
+		D8D671822823B28B00496832 /* LivestormBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = LivestormBar.app; path = /Users/mathieubellon/Apps/LivestormBar/build/Debug/LivestormBar.app; sourceTree = "<absolute>"; };
 		D8E3B419281290A8006B423A /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		D8E3B41E2812B4CA006B423A /* DefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsKeys.swift; sourceTree = "<group>"; };
 		D8ED32382806BD1800191093 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -192,7 +192,7 @@
 				D82ED1322821814C006F3E50 /* Sparkle */,
 			);
 			productName = LivestormBar;
-			productReference = D8D671812823B09100496832 /* LivestormBar.app */;
+			productReference = D8D671822823B28B00496832 /* LivestormBar.app */;
 			productType = "com.apple.product-type.application";
 		};
 		D8ED32482806BD1B00191093 /* LivestormBarTests */ = {
@@ -490,6 +490,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = LivestormBar/LivestormBar.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 5;
@@ -519,6 +520,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = LivestormBar/LivestormBarRelease.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 5;

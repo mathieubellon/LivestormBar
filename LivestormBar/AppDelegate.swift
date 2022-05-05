@@ -49,7 +49,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
             openNextEvent()
         }
         
-        //openOnboardingWindow()
+        if !Defaults[.isOnboardingDone] {
+            openOnboardingWindow()
+        }
     }
     
     
@@ -234,6 +236,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
 
         OnboardingWindow.center()
         OnboardingWindow.orderFrontRegardless()
+        Defaults[.isOnboardingDone] = true
     }
     
     @objc

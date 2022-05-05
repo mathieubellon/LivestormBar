@@ -12,8 +12,14 @@ struct OnboardingView: View {
 
     var body: some View {
         VStack(alignment: .center) {
-            Text("Application installée").font(.system(size: 40)).bold().underline()
-            Image(nsImage: NSImage(named: "meeting_room")!).resizable().frame(width: 600.0, height: 600.0)
+            HStack{
+                Text("LivestormBar installed 🎉").font(.system(size: 30)).bold().padding(10)
+            }.padding()
+            VStack (alignment: .leading, spacing: 10.0){
+                Text("Click on logo > Preferences > Connect your Google calendar ").font(.system(size: 20))
+                Text("Then you can register your custom shortcut to go to your next meeting in no time").font(.system(size: 20))
+            }
+            Image(nsImage: NSImage(named: "youdidit")!).resizable().frame(width: 911.75, height: 600.0).padding()
 
         }
     }
@@ -23,6 +29,7 @@ struct OnboardingView: View {
 struct OnboardingView_Previews: PreviewProvider{
     static var previews: some View{
         OnboardingView()
+            .frame(width: 600.0, height: 700.0)
     }
 }
 
