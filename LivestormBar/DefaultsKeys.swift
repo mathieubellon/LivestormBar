@@ -16,7 +16,7 @@ extension Defaults.Keys {
     static let userWantsNotificationsAtEventStart = Key<Bool>("userWantsNotificationsAtEventStart", default:false)
     static let userWantsNotifications1mnBeforeEventStart = Key<Bool>("userWantsNotifications1mnBeforeEventStart", default:false)
     static let userWantsNotifications5mnBeforeEventStart = Key<Bool>("userWantsNotifications5mnBeforeEventStart", default:false)
-    static let userWantsNotifications10mnBeforeEventStart = Key<Bool>("userWantsNotifications10mnBeforeEventStart", default:true)
+    static let userWantsNotifications10mnBeforeEventStart = Key<Bool>("userWantsNotifications10mnBeforeEventStart", default:false)
 }
 
 //

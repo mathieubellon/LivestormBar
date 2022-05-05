@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import KeyboardShortcuts
 
 
 func getTodayDate(choosenFormat: String = "yyyy-MM-dd", locale: String = "FR-fr") -> String{
@@ -80,4 +81,12 @@ func getMatch(text: String, regex: NSRegularExpression) -> String? {
         return match
     }
     return nil
+}
+
+
+func resetFactoryDefault(){
+    let domain = Bundle.main.bundleIdentifier!
+    UserDefaults.standard.removePersistentDomain(forName: domain)
+    UserDefaults.standard.synchronize()
+    print(Array(UserDefaults.standard.dictionaryRepresentation().keys).count)
 }

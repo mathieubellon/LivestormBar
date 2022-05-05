@@ -94,6 +94,7 @@ struct ShortcutsSection: View {
 
 struct CreditsSection: View{
     @ObservedObject var updaterViewModel: UpdaterViewModel
+    @State private var isPresentingConfirm: Bool = false
     var body: some View{
         HStack {
             VStack(alignment: .center) {
@@ -104,6 +105,16 @@ struct CreditsSection: View{
                 }
                 Button("Check for Updates…", action: updaterViewModel.checkForUpdates)
                     .disabled(!updaterViewModel.canCheckForUpdates)
+                Button("Reset to factory defaults", role: .destructive) {
+                      isPresentingConfirm = true
+                    }
+                   .confirmationDialog("Are you sure?",
+                     isPresented: $isPresentingConfirm) {
+                     Button("Yes, delete", role: .destructive) {
+                       resetFactoryDefault()
+                      }
+                    }
+                
             }.lineLimit(1).minimumScaleFactor(0.5).frame(minWidth: 0, maxWidth: .infinity)
         }
     }
