@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D844782428244FE800468B6E /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D844782228244FE800468B6E /* Sparkle.framework */; };
-		D844782528244FE800468B6E /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D844782228244FE800468B6E /* Sparkle.framework */; };
-		D84478262824501500468B6E /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D844782228244FE800468B6E /* Sparkle.framework */; };
-		D84478272824501500468B6E /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D844782228244FE800468B6E /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D89B8F08281C0FC900EC582F /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = D89B8F07281C0FC900EC582F /* KeyboardShortcuts */; };
 		D89B8F0C281C3FB400EC582F /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89B8F0B281C3FB400EC582F /* OnboardingView.swift */; };
 		D89C88432819A2820099BFBE /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89C88422819A2820099BFBE /* Notifications.swift */; };
@@ -21,6 +17,7 @@
 		D8A2B4112810460500D9C741 /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B4102810460500D9C741 /* SettingsTab.swift */; };
 		D8A2B413281047A100D9C741 /* CalendarTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B412281047A100D9C741 /* CalendarTab.swift */; };
 		D8A2B4182811869100D9C741 /* NoteTakingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B4172811869100D9C741 /* NoteTakingView.swift */; };
+		D8DB110C2824632100FD436E /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = D8DB110B2824632100FD436E /* Sparkle */; };
 		D8E3B41A281290A8006B423A /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E3B419281290A8006B423A /* Helpers.swift */; };
 		D8E3B41D2812B34B006B423A /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = D8E3B41C2812B34B006B423A /* Defaults */; };
 		D8E3B41F2812B4CA006B423A /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E3B41E2812B4CA006B423A /* DefaultsKeys.swift */; };
@@ -51,22 +48,7 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		D84478282824501500468B6E /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				D84478272824501500468B6E /* Sparkle.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		D844782228244FE800468B6E /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		D89B8F0B281C3FB400EC582F /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		D89C88422819A2820099BFBE /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		D8A2B4052807231100D9C741 /* GoogleLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoader.swift; sourceTree = "<group>"; };
@@ -98,9 +80,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8E3B41D2812B34B006B423A /* Defaults in Frameworks */,
+				D8DB110C2824632100FD436E /* Sparkle in Frameworks */,
 				D8ED32682806BFEA00191093 /* OAuth2 in Frameworks */,
 				D89B8F08281C0FC900EC582F /* KeyboardShortcuts in Frameworks */,
-				D84478262824501500468B6E /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,7 +90,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D844782428244FE800468B6E /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,7 +97,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D844782528244FE800468B6E /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,7 +126,6 @@
 		D8ED322C2806BD1800191093 = {
 			isa = PBXGroup;
 			children = (
-				D844782228244FE800468B6E /* Sparkle.framework */,
 				D8ED32372806BD1800191093 /* LivestormBar */,
 				D8ED324C2806BD1B00191093 /* LivestormBarTests */,
 				D8ED32562806BD1B00191093 /* LivestormBarUITests */,
@@ -203,7 +182,6 @@
 				D8ED32312806BD1800191093 /* Sources */,
 				D8ED32322806BD1800191093 /* Frameworks */,
 				D8ED32332806BD1800191093 /* Resources */,
-				D84478282824501500468B6E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -214,6 +192,7 @@
 				D8ED32672806BFEA00191093 /* OAuth2 */,
 				D8E3B41C2812B34B006B423A /* Defaults */,
 				D89B8F07281C0FC900EC582F /* KeyboardShortcuts */,
+				D8DB110B2824632100FD436E /* Sparkle */,
 			);
 			productName = LivestormBar;
 			productReference = D8D671832823BE2200496832 /* LivestormBar.app */;
@@ -291,6 +270,7 @@
 				D8ED32662806BFEA00191093 /* XCRemoteSwiftPackageReference "OAuth2" */,
 				D8E3B41B2812B34B006B423A /* XCRemoteSwiftPackageReference "Defaults" */,
 				D89B8F06281C0FC900EC582F /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
+				D8DB110A2824632100FD436E /* XCRemoteSwiftPackageReference "Sparkle" */,
 			);
 			productRefGroup = D8ED322C2806BD1800191093;
 			projectDirPath = "";
@@ -516,7 +496,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = CB4U3K2Z5U;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -532,7 +512,6 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 0.9.4;
@@ -552,7 +531,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = CB4U3K2Z5U;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -569,7 +548,6 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 0.9.4;
@@ -714,6 +692,14 @@
 				kind = branch;
 			};
 		};
+		D8DB110A2824632100FD436E /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				branch = 2.x;
+				kind = branch;
+			};
+		};
 		D8E3B41B2812B34B006B423A /* XCRemoteSwiftPackageReference "Defaults" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sindresorhus/Defaults";
@@ -737,6 +723,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D89B8F06281C0FC900EC582F /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
 			productName = KeyboardShortcuts;
+		};
+		D8DB110B2824632100FD436E /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8DB110A2824632100FD436E /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
 		};
 		D8E3B41C2812B34B006B423A /* Defaults */ = {
 			isa = XCSwiftPackageProductDependency;
