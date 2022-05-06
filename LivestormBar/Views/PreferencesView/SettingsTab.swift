@@ -10,6 +10,7 @@ import SwiftUI
 import Defaults
 import KeyboardShortcuts
 import Sparkle
+import LaunchAtLogin
 
 extension KeyboardShortcuts.Name {
     static let openNextEvent = Self("openNextEvent")
@@ -39,23 +40,33 @@ final class UpdaterViewModel: ObservableObject {
 struct SettingsTab: View {
     @StateObject var updaterViewModel = UpdaterViewModel()
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Spacer()
+        VStack(alignment: .leading) {
+          
             ShortcutsSection()
-            Spacer()
             Divider()
             Spacer()
             NotificationsSection()
+            Divider()
             Spacer()
+            LaunchAtLoginSection()
             Divider()
             Spacer()
             CreditsSection(updaterViewModel: updaterViewModel)
+          
         }.padding()
-
+        
     }
 }
 
-
+struct LaunchAtLoginSection: View{
+    var body: some View{
+        VStack{
+            LaunchAtLogin.Toggle {
+                Text("Launch at login")
+            }
+        }
+    }
+}
 
 struct NotificationsSection: View{
     
@@ -69,7 +80,7 @@ struct NotificationsSection: View{
         VStack(alignment: .leading) {
             Text("Notifications").fontWeight(.bold).lineSpacing(10.0)
             Toggle("Envoyer une notification au début de la réunion", isOn:
-                     $userWantsNotificationsAtEventStart)
+                    $userWantsNotificationsAtEventStart)
             Toggle("Envoyer une notification 1mn avant le début de la réunion", isOn: $userWantsNotifications1mnBeforeEventStart)
             Toggle("Envoyer une notification 5mn avant le début de la réunion", isOn: $userWantsNotifications5mnBeforeEventStart)
             Toggle("Envoyer une notification 10mn avant le début de la réunion", isOn: $userWantsNotifications10mnBeforeEventStart)
@@ -87,7 +98,7 @@ struct ShortcutsSection: View {
                 KeyboardShortcuts.Recorder("Open next event (in Livestorm if link available or Google Calendar):", name: .openNextEvent)
             }
         }
-
+        
     }
 }
 
@@ -103,20 +114,22 @@ struct CreditsSection: View{
                 if Bundle.main.infoDictionary != nil {
                     Text("Version \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown")").foregroundColor(.gray)
                 }
+                
+            }.lineLimit(1).minimumScaleFactor(0.5).frame(minWidth: 0, maxWidth: .infinity)
+            VStack{
                 Button("Check for Updates…", action: updaterViewModel.checkForUpdates)
                     .disabled(!updaterViewModel.canCheckForUpdates)
                 //Button("print defaults", action:printUserDefaults)
                 Button("Reset to factory defaults", role: .destructive) {
-                      isPresentingConfirm = true
+                    isPresentingConfirm = true
+                }
+                .confirmationDialog("Are you sure?",
+                                    isPresented: $isPresentingConfirm) {
+                    Button("Yes, delete", role: .destructive) {
+                        resetFactoryDefault()
                     }
-                   .confirmationDialog("Are you sure?",
-                     isPresented: $isPresentingConfirm) {
-                     Button("Yes, delete", role: .destructive) {
-                       resetFactoryDefault()
-                      }
-                    }
-                
-            }.lineLimit(1).minimumScaleFactor(0.5).frame(minWidth: 0, maxWidth: .infinity)
+                }
+            }
         }
     }
 }

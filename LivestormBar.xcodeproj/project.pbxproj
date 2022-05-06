@@ -18,6 +18,7 @@
 		D8A2B413281047A100D9C741 /* CalendarTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B412281047A100D9C741 /* CalendarTab.swift */; };
 		D8A2B4182811869100D9C741 /* NoteTakingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B4172811869100D9C741 /* NoteTakingView.swift */; };
 		D8DB110C2824632100FD436E /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = D8DB110B2824632100FD436E /* Sparkle */; };
+		D8DB110F2824F74A00FD436E /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = D8DB110E2824F74A00FD436E /* LaunchAtLogin */; };
 		D8E3B41A281290A8006B423A /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E3B419281290A8006B423A /* Helpers.swift */; };
 		D8E3B41D2812B34B006B423A /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = D8E3B41C2812B34B006B423A /* Defaults */; };
 		D8E3B41F2812B4CA006B423A /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E3B41E2812B4CA006B423A /* DefaultsKeys.swift */; };
@@ -82,6 +83,7 @@
 				D8E3B41D2812B34B006B423A /* Defaults in Frameworks */,
 				D8DB110C2824632100FD436E /* Sparkle in Frameworks */,
 				D8ED32682806BFEA00191093 /* OAuth2 in Frameworks */,
+				D8DB110F2824F74A00FD436E /* LaunchAtLogin in Frameworks */,
 				D89B8F08281C0FC900EC582F /* KeyboardShortcuts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -182,6 +184,7 @@
 				D8ED32312806BD1800191093 /* Sources */,
 				D8ED32322806BD1800191093 /* Frameworks */,
 				D8ED32332806BD1800191093 /* Resources */,
+				D8DB11102824FA5200FD436E /* Launch at Login Helper */,
 			);
 			buildRules = (
 			);
@@ -193,6 +196,7 @@
 				D8E3B41C2812B34B006B423A /* Defaults */,
 				D89B8F07281C0FC900EC582F /* KeyboardShortcuts */,
 				D8DB110B2824632100FD436E /* Sparkle */,
+				D8DB110E2824F74A00FD436E /* LaunchAtLogin */,
 			);
 			productName = LivestormBar;
 			productReference = D8D671832823BE2200496832 /* LivestormBar.app */;
@@ -271,6 +275,7 @@
 				D8E3B41B2812B34B006B423A /* XCRemoteSwiftPackageReference "Defaults" */,
 				D89B8F06281C0FC900EC582F /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
 				D8DB110A2824632100FD436E /* XCRemoteSwiftPackageReference "Sparkle" */,
+				D8DB110D2824F74A00FD436E /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
 			);
 			productRefGroup = D8ED322C2806BD1800191093;
 			projectDirPath = "";
@@ -308,6 +313,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D8DB11102824FA5200FD436E /* Launch at Login Helper */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Launch at Login Helper";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D8ED32312806BD1800191093 /* Sources */ = {
@@ -496,7 +522,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = CB4U3K2Z5U;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -531,7 +557,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = CB4U3K2Z5U;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -700,6 +726,14 @@
 				kind = branch;
 			};
 		};
+		D8DB110D2824F74A00FD436E /* XCRemoteSwiftPackageReference "LaunchAtLogin" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		D8E3B41B2812B34B006B423A /* XCRemoteSwiftPackageReference "Defaults" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sindresorhus/Defaults";
@@ -728,6 +762,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D8DB110A2824632100FD436E /* XCRemoteSwiftPackageReference "Sparkle" */;
 			productName = Sparkle;
+		};
+		D8DB110E2824F74A00FD436E /* LaunchAtLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8DB110D2824F74A00FD436E /* XCRemoteSwiftPackageReference "LaunchAtLogin" */;
+			productName = LaunchAtLogin;
 		};
 		D8E3B41C2812B34B006B423A /* Defaults */ = {
 			isa = XCSwiftPackageProductDependency;
