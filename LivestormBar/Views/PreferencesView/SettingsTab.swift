@@ -41,15 +41,11 @@ struct SettingsTab: View {
     @StateObject var updaterViewModel = UpdaterViewModel()
     var body: some View {
         VStack(alignment: .leading) {
-          
             ShortcutsSection()
-            Divider()
             Spacer()
             NotificationsSection()
-            Divider()
             Spacer()
             LaunchAtLoginSection()
-            Divider()
             Spacer()
             CreditsSection(updaterViewModel: updaterViewModel)
           
@@ -60,10 +56,12 @@ struct SettingsTab: View {
 
 struct LaunchAtLoginSection: View{
     var body: some View{
-        VStack{
+        VStack(alignment: .leading){
+            Text("Startup").fontWeight(.bold).lineSpacing(10.0)
             LaunchAtLogin.Toggle {
-                Text("Launch at login")
+                Text("Launch Livestormbar at login")
             }
+            
         }
     }
 }
@@ -76,14 +74,15 @@ struct NotificationsSection: View{
     @Default(.userWantsNotifications10mnBeforeEventStart) var userWantsNotifications10mnBeforeEventStart
     
     var body: some View{
-        
         VStack(alignment: .leading) {
+        
             Text("Notifications").fontWeight(.bold).lineSpacing(10.0)
             Toggle("Envoyer une notification au début de la réunion", isOn:
                     $userWantsNotificationsAtEventStart)
             Toggle("Envoyer une notification 1mn avant le début de la réunion", isOn: $userWantsNotifications1mnBeforeEventStart)
             Toggle("Envoyer une notification 5mn avant le début de la réunion", isOn: $userWantsNotifications5mnBeforeEventStart)
             Toggle("Envoyer une notification 10mn avant le début de la réunion", isOn: $userWantsNotifications10mnBeforeEventStart)
+         
         }
     }
     
@@ -93,10 +92,12 @@ struct NotificationsSection: View{
 struct ShortcutsSection: View {
     var body: some View {
         VStack(alignment: .leading) {
+         
             Text("Keyboard shortcuts").fontWeight(.bold).lineSpacing(10.0)
             Form {
                 KeyboardShortcuts.Recorder("Open next event (in Livestorm if link available or Google Calendar):", name: .openNextEvent)
             }
+      
         }
         
     }
@@ -107,7 +108,10 @@ struct CreditsSection: View{
     @ObservedObject var updaterViewModel: UpdaterViewModel
     @State private var isPresentingConfirm: Bool = false
     var body: some View{
-        HStack {
+        Divider()
+        Spacer()
+        HStack(spacing: 2.0) {
+
             VStack(alignment: .center) {
                 Image(nsImage: NSImage(named: "AppIcon")!).resizable().frame(width: 100.0, height: 100.0)
                 Text("LivestormBar").font(.system(size: 20)).bold()
@@ -115,7 +119,7 @@ struct CreditsSection: View{
                     Text("Version \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown")").foregroundColor(.gray)
                 }
                 
-            }.lineLimit(1).minimumScaleFactor(0.5).frame(minWidth: 0, maxWidth: .infinity)
+            }.lineLimit(1).minimumScaleFactor(0.5).frame(minWidth: 0)
             VStack{
                 Button("Check for Updates…", action: updaterViewModel.checkForUpdates)
                     .disabled(!updaterViewModel.canCheckForUpdates)
@@ -129,7 +133,7 @@ struct CreditsSection: View{
                         resetFactoryDefault()
                     }
                 }
-            }
+            }.lineLimit(1).minimumScaleFactor(0.5).frame(minWidth: 0, maxWidth: .infinity)
         }
     }
 }
@@ -138,5 +142,6 @@ struct CreditsSection: View{
 struct GeneralTab_Previews: PreviewProvider{
     static var previews: some View{
         SettingsTab()
+            .frame(width: 600.0, height: 500.0)
     }
 }
