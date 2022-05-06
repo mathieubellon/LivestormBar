@@ -11,6 +11,7 @@ import Defaults
 import KeyboardShortcuts
 import Sparkle
 import LaunchAtLogin
+import UserNotifications
 
 extension KeyboardShortcuts.Name {
     static let openNextEvent = Self("openNextEvent")
@@ -73,15 +74,61 @@ struct NotificationsSection: View{
     @Default(.userWantsNotifications5mnBeforeEventStart) var userWantsNotifications5mnBeforeEventStart
     @Default(.userWantsNotifications10mnBeforeEventStart) var userWantsNotifications10mnBeforeEventStart
     
+    func checkNotificationSettings() -> (Bool, Bool) {
+        var noAlertStyle = false
+        var notificationsDisabled = false
+
+        let center = UNUserNotificationCenter.current()
+        let group = DispatchGroup()
+        group.enter()
+
+        center.getNotificationSettings { notificationSettings in
+            noAlertStyle = notificationSettings.alertStyle != UNAlertStyle.alert
+            notificationsDisabled = notificationSettings.authorizationStatus == UNAuthorizationStatus.denied
+            group.leave()
+        }
+
+        group.wait()
+        return (noAlertStyle, notificationsDisabled)
+    }
+    
     var body: some View{
+  
         VStack(alignment: .leading) {
         
-            Text("Notifications").fontWeight(.bold).lineSpacing(10.0)
+            
+            
+            let (noAlertStyle, disabled) = checkNotificationSettings()
+
+            if noAlertStyle && !disabled {
+                Text("Notifications non persistantes").fontWeight(.semibold).lineSpacing(10.0)
+                HStack (alignment: .top){
+                    Text("Si vous choisissez les notifications de type \"Alertes\" elles seront persistantes").foregroundColor(Color.gray).font(.system(size: 12))
+                    
+                    Button("Modifier"){
+                        preferencesWindow.close()
+                        NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Library/PreferencePanes/Notifications.prefPane"))
+                    }.buttonStyle(.plain).foregroundColor(Color.blue).font(.system(size: 12))
+                }
+            } else if disabled {
+                Text("Notifications impossible").fontWeight(.semibold).lineSpacing(10.0).foregroundColor(Color.red)
+                HStack(alignment: .top){
+                    Text("Vous n'avez pas autorisé LivestormBar à vous envoyer des  notifications").foregroundColor(Color.red).font(.system(size: 12))
+                    Button("Modifier"){
+                        preferencesWindow.close()
+                        NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Library/PreferencePanes/Notifications.prefPane"))
+                    }.buttonStyle(.plain).foregroundColor(Color.blue).font(.system(size: 12))
+                }
+            } else{
+                Text("Notifications").fontWeight(.bold).lineSpacing(10.0)
+            }
+            
+            
             Toggle("Envoyer une notification au début de la réunion", isOn:
-                    $userWantsNotificationsAtEventStart)
-            Toggle("Envoyer une notification 1mn avant le début de la réunion", isOn: $userWantsNotifications1mnBeforeEventStart)
-            Toggle("Envoyer une notification 5mn avant le début de la réunion", isOn: $userWantsNotifications5mnBeforeEventStart)
-            Toggle("Envoyer une notification 10mn avant le début de la réunion", isOn: $userWantsNotifications10mnBeforeEventStart)
+                    $userWantsNotificationsAtEventStart).disabled(disabled)
+            Toggle("Envoyer une notification 1mn avant le début de la réunion", isOn: $userWantsNotifications1mnBeforeEventStart).disabled(disabled)
+            Toggle("Envoyer une notification 5mn avant le début de la réunion", isOn: $userWantsNotifications5mnBeforeEventStart).disabled(disabled)
+            Toggle("Envoyer une notification 10mn avant le début de la réunion", isOn: $userWantsNotifications10mnBeforeEventStart).disabled(disabled)
          
         }
     }

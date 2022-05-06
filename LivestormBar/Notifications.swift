@@ -11,10 +11,8 @@ import SwiftUI
 
 func requestNotificationAuthorization() {
     let center = UNUserNotificationCenter.current()
-
     center.requestAuthorization(options: [.alert, .badge, .sound]) { _, _ in }
 }
-
 
 func scheduleEventNotification(event: CalendarItem, notificationTime:Double, body:String, notifType:String) {
     requestNotificationAuthorization() // By the apple best practices

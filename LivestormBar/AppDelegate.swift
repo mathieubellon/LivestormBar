@@ -52,6 +52,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         if !Defaults[.isOnboardingDone] {
             openOnboardingWindow()
         }
+        
+        requestNotificationAuthorization()
     }
     
     
