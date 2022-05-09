@@ -63,9 +63,9 @@
 		D8A47A5A2825887500968AF1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		D8A47A5E28258B4700968AF1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D8A47A6028258B4C00968AF1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		D8AE53132823D0B400F0F503 /* LivestormBarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LivestormBarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D8AE53142823D0B400F0F503 /* LivestormBarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LivestormBarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D8D671832823BE2200496832 /* LivestormBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LivestormBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8AE53132823D0B400F0F503 /* LivestormBarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = LivestormBarTests.xctest; path = /Users/mathieubellon/Apps/LivestormBar/build/Debug/LivestormBarTests.xctest; sourceTree = "<absolute>"; };
+		D8AE53142823D0B400F0F503 /* LivestormBarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = LivestormBarUITests.xctest; path = /Users/mathieubellon/Apps/LivestormBar/build/Debug/LivestormBarUITests.xctest; sourceTree = "<absolute>"; };
+		D8D671832823BE2200496832 /* LivestormBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = LivestormBar.app; path = /Users/mathieubellon/Apps/LivestormBar/build/Debug/LivestormBar.app; sourceTree = "<absolute>"; };
 		D8E3B419281290A8006B423A /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		D8E3B41E2812B4CA006B423A /* DefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsKeys.swift; sourceTree = "<group>"; };
 		D8ED32382806BD1800191093 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +77,9 @@
 		D8ED32572806BD1B00191093 /* LivestormBarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivestormBarUITests.swift; sourceTree = "<group>"; };
 		D8ED32592806BD1B00191093 /* LivestormBarUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivestormBarUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D8ED326B28070D5000191093 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D8FCB03B282903D600A9BD22 /* LivestormBarUITests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; name = LivestormBarUITests.xctest; path = "../../../Library/Developer/Xcode/DerivedData/LivestormBar-ddbazbobatsbixfdpsjbgqfhfign/Build/Products/Debug/LivestormBarUITests.xctest"; sourceTree = "<group>"; };
+		D8FCB03C282903D600A9BD22 /* LivestormBarTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; name = LivestormBarTests.xctest; path = "../../../Library/Developer/Xcode/DerivedData/LivestormBar-ddbazbobatsbixfdpsjbgqfhfign/Build/Products/Debug/LivestormBarTests.xctest"; sourceTree = "<group>"; };
+		D8FCB03D282903D600A9BD22 /* LivestormBar.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = LivestormBar.app; path = "../../../Library/Developer/Xcode/DerivedData/LivestormBar-ddbazbobatsbixfdpsjbgqfhfign/Build/Products/Debug/LivestormBar.app"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,9 +138,7 @@
 				D8ED32372806BD1800191093 /* LivestormBar */,
 				D8ED324C2806BD1B00191093 /* LivestormBarTests */,
 				D8ED32562806BD1B00191093 /* LivestormBarUITests */,
-				D8D671832823BE2200496832 /* LivestormBar.app */,
-				D8AE53132823D0B400F0F503 /* LivestormBarTests.xctest */,
-				D8AE53142823D0B400F0F503 /* LivestormBarUITests.xctest */,
+				D8FCB03A282903C400A9BD22 /* Product */,
 			);
 			sourceTree = "<group>";
 		};
@@ -177,6 +178,16 @@
 				D8ED32592806BD1B00191093 /* LivestormBarUITestsLaunchTests.swift */,
 			);
 			path = LivestormBarUITests;
+			sourceTree = "<group>";
+		};
+		D8FCB03A282903C400A9BD22 /* Product */ = {
+			isa = PBXGroup;
+			children = (
+				D8FCB03D282903D600A9BD22 /* LivestormBar.app */,
+				D8FCB03C282903D600A9BD22 /* LivestormBarTests.xctest */,
+				D8FCB03B282903D600A9BD22 /* LivestormBarUITests.xctest */,
+			);
+			path = Product;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -541,7 +552,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = CB4U3K2Z5U;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -576,7 +587,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = CB4U3K2Z5U;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
