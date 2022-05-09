@@ -174,7 +174,7 @@ struct CreditsSection: View{
                 Button(NSLocalizedString("reset_factory_defaults", comment: ""), role: .destructive) {
                     isPresentingConfirm = true
                 }
-                .confirmationDialog(NSLocalizedString("are_your_sure", comment: ""),
+                .confirmationDialog(NSLocalizedString("are_you_sure", comment: ""),
                                     isPresented: $isPresentingConfirm) {
                     Button(NSLocalizedString("confirm_reset_defaults", comment: ""), role: .destructive) {
                         resetFactoryDefault()

@@ -10,13 +10,14 @@ import SwiftUI
 import OAuth2
 import Defaults
 
+
 class StatusBarItemController: NSObject, NSMenuDelegate {
     var statusItem: NSStatusItem!
     var statusItemMenu: NSMenu!
     var menuIsOpen = false
     
     weak var appdelegate: AppDelegate!
-   
+    
     
     
     override
@@ -48,7 +49,7 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         menuIsOpen = false
     }
     
-
+    
     
     
     @objc
@@ -88,7 +89,7 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         self.statusItemMenu.autoenablesItems = false
         self.statusItemMenu.removeAllItems()
         self.statusItemMenu.addItem(NSMenuItem.separator())
-
+        
         self.createEventSectionHeader()
         
         if Defaults[.email] == nil {
@@ -101,16 +102,15 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
             }
         }
         
-        self.createMeetingSection()
-
+        
+        
+        self.createMoreActions()
         self.createActionsSection()
-        
-
-        
     }
     
     func createEventSectionHeader(){
-        let title = NSLocalizedString("today", comment: "")
+        let title = NSLocalizedString("today", comment: "") + " (" + getTodayDate(choosenFormat: "dd MMMM") + ")"
+        
         let menuHeader = self.statusItemMenu.addItem(
             withTitle: title,
             action: nil,
@@ -118,6 +118,7 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         )
         menuHeader.state = .off
         menuHeader.isEnabled = false
+        
         let menuTitle = NSMutableAttributedString()
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 0.9
@@ -127,14 +128,6 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         styles[NSAttributedString.Key.foregroundColor] = NSColor.black
         menuTitle.append(NSAttributedString(string: title, attributes: styles))
         
-        
-       
-        menuTitle.append(NSAttributedString(
-            string: getTodayDate(choosenFormat: "dd MMMM"),
-            attributes: [NSAttributedString.Key.font: NSFont.systemFont(ofSize: 16),
-                         NSAttributedString.Key.foregroundColor: NSColor.black])
-        )
-
         menuTitle.addAttributes([NSAttributedString.Key.paragraphStyle: paragraphStyle], range: NSRange(location: 0, length: menuTitle.length))
         menuHeader.attributedTitle = menuTitle
     }
@@ -148,31 +141,35 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
             keyEquivalent: ""
         )
         empty.isEnabled = false
-//        let menuTitle = NSMutableAttributedString()
-//        let paragraphStyle = NSMutableParagraphStyle()
-//        paragraphStyle.lineHeightMultiple = 0.7
-//        paragraphStyle.alignment = .center
-//        var styles = [NSAttributedString.Key: Any]()
-//        styles[NSAttributedString.Key.font] = NSFont.systemFont(ofSize: 16)
-//        styles[NSAttributedString.Key.foregroundColor] = NSColor.white
-//        menuTitle.append(NSAttributedString(string: title, attributes: styles))
-//        empty.attributedTitle = menuTitle
+        //        let menuTitle = NSMutableAttributedString()
+        //        let paragraphStyle = NSMutableParagraphStyle()
+        //        paragraphStyle.lineHeightMultiple = 0.7
+        //        paragraphStyle.alignment = .center
+        //        var styles = [NSAttributedString.Key: Any]()
+        //        styles[NSAttributedString.Key.font] = NSFont.systemFont(ofSize: 16)
+        //        styles[NSAttributedString.Key.foregroundColor] = NSColor.white
+        //        menuTitle.append(NSAttributedString(string: title, attributes: styles))
+        //        empty.attributedTitle = menuTitle
     }
-   
     
-
+    
+    
     
     func createEventMenuItem(_ event: CalendarItem){
         guard let startDate = event.start?.dateTime else {
+            return
+        }
+        guard let endDate = event.end?.dateTime else {
             return
         }
         let now = Date()
         var styles = [NSAttributedString.Key: Any]()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm  "
-        let dateToSHow = dateFormatter.string(from:startDate)
+        let startDateStr = dateFormatter.string(from:startDate)
+        let endDateStr = dateFormatter.string(from:endDate)
         
-        var dateTitle = "\(dateToSHow) \(event.summary ?? "No title")"
+        var dateTitle = "\(startDateStr) \(endDateStr)  \(event.summary ?? "No title")"
         
         let eventMenuItem = self.statusItemMenu.addItem(
             withTitle: dateTitle,
@@ -180,6 +177,7 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
             keyEquivalent: ""
         )
         eventMenuItem.isEnabled = true
+        
         if event.extractedLink != "" {
             eventMenuItem.image = NSImage(named: "link")!
             eventMenuItem.image?.size = NSSize(width: 14, height: 14)
@@ -188,30 +186,22 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
             eventMenuItem.image?.size = NSSize(width: 14, height: 14)
         }
         
+        
+        styles[NSAttributedString.Key.font] = NSFont.monospacedDigitSystemFont(ofSize:14, weight: .regular)
+        eventMenuItem.state = .off
+        eventMenuItem.onStateImage = nil
+        
         if event.end!.dateTime! < now {
-            eventMenuItem.state = .off
-            eventMenuItem.onStateImage = nil
             styles[NSAttributedString.Key.foregroundColor] = NSColor.disabledControlTextColor
-            styles[NSAttributedString.Key.font] = NSFont.systemFont(ofSize: 14)
-            //            styles[NSAttributedString.Key.strikethroughStyle] = NSUnderlineStyle.thick.rawValue
-            
-            eventMenuItem.attributedTitle = NSAttributedString(
-                string: dateTitle,
-                attributes: styles
-            )
         } else if event.start!.dateTime! < now && now < event.end!.dateTime! {
-            eventMenuItem.state = .off
-            eventMenuItem.onStateImage = nil
             styles[NSAttributedString.Key.foregroundColor] = NSColor.black
             dateTitle = dateTitle + " 🔥"
-            styles[NSAttributedString.Key.font] = NSFont.systemFont(ofSize: 14)
-            //            styles[NSAttributedString.Key.strikethroughStyle] = NSUnderlineStyle.thick.rawValue
-            
-            eventMenuItem.attributedTitle = NSAttributedString(
-                string: dateTitle,
-                attributes: styles
-            )
         }
+        
+        eventMenuItem.attributedTitle = NSAttributedString(
+            string: dateTitle,
+            attributes: styles
+        )
         
         
         // SUBMENU
@@ -244,20 +234,20 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         }
         
         
-//        let noteTaking = eventMenuItem.submenu!.addItem(
-//            withTitle: "Take notes",
-//            action: #selector(AppDelegate.openNoteTakingWindow(_:)),
-//            keyEquivalent: "N"
-//        )
-//        noteTaking.representedObject = event
+        //        let noteTaking = eventMenuItem.submenu!.addItem(
+        //            withTitle: "Take notes",
+        //            action: #selector(AppDelegate.openNoteTakingWindow(_:)),
+        //            keyEquivalent: "N"
+        //        )
+        //        noteTaking.representedObject = event
         
     }
     
-    func createMeetingSection(){
+    func createMoreActions(){
         self.statusItemMenu.addItem(NSMenuItem.separator())
-
+        
         let actionsMenu = self.statusItemMenu.addItem(withTitle: NSLocalizedString("more_actions", comment: ""),
-                                    action: nil, keyEquivalent: "")
+                                                      action: nil, keyEquivalent: "")
         
         actionsMenu.submenu = NSMenu(title: "Actions menu")
         actionsMenu.submenu!.addItem(withTitle: NSLocalizedString("force_refresh_events", comment: ""),

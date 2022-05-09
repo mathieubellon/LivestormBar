@@ -44,12 +44,13 @@ func scheduleEventNotification(event: CalendarItem, notificationTime:Double, bod
             NSLog("%@", "request \(request.identifier) could not be added because of error \(error)")
         }else{
             let debuggy = """
-🐝--------------------
+--------------------
 Event title: \(request.content.title)
 Notification message: \(body)
 link: \(event.extractedLink ?? "No extracted link")
 trigger: \(request.trigger!)
 identifier: \(request.identifier)
+--------------------
 """
             print(debuggy)
         }
