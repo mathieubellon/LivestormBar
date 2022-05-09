@@ -17,6 +17,7 @@
 		D8A2B4112810460500D9C741 /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B4102810460500D9C741 /* SettingsTab.swift */; };
 		D8A2B413281047A100D9C741 /* CalendarTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B412281047A100D9C741 /* CalendarTab.swift */; };
 		D8A2B4182811869100D9C741 /* NoteTakingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A2B4172811869100D9C741 /* NoteTakingView.swift */; };
+		D8A47A5D28258B4700968AF1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8A47A5F28258B4700968AF1 /* Localizable.strings */; };
 		D8DB110C2824632100FD436E /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = D8DB110B2824632100FD436E /* Sparkle */; };
 		D8DB110F2824F74A00FD436E /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = D8DB110E2824F74A00FD436E /* LaunchAtLogin */; };
 		D8E3B41A281290A8006B423A /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E3B419281290A8006B423A /* Helpers.swift */; };
@@ -59,6 +60,9 @@
 		D8A2B4102810460500D9C741 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
 		D8A2B412281047A100D9C741 /* CalendarTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTab.swift; sourceTree = "<group>"; };
 		D8A2B4172811869100D9C741 /* NoteTakingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTakingView.swift; sourceTree = "<group>"; };
+		D8A47A5A2825887500968AF1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		D8A47A5E28258B4700968AF1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D8A47A6028258B4C00968AF1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D8AE53132823D0B400F0F503 /* LivestormBarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LivestormBarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8AE53142823D0B400F0F503 /* LivestormBarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LivestormBarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8D671832823BE2200496832 /* LivestormBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LivestormBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,6 +144,7 @@
 		D8ED32372806BD1800191093 /* LivestormBar */ = {
 			isa = PBXGroup;
 			children = (
+				D8A47A5F28258B4700968AF1 /* Localizable.strings */,
 				D8A2B4162811867000D9C741 /* Views */,
 				D8ED326B28070D5000191093 /* Info.plist */,
 				D8ED32382806BD1800191093 /* AppDelegate.swift */,
@@ -268,6 +273,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = D8ED322C2806BD1800191093;
 			packageReferences = (
@@ -294,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8ED32402806BD1B00191093 /* Assets.xcassets in Resources */,
+				D8A47A5D28258B4700968AF1 /* Localizable.strings in Resources */,
 				D8ED32432806BD1B00191093 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -389,10 +396,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		D8A47A5F28258B4700968AF1 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D8A47A5E28258B4700968AF1 /* fr */,
+				D8A47A6028258B4C00968AF1 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		D8ED32412806BD1B00191093 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				D8ED32422806BD1B00191093 /* Base */,
+				D8A47A5A2825887500968AF1 /* fr */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -404,6 +421,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -464,6 +482,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";

@@ -26,7 +26,7 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
             withLength: NSStatusItem.variableLength
         )
         enableButtonAction()
-        self.statusItemMenu = NSMenu(title: "LivestormBar in Status Bar Menu")
+        self.statusItemMenu = NSMenu(title: "app_menubar")
         self.statusItemMenu.delegate = self
     }
     
@@ -92,9 +92,9 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         self.createEventSectionHeader()
         
         if Defaults[.email] == nil {
-            self.createEmptyMenu("Vous n'êtes pas connecté")
+            self.createEmptyMenu(NSLocalizedString("you_are_not_connected", comment: ""))
         }else if em.eventsArray.isEmpty{
-            self.createEmptyMenu("Aucun meeting")
+            self.createEmptyMenu(NSLocalizedString("no_meeting", comment: ""))
         }else{
             for event in em.eventsArray {
                 self.createEventMenuItem(event)
@@ -110,7 +110,7 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
     }
     
     func createEventSectionHeader(){
-        let title = "Réunions du "
+        let title = NSLocalizedString("today", comment: "")
         let menuHeader = self.statusItemMenu.addItem(
             withTitle: title,
             action: nil,
@@ -216,19 +216,19 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         
         // SUBMENU
         
-        eventMenuItem.submenu = NSMenu(title: "Bientôt une liste d'action diverses ici")
+        eventMenuItem.submenu = NSMenu(title: "more_actions")
         
         
         if event.extractedLink != "" {
             let LSLink = eventMenuItem.submenu!.addItem(
-                withTitle: "Open meeting link in default browser",
+                withTitle: NSLocalizedString("open_link_in_default_browser", comment: ""),
                 action: #selector(AppDelegate.openLinkInDefaultBrowser(sender:)),
                 keyEquivalent: "O"
             )
             LSLink.representedObject = event
         }else{
             eventMenuItem.submenu!.addItem(
-                withTitle: "No Livestorm meeting link found",
+                withTitle: NSLocalizedString("no_livestorm_meeting_link_found", comment: ""),
                 action: nil,
                 keyEquivalent: ""
             )
@@ -236,7 +236,7 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         
         if event.htmlLink != nil {
             let GoogleLink = eventMenuItem.submenu!.addItem(
-                withTitle: "Open event in Google Calendar",
+                withTitle: NSLocalizedString("open_event_in_google_calendar", comment: ""),
                 action: #selector(AppDelegate.openLinkInGoogleCalendar(sender:)),
                 keyEquivalent: "G"
             )
@@ -256,11 +256,11 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
     func createMeetingSection(){
         self.statusItemMenu.addItem(NSMenuItem.separator())
 
-        let actionsMenu = self.statusItemMenu.addItem(withTitle: "More actions",
+        let actionsMenu = self.statusItemMenu.addItem(withTitle: NSLocalizedString("more_actions", comment: ""),
                                     action: nil, keyEquivalent: "")
         
         actionsMenu.submenu = NSMenu(title: "Actions menu")
-        actionsMenu.submenu!.addItem(withTitle: "Force refresh events",
+        actionsMenu.submenu!.addItem(withTitle: NSLocalizedString("force_refresh_events", comment: ""),
                                      action: #selector(AppDelegate.updateEvents), keyEquivalent: "R")
     }
     
@@ -268,13 +268,13 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
     func createActionsSection(){
         self.statusItemMenu.addItem(NSMenuItem.separator())
         self.statusItemMenu.addItem(
-            withTitle: "Préférences",
+            withTitle: NSLocalizedString("preferences", comment: ""),
             action: #selector(AppDelegate.openPreferencesWindow),
             keyEquivalent: ","
         )
         
         self.statusItemMenu.addItem(
-            withTitle: "Quitter LivestormBar",
+            withTitle: NSLocalizedString("quit_app", comment: "yo sure"),
             action: #selector(AppDelegate.quit),
             keyEquivalent: "q"
         )

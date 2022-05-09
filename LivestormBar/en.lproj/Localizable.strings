@@ -1,0 +1,44 @@
+/* 
+  Localizable.strings
+  LivestormBar
+
+  Created by Mathieu Bellon on 06/05/2022.
+  
+*/
+
+"are_you_sure" = "Are you sure?";
+"calendar_not_connected" = "Calendar is not connected";
+"check_for_updates" = "Check for Updates…";
+"confirm_reset_defaults" = "Yes, reset to defaults";
+"connect_to_google_calendar" = "Connect to your Google Calendar";
+"connect_your_calendar" = "Connect to your calendar";
+"connection_to_default_calendar" = "Connected to your default calendar:";
+"disconnect" = "Disconnect";
+"force_refresh_events" = "Force refresh events";
+"greeting_app_installed" = "Livestorm correctly installed 🎉";
+"keyboard_shortcuts" = "Keyboard shortcuts";
+"launch_app_at_login" = "Launch app at login";
+"more_actions" = "More actions";
+"no_livestorm_meeting_link_found" = "No Livestorm meeting link found";
+"no_meeting" = "No meeting";
+"notifications_header_impossible" = "We can't send notifications";
+"notifications_header_non_persistant" = "Notifications (non persistants)";
+"onboarding_tip_shortcut" = "Then you can register your custom shortcut to go to your next meeting in no time";
+"open_event_in_google_calendar" = "Open event in Google Calendar";
+"open_link_in_default_browser" = "Open meeting link in default browser";
+"preferences" = "Preferences";
+"quit_app" = "Quit Livestorm";
+"reset_factory_defaults" = "Reset to factory defaults";
+"send_notification_10mn_before_meeting" = "Send a notification 10mn before meeting";
+"send_notification_1mn_before_meeting" = "Send a notification 1mn before meeting";
+"send_notification_5mn_before_meeting" = "Send a notification 5mn before meeting";
+"send_notification_at_beginning_meeting" = "Send a notification when meeting starts";
+"settings" = "Settings";
+"shortcut_open_next_event_link" = "Open next event (in Livestorm if link available or Google Calendar):";
+"startup" = "Launch at login?";
+"tip_app_not_authorized_send_notifications" = "You have not authorized LivestormBar to send you notifications";
+"tip_choose_alert_type_notification" = "If you choose \"Alerts\" type notifications they will be persistent";
+"tip_connect_calendar" = "Click on logo > Preferences > Connect your Google calendar";
+"today" = "Today";
+"you_are_connected" = "You are connected ✅";
+"you_are_not_connected" = "You are not connected";

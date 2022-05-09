@@ -1,0 +1,45 @@
+/* 
+  Localizable.strings
+  LivestormBar
+
+  Created by Mathieu Bellon on 06/05/2022.
+  
+*/
+
+"are_you_sure" = "Êtes-vous sûr ?";
+"calendar_not_connected" = "Le calendrier n'est pas connecté";
+"check_for_updates" = "Vérifier les mises à jour...";
+"confirm_reset_defaults" = "Oui, réinitialiser les valeurs par défaut" ;
+"confirm_reset_defaults" = "Oui, réinitialiser les valeurs par défaut.";
+"connect_to_google_calendar" = "Se connecter à votre Google Agenda";
+"connect_your_calendar" = "Connectez-vous à votre agenda";
+"connection_to_default_calendar" = "Connexion au calendrier par défaut :";
+"disconnect" = "Déconnecter";
+"force_refresh_events" = "Recharger les évènements";
+"greeting_app_installed" = "Livestorm correctement installé 🎉";
+"keyboard_shortcuts" = "Raccourcis clavier";
+"launch_app_at_login" = "Lancer l'application à l'ouverture de session";
+"more_actions" = "Plus d'actions";
+"no_livestorm_meeting_link_found" = "Aucun lien de réunion Livestorm trouvé";
+"no_meeting" = "Pas de réunion";
+"notifications_header_impossible" = "Nous ne pouvons pas envoyer de notifications";
+"notifications_header_non_persistant" = "Notifications (non persistantes)";
+"onboarding_tip_shortcut" = "Vous pouvez ensuite enregistrer votre raccourci personnalisé pour vous rendre à votre prochaine réunion en un rien de temps";
+"open_event_in_google_calendar" = "Ouvrez l'événement dans Google Agenda";
+"open_link_in_default_browser" = "Ouvrir le lien de la réunion dans le navigateur par défaut";
+"preferences" = "Préférences";
+"quit_app" = "Quitter Livestorm";
+"reset_factory_defaults" = "Réinitialiser les paramètres d'usine";
+"send_notification_10mn_before_meeting" = "Envoyer une notification 10mn avant la réunion";
+"send_notification_1mn_before_meeting" = "Envoyer une notification 1mn avant le début de la réunion";
+"send_notification_5mn_before_meeting" = "Envoyer une notification 5mn avant la réunion";
+"send_notification_at_beginning_meeting" = "Envoyer une notification au début de la réunion";
+"settings" = "Paramètres";
+"shortcut_open_next_event_link" = "Ouvrir le prochain événement (dans Livestorm si le lien est disponible ou dans Google Agenda) :";
+"startup" = "Ouvrir au démarrage ?";
+"tip_app_not_authorized_send_notifications" = "Vous n'avez pas autorisé LivestormBar à vous envoyer des notifications";
+"tip_choose_alert_type_notification" = "Si vous choisissez des notifications de type \"Alertes\", elles seront persistantes";
+"tip_connect_calendar" = "Cliquez sur logo > Préférences > Connecter votre agenda Google";
+"today" = "Aujourd'hui";
+"you_are_connected" = "Vous êtes connecté ✅";
+"you_are_not_connected" = "Vous n'êtes pas connecté";

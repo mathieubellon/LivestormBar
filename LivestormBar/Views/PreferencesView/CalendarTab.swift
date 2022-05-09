@@ -72,14 +72,17 @@ struct yourCalendarView: View {
                     }
                     
                     VStack(alignment: .leading,spacing: 5){
-                        Text("Vous êtes connecté \(username ?? "No username")").font(.system(size: 20, weight: .bold))
-                        Text("Connection au calendrier par défaut: ").foregroundColor(.purple)
-                        Text(email ?? "No email").foregroundColor(.purple)
+                        Text("you_are_connected").font(.system(size: 20, weight: .bold))
+                        
+                        HStack{
+                            Text("connection_to_default_calendar").foregroundColor(.black).padding(.trailing, 0.2)
+                            Text(email ?? "No email").foregroundColor(.black).font(.system(size: 12, weight: .bold))
+                        }
                             
                     }
                     Spacer()
                     
-                    Button("Disconnect") {
+                    Button(NSLocalizedString("disconnect", comment: "")) {
                         forgetTokens()
                     }
                 }
@@ -91,9 +94,9 @@ struct yourCalendarView: View {
                         .font(.system(size: 30, weight: .semibold))
                         .scaledToFit()
                         .frame(width: 90, height: 90)
-                    Text("Calendar not connected").font(.system(size: 16, weight: .bold))
+                    Text("calendar_not_connected").font(.system(size: 16, weight: .bold))
                     Spacer()
-                    Button("Connect to Google Calendar") {
+                    Button("connect_to_google_calendar") {
                         oauthDanceLaunch()
                     }
                 }

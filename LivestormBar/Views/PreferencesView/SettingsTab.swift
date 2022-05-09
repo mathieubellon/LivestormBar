@@ -58,9 +58,9 @@ struct SettingsTab: View {
 struct LaunchAtLoginSection: View{
     var body: some View{
         VStack(alignment: .leading){
-            Text("Startup").fontWeight(.bold).lineSpacing(10.0)
+            Text("startup").fontWeight(.bold).lineSpacing(10.0)
             LaunchAtLogin.Toggle {
-                Text("Launch Livestormbar at login")
+                Text("launch_app_at_login")
             }
             
         }
@@ -101,20 +101,20 @@ struct NotificationsSection: View{
             let (noAlertStyle, disabled) = checkNotificationSettings()
 
             if noAlertStyle && !disabled {
-                Text("Notifications non persistantes").fontWeight(.semibold).lineSpacing(10.0)
+                Text("notifications_header_non_persistant").fontWeight(.semibold).lineSpacing(10.0)
                 HStack (alignment: .top){
-                    Text("Si vous choisissez les notifications de type \"Alertes\" elles seront persistantes").foregroundColor(Color.gray).font(.system(size: 12))
+                    Text("tip_choose_alert_type_notification").foregroundColor(Color.gray).font(.system(size: 12))
                     
-                    Button("Modifier"){
+                    Button(NSLocalizedString("Edit", comment: "")){
                         preferencesWindow.close()
                         NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Library/PreferencePanes/Notifications.prefPane"))
                     }.buttonStyle(.plain).foregroundColor(Color.blue).font(.system(size: 12))
                 }
             } else if disabled {
-                Text("Notifications impossible").fontWeight(.semibold).lineSpacing(10.0).foregroundColor(Color.red)
+                Text("notifications_header_impossible").fontWeight(.semibold).lineSpacing(10.0).foregroundColor(Color.red)
                 HStack(alignment: .top){
-                    Text("Vous n'avez pas autorisé LivestormBar à vous envoyer des  notifications").foregroundColor(Color.red).font(.system(size: 12))
-                    Button("Modifier"){
+                    Text("tip_app_not_authorized_send_notifications").foregroundColor(Color.red).font(.system(size: 12))
+                    Button(NSLocalizedString("Edit", comment: "")){
                         preferencesWindow.close()
                         NSWorkspace.shared.open(URL(fileURLWithPath: "/System/Library/PreferencePanes/Notifications.prefPane"))
                     }.buttonStyle(.plain).foregroundColor(Color.blue).font(.system(size: 12))
@@ -124,11 +124,11 @@ struct NotificationsSection: View{
             }
             
             
-            Toggle("Envoyer une notification au début de la réunion", isOn:
+            Toggle("send_notification_at_beginning_meeting", isOn:
                     $userWantsNotificationsAtEventStart).disabled(disabled)
-            Toggle("Envoyer une notification 1mn avant le début de la réunion", isOn: $userWantsNotifications1mnBeforeEventStart).disabled(disabled)
-            Toggle("Envoyer une notification 5mn avant le début de la réunion", isOn: $userWantsNotifications5mnBeforeEventStart).disabled(disabled)
-            Toggle("Envoyer une notification 10mn avant le début de la réunion", isOn: $userWantsNotifications10mnBeforeEventStart).disabled(disabled)
+            Toggle("send_notification_1mn_before_meeting", isOn: $userWantsNotifications1mnBeforeEventStart).disabled(disabled)
+            Toggle("send_notification_5mn_before_meeting", isOn: $userWantsNotifications5mnBeforeEventStart).disabled(disabled)
+            Toggle("send_notification_10mn_before_meeting", isOn: $userWantsNotifications10mnBeforeEventStart).disabled(disabled)
          
         }
     }
@@ -140,9 +140,9 @@ struct ShortcutsSection: View {
     var body: some View {
         VStack(alignment: .leading) {
          
-            Text("Keyboard shortcuts").fontWeight(.bold).lineSpacing(10.0)
+            Text("keyboard_shortcuts").fontWeight(.bold).lineSpacing(10.0)
             Form {
-                KeyboardShortcuts.Recorder("Open next event (in Livestorm if link available or Google Calendar):", name: .openNextEvent)
+                KeyboardShortcuts.Recorder(NSLocalizedString("shortcut_open_next_event_link", comment: ""), name: .openNextEvent)
             }
       
         }
@@ -168,15 +168,15 @@ struct CreditsSection: View{
                 
             }.lineLimit(1).minimumScaleFactor(0.5).frame(minWidth: 0)
             VStack{
-                Button("Check for Updates…", action: updaterViewModel.checkForUpdates)
+                Button(NSLocalizedString("check_for_updates", comment: ""), action: updaterViewModel.checkForUpdates)
                     .disabled(!updaterViewModel.canCheckForUpdates)
                 //Button("print defaults", action:printUserDefaults)
-                Button("Reset to factory defaults", role: .destructive) {
+                Button(NSLocalizedString("reset_factory_defaults", comment: ""), role: .destructive) {
                     isPresentingConfirm = true
                 }
-                .confirmationDialog("Are you sure?",
+                .confirmationDialog(NSLocalizedString("are_your_sure", comment: ""),
                                     isPresented: $isPresentingConfirm) {
-                    Button("Yes, delete", role: .destructive) {
+                    Button(NSLocalizedString("confirm_reset_defaults", comment: ""), role: .destructive) {
                         resetFactoryDefault()
                     }
                 }
