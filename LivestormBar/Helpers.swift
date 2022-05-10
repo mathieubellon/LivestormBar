@@ -8,9 +8,36 @@
 import Foundation
 import KeyboardShortcuts
 
+extension Date {
+    var tomorrow: Date {
+        return Calendar.current.date(byAdding: .day, value: 1, to: self)!
+    }
 
-func getTodayDate(choosenFormat: String = "yyyy-MM-dd", locale: String = "FR-fr") -> String{
-    let date = Date()
+    var afterTomorrow: Date {
+        return Calendar.current.date(byAdding: .day, value: 2, to: self)!
+    }
+}
+
+enum Deltas {
+    case today
+    case tomorrow
+    case dayAfterTomorrow
+}
+
+
+func getDateAsString(choosenFormat: String = "yyyy-MM-dd", locale: String = "FR-fr", delta: Deltas = .today) -> String{
+    
+    let date: Date
+
+    switch delta {
+    case .today:
+        date = Date()
+    case .tomorrow:
+        date = Date().tomorrow
+    case .dayAfterTomorrow:
+        date = Date().afterTomorrow
+    }
+
     let dateFormatter = DateFormatter()
     dateFormatter.locale    = Locale(identifier: locale)
     dateFormatter.dateFormat = choosenFormat

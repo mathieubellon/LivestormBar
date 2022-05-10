@@ -73,13 +73,14 @@ class GoogleLoader: OAuth2DataLoader {
     func requestTodayEvents(path: String, callback: @escaping ((CalendarResponse?, Error?) -> Void)) {
         //let url = baseURL.appendingPathComponent(path)
         
-        let todayDate = getTodayDate()
+        let todayDate = getDateAsString()
+        let endDate = getDateAsString(delta:.dayAfterTomorrow)
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "www.googleapis.com"
         urlComponents.path = path
         urlComponents.queryItems = [
-           URLQueryItem(name: "timeMax", value: "\(todayDate)T23:59:59Z"),
+           URLQueryItem(name: "timeMax", value: "\(endDate)T23:59:59Z"),
            URLQueryItem(name: "timeMin", value: "\(todayDate)T00:00:00Z"),
            URLQueryItem(name: "singleEvents", value: "true"),
         ]
