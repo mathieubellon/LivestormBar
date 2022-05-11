@@ -144,12 +144,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     @objc func handleRedirect(_ notification: Notification) {
         if let url = notification.object as? URL {
             NSLog("Handling redirect...")
-            do {
-                try GoogleOauth2.handleRedirectURL(url)
-            }
-            catch let error {
-                NSLog("handleRedirect: \(error)")
-            }
+            GoogleOauth2.handleRedirectURL(url)
         }
         else {
             NSLog("ici une erreur")
