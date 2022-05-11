@@ -71,6 +71,33 @@ class UserCalendar {
         }
     }
     
+    
+    public func getNextEvent() -> CalendarItem? {
+        // Get upcomin events from sorted array
+        let now = Date()
+        let upcomingEvents = self.classicEvents.filter{$0.start.dateTime! > now}
+       
+        // Return index 0 as it is a sorted array
+        if upcomingEvents.count > 0 {
+            let now = Date()
+            var nextEvent = upcomingEvents[0]
+            nextEvent.remainingTime = nextEvent.start.dateTime?.timeIntervalSince(now)
+            return nextEvent
+        }
+        
+        return nil
+    }
+    
+    public func getCurrentEvents() -> [CalendarItem]{
+        let now = Date()
+        var currentEvents = self.classicEvents.filter{$0.start.dateTime! < now && now < $0.end.dateTime!}
+        for (i, event) in currentEvents.enumerated() {
+            currentEvents[i].elapsedTime = event.end.dateTime?.timeIntervalSince(now)
+        }
+        return currentEvents
+    }
+    
+    
 
     private func sortEventsArray(){
         self.classicEvents.sort(by: {$0.start.dateTime!.compare($1.start.dateTime!) == .orderedAscending})

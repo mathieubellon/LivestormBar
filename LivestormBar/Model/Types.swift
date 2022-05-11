@@ -8,12 +8,9 @@
 import Foundation
 
 
-
 struct CalendarItems: Decodable {
     let items: [CalendarItem]
 }
-
-
 
 struct CalendarItem: Decodable {
     let id: String
@@ -25,6 +22,8 @@ struct CalendarItem: Decodable {
     let location: String?
     let conferenceData: Conference?
     var extractedLink: String?
+    var remainingTime: Double?
+    var elapsedTime: Double?
     
     
     func isNow() -> Bool {
@@ -46,9 +45,6 @@ struct entryPoint: Decodable{
     let entryPointType: String
     let uri: String
 }
-
-
-
 
 struct Start: Decodable {
     let date: String? // In case of full day event only date is given in format yyyy-mm-dd

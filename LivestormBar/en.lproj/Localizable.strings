@@ -13,6 +13,7 @@
 "connect_to_google_calendar" = "Connect to your Google Calendar";
 "connect_your_calendar" = "Connect to your calendar";
 "connection_to_default_calendar" = "Connected to your default calendar:";
+"current_meeting" = "Current meeting";
 "disconnect" = "Disconnect";
 "event_starts_now" = "starts now !! 🔥";
 "event_starts_in_1mn" = "starts in 1 mn!";
@@ -23,6 +24,7 @@
 "keyboard_shortcuts" = "Keyboard shortcuts";
 "launch_app_at_login" = "Launch app at login";
 "more_actions" = "More actions";
+"next_meeting" = "Next meeting";
 "no_livestorm_meeting_link_found" = "No Livestorm meeting link found";
 "no_meeting" = "No meeting";
 "notifications_header_impossible" = "We can't send notifications";
@@ -46,3 +48,6 @@
 "today" = "Today";
 "you_are_connected" = "You are connected ✅";
 "you_are_not_connected" = "You are not connected";
+"next_in" = "Coming next in";
+"in" = "in";
+"end_in" = "ends in";

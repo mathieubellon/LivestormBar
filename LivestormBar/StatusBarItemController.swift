@@ -15,26 +15,26 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
     var statusItem: NSStatusItem!
     var statusItemMenu: NSMenu!
     var menuIsOpen = false
-    
+    var button: NSStatusBarButton
     weak var appdelegate: AppDelegate!
     
     
     
     override
     init() {
-        super.init()
         statusItem = NSStatusBar.system.statusItem(
             withLength: NSStatusItem.variableLength
         )
-        enableButtonAction()
+        self.button = statusItem.button!
+        super.init()
         self.statusItemMenu = NSMenu(title: "app_menubar")
         self.statusItemMenu.delegate = self
+        enableButtonAction()
     }
     
     
     
     func enableButtonAction() {
-        let button: NSStatusBarButton = statusItem.button!
         // Safe check if statusbar is created
         guard let logo = NSImage(named: NSImage.Name("logo-primary-svg")) else { return }
         
@@ -45,6 +45,7 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         button.image = resizedLogo
         button.target = self
         button.action = #selector(statusMenuBarAction)
+        button.imagePosition = .imageLeft
         button.sendAction(on: [NSEvent.EventTypeMask.rightMouseDown, NSEvent.EventTypeMask.leftMouseUp, NSEvent.EventTypeMask.leftMouseDown])
         menuIsOpen = false
     }
@@ -90,7 +91,37 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         self.statusItemMenu.removeAllItems()
         self.statusItemMenu.addItem(NSMenuItem.separator())
         
-        self.createEventSectionHeader()
+        // format remaining time
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .abbreviated
+        formatter.allowedUnits = [.hour, .minute]
+        formatter.zeroFormattingBehavior = .pad
+       
+        // if current meeting
+        if  !userCalendar.getCurrentEvents().isEmpty {
+            let currentOne = userCalendar.getCurrentEvents()[0]
+            
+            let elapsedString = formatter.string(from: currentOne.elapsedTime ?? 0.0)
+            let eventEndsIn = NSLocalizedString("end_in", comment: "") + " " + elapsedString!
+            
+            self.createSectionTitle(text:eventEndsIn)
+            for meeting in userCalendar.getCurrentEvents(){
+                self.createEventMenuItem(meeting)
+            }
+            
+            button.title = " \(currentOne.summary!) (\(eventEndsIn))"
+        }else if  userCalendar.getNextEvent() != nil {
+  
+            let remainingString = formatter.string(from: userCalendar.getNextEvent()?.remainingTime ?? 0.0)
+            let nextMeeting = NSLocalizedString("next_in", comment: "") + " " + remainingString!
+            self.createSectionTitle(text:nextMeeting)
+            self.createEventMenuItem(userCalendar.getNextEvent()!)
+            button.title = " \(userCalendar.getNextEvent()?.summary ?? "no title")" + " " + (NSLocalizedString("in", comment: "")) + " " + remainingString!
+        }
+        
+        // title in param
+        let today = NSLocalizedString("today", comment: "") + " (" + getDateAsString(choosenFormat: "dd MMMM") + ")"
+        self.createSectionTitle(text: today)
         
         if Defaults[.email] == nil {
             self.createEmptyMenu(NSLocalizedString("you_are_not_connected", comment: ""))
@@ -108,8 +139,9 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         self.createActionsSection()
     }
     
-    func createEventSectionHeader(){
-        let title = NSLocalizedString("today", comment: "") + " (" + getDateAsString(choosenFormat: "dd MMMM") + ")"
+    func createSectionTitle(text:String){
+        
+        let title = text
         
         let menuHeader = self.statusItemMenu.addItem(
             withTitle: title,

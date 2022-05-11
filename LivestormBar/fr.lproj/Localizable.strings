@@ -23,7 +23,9 @@
 "greeting_app_installed" = "Livestorm est installé 🎉";
 "keyboard_shortcuts" = "Raccourcis clavier";
 "launch_app_at_login" = "Lancer l'application à l'ouverture de session";
+"current_meeting" = "Réunion en cours";
 "more_actions" = "Plus d'actions";
+"next_meeting" = "Prochaine réunion";
 "no_livestorm_meeting_link_found" = "Aucun lien de réunion Livestorm trouvé";
 "no_meeting" = "Pas de réunion";
 "notifications_header_impossible" = "Nous ne pouvons pas envoyer de notifications";
@@ -47,3 +49,6 @@
 "today" = "Aujourd'hui";
 "you_are_connected" = "Vous êtes connecté ✅";
 "you_are_not_connected" = "Vous n'êtes pas connecté";
+"next_in" = "A venir dans";
+"in" = "dans";
+"end_in" = "termine dans";
