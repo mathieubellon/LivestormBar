@@ -30,6 +30,26 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         self.statusItemMenu = NSMenu(title: "app_menubar")
         self.statusItemMenu.delegate = self
         enableButtonAction()
+        
+        // On launch we detect if app will be hidden and deactivate the settings
+        if self.statusItem.button!.window?.occlusionState.contains(.visible) == false {
+            Defaults[.showEventNameInMenubar] = false
+        }
+        // During app life detect if app will be hidden and act to prevent that
+        NotificationCenter.default.addObserver(forName: NSWindow.didChangeOcclusionStateNotification, object: self.button.window, queue: nil) { _ in
+            // We don't want to report when you manually make it invisible.
+            guard self.statusItem.isVisible else {
+                return
+            }
+            // If MacOS will hode the menu because too long we force to hide the title
+            // The app is in a weird state (menu does not appear below the bar) but
+            // this allow the user to go back to settings and change settings
+            if self.statusItem.button!.window?.occlusionState.contains(.visible) == false {
+                Defaults[.showEventNameInMenubar] = false
+            }
+
+            //print("MacOS hides our app!", self.statusItem.button!.window?.occlusionState.contains(.visible) == false)
+        }
     }
     
     

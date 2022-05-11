@@ -79,6 +79,7 @@ struct DisplaySection: View{
                 .onChange(of: showEventNameInMenubar) { _ in
                     statusBarItem.updateMenu()
                 }
+            Text("⚠️ ") + Text("alert_app_will_be_hidden").fontWeight(.regular).foregroundColor(Color.black).font(.system(size: 10))
             
         }
     }

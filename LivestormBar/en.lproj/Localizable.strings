@@ -53,3 +53,4 @@
 "end_in" = "ends in";
 "show_event_name_in_menubar" = "Show next or current event in menubar";
 "display" = "Display";
+"alert_app_will_be_hidden" = "This setting will not activate if it is detected that the app is going to be hidden by macOS by taking up too much space - hold your command button then drag the app to the right and try again.";

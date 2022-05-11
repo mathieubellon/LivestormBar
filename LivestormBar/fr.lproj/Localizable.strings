@@ -54,3 +54,4 @@
 "end_in" = "termine dans";
 "show_event_name_in_menubar" = "Afficher l'événement suivant ou actuel dans la barre de menus";
 "display" = "Affichage";
+"alert_app_will_be_hidden" = "Ce paramètre ne s'activera pas si on détecte que l'app va être cachée par MacOS en prenant trop de place - Maintenez votre bouton de commande puis faites glisser l'application vers la droite et réessayez.";
