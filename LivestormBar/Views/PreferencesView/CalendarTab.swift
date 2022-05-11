@@ -8,6 +8,7 @@
 import SwiftUI
 import OAuth2
 import Defaults
+import Alamofire
 
 let ud = UserDefaults.standard
 
@@ -52,15 +53,15 @@ struct yourCalendarView: View {
     
     var body: some View {
         VStack{
-            if email != nil && email != "" {
+            if email != nil {
                 HStack(alignment: .center, spacing: 10){
                     if picture != nil{
                         Image(nsImage: NSImage(contentsOf: URL(string: picture!)!)!)
                             .resizable()
                             .frame(width: 90.0, height: 90.0)
                             .clipShape(Circle())
-                                    .shadow(radius: 10)
-                                    .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                            .shadow(radius: 10)
+                            .overlay(Circle().stroke(Color.white, lineWidth: 2))
                     }else{
                         
                         Image(systemName: "person.crop.circle.badge.questionmark")
@@ -78,7 +79,7 @@ struct yourCalendarView: View {
                             Text("connection_to_default_calendar").foregroundColor(.black).padding(.trailing, 0.2)
                             Text(email ?? "No email").foregroundColor(.black).font(.system(size: 12, weight: .bold))
                         }
-                            
+                        
                     }
                     Spacer()
                     
@@ -118,46 +119,37 @@ struct yourCalendarView_Previews: PreviewProvider{
 
 func forgetTokens() {
     NSLog("Deleting token")
-    loader.oauth2.forgetTokens()
+    GoogleOauth2.forgetTokens()
     // print(Bundle.main.bundleIdentifier!)
     // TODO : forEach key or Defaults.removeAll(suite: UserDefaults = .standard)
     Defaults.reset("username", "email", "picture", "isAuthenticated")
-    em.eventsArray = []
+    userCalendar.purge()
 }
 
 func oauthDanceLaunch(){
     NSLog("Launch Oauth Dance")
+    let baseURL = URL(string: "https://www.googleapis.com")!
+    let path = "/oauth2/v1/userinfo"
     // config OAuth2
-    loader.requestUserdata() { dict, error in
-        if let error = error {
-            switch error {
-            case OAuth2Error.requestCancelled:
-                ud.set("cancelled", forKey: "oautherror")
-            default:
-                ud.set("globale", forKey: "oautherror")
+//    let urlComponents = URLComponents()
+    let url = baseURL.appendingPathComponent(path)
+    
+    
+    AF.request(url, interceptor: OAuth2RetryHandler(oauth2: GoogleOauth2), requestModifier: { $0.timeoutInterval = 5 }).validate().response() {response in
+        switch response.result {
+        case .success(let data):
+            do {
+                let user = try JSONDecoder().decode(UserInfo.self, from: data!)
+                print("USERINFO : \(user)")
+                Defaults[.picture] = user.picture
+                Defaults[.email] = user.email
+                Defaults[.username] = user.name
+                userCalendar.fetchEvents(calendarID: user.email)
+            }catch{
+                NSLog("Error decoding JSON")
             }
-        }
-        else {
-            
-            if let imgURL = dict?["picture"] as? String {
-                // This does not work for NSImageView and drives my crazy and forces me to use IKImageView
-                //let image = NSImage(byReferencing:NSURL(string: imgURL)! as URL)
-                //self.avatarImage?.image = image
-                Defaults[.picture] = imgURL
-                
-            }
-            if let username = dict?["name"] as? String {
-                
-                Defaults[.username] = username
-            }
-            if let email = dict?["email"] as? String {
-                
-                Defaults[.email] = email
-                if email != "" && email != "" {
-                    em.fetchEvents()
-                }
-            }
-            
+        case .failure(let error):
+            NSLog("Error requesting UserInfo : \(error)")
         }
     }
 }

@@ -94,10 +94,10 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         
         if Defaults[.email] == nil {
             self.createEmptyMenu(NSLocalizedString("you_are_not_connected", comment: ""))
-        }else if em.eventsArray.isEmpty{
+        }else if userCalendar.classicEvents.isEmpty{
             self.createEmptyMenu(NSLocalizedString("no_meeting", comment: ""))
         }else{
-            for event in em.eventsArray {
+            for event in userCalendar.classicEvents {
                 self.createEventMenuItem(event)
             }
         }
@@ -109,7 +109,7 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
     }
     
     func createEventSectionHeader(){
-        let title = NSLocalizedString("today", comment: "") + " (" + getTodayDate(choosenFormat: "dd MMMM") + ")"
+        let title = NSLocalizedString("today", comment: "") + " (" + getDateAsString(choosenFormat: "dd MMMM") + ")"
         
         let menuHeader = self.statusItemMenu.addItem(
             withTitle: title,
@@ -124,7 +124,7 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         paragraphStyle.lineHeightMultiple = 0.9
         paragraphStyle.alignment = .left
         var styles = [NSAttributedString.Key: Any]()
-        styles[NSAttributedString.Key.font] = NSFont.systemFont(ofSize: 16)
+        styles[NSAttributedString.Key.font] = NSFont.systemFont(ofSize: 14)
         styles[NSAttributedString.Key.foregroundColor] = NSColor.black
         menuTitle.append(NSAttributedString(string: title, attributes: styles))
         
@@ -156,10 +156,10 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
     
     
     func createEventMenuItem(_ event: CalendarItem){
-        guard let startDate = event.start?.dateTime else {
+        guard let startDate = event.start.dateTime else {
             return
         }
-        guard let endDate = event.end?.dateTime else {
+        guard let endDate = event.end.dateTime else {
             return
         }
         let now = Date()
@@ -178,6 +178,7 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         )
         eventMenuItem.isEnabled = true
         
+        debugPrint(event.extractedLink)
         if event.extractedLink != "" {
             eventMenuItem.image = NSImage(named: "link")!
             eventMenuItem.image?.size = NSSize(width: 14, height: 14)
@@ -191,9 +192,9 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         eventMenuItem.state = .off
         eventMenuItem.onStateImage = nil
         
-        if event.end!.dateTime! < now {
+        if event.end.dateTime! < now {
             styles[NSAttributedString.Key.foregroundColor] = NSColor.disabledControlTextColor
-        } else if event.start!.dateTime! < now && now < event.end!.dateTime! {
+        } else if event.start.dateTime! < now && now < event.end.dateTime! {
             styles[NSAttributedString.Key.foregroundColor] = NSColor.black
             dateTitle = dateTitle + " 🔥"
         }

@@ -7,6 +7,55 @@
 
 import Foundation
 import KeyboardShortcuts
+import OAuth2
+import Alamofire
+
+class OAuth2RetryHandler: Alamofire.RequestInterceptor {
+    
+    let loader: OAuth2DataLoader
+
+    init(oauth2: OAuth2) {
+        loader = OAuth2DataLoader(oauth2: oauth2)
+        loader.alsoIntercept403 = true
+    }
+    
+    func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
+       
+        
+        if let response = request.task?.response as? HTTPURLResponse, 401 == response.statusCode, let req = request.request {
+            var dataRequest = OAuth2DataRequest(request: req, callback: { _ in })
+          
+            dataRequest.context = completion
+            loader.enqueue(request: dataRequest)
+            loader.attemptToAuthorize() { authParams, error in
+                self.loader.dequeueAndApply() { req in
+                    if let comp = req.context as? (RetryResult) -> Void {
+                        comp(nil != authParams ? .retry : .doNotRetry)
+                    }
+                }
+            }
+        }
+        else {
+             completion(.doNotRetry)   // not a 401, not our problem
+        }
+    }
+    
+    func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
+        guard nil != loader.oauth2.accessToken else {
+            completion(.success(urlRequest))
+            return
+        }
+        
+        do {
+            let request = try urlRequest.signed(with: loader.oauth2)
+            
+            return completion(.success(request))
+        } catch {
+            print("Unable to sign request: \(error)")
+            return completion(.failure(error))
+        }
+    }
+}
 
 extension Date {
     var tomorrow: Date {
@@ -53,7 +102,7 @@ struct MeetingLink: Equatable {
  * this method will collect text from the location, url and notes field of an event and try to find a known meeting url link.
  * As meeting links can be part of a outlook safe url, we will extract the original link from outlook safe links.
  */
-func getMeetingLink(_ event: CalendarItem) -> MeetingLink? {
+func getMeetingLink(_ event: CalendarItem) -> String {
     var searchFields: [String] = []
 
     if let location = event.location {
@@ -71,11 +120,11 @@ func getMeetingLink(_ event: CalendarItem) -> MeetingLink? {
     for var field in searchFields {
         let meetingLink = detectLink(&field)
         if meetingLink != nil {
-            return meetingLink
+            return meetingLink!.url.absoluteString
         }
     }
 
-    return nil
+    return ""
 }
 
 func detectLink(_ field: inout String) -> MeetingLink? {
@@ -123,6 +172,7 @@ func resetFactoryDefault(){
     UserDefaults.standard.removePersistentDomain(forName: domain)
     UserDefaults.standard.synchronize()
     print(Array(UserDefaults.standard.dictionaryRepresentation().keys).count)
+    userCalendar.purge()
 }
 
 //func printUserDefaults(){

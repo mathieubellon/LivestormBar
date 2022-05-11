@@ -17,63 +17,59 @@ func requestNotificationAuthorization() {
 func scheduleEventNotification(event: CalendarItem, notificationTime:Double, body:String, notifType:String) {
     requestNotificationAuthorization() // By the apple best practices
     
-    guard event.start != nil, event.start?.dateTime != nil else { return }
-
+    guard event.start.dateTime != nil else { return }
+    
     let now = Date()
-    let timeInterval = event.start!.dateTime!.timeIntervalSince(now) - notificationTime
-
+    let timeInterval = event.start.dateTime!.timeIntervalSince(now) - notificationTime
+    
     if timeInterval <= 60.0 {
         return
     }
-
+    
     let center = UNUserNotificationCenter.current()
-
+    
     let content = UNMutableNotificationContent()
     content.title = event.summary ?? "No title"
-
+    
     content.body = body
     content.categoryIdentifier = "EVENT"
     content.sound = UNNotificationSound.default
     content.userInfo = ["eventID": event.id, "extractedLink": event.extractedLink ?? "", "htmlLink": event.htmlLink ?? ""]
     content.threadIdentifier = "livestormbar"
-
+    
     let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
     let request = UNNotificationRequest(identifier: "\(notifType)_\(event.id)", content: content, trigger: trigger)
     center.add(request) { error in
         if let error = error {
             NSLog("%@", "request \(request.identifier) could not be added because of error \(error)")
-        }else{
-            let debuggy = """
---------------------
-Event title: \(request.content.title)
-Notification message: \(body)
-link: \(event.extractedLink ?? "No extracted link")
-trigger: \(request.trigger!)
-identifier: \(request.identifier)
---------------------
-"""
-            print(debuggy)
         }
     }
 }
+
+//else{
+//    NSLog("""
+//--------------------
+//\(request.content.title) --- Notification message: \(body)
+//""")
+//}
 
 func registerNotificationCategories() {
     let acceptAction = UNNotificationAction(identifier: "JOIN_ACTION",
                                             title: "Join",
                                             options: .foreground)
-
-
+    
+    
     let eventCategory = UNNotificationCategory(identifier: "EVENT",
                                                actions: [acceptAction],
                                                intentIdentifiers: [],
                                                hiddenPreviewsBodyPlaceholder: "",
                                                options: [.customDismissAction, .hiddenPreviewsShowTitle])
-
-
+    
+    
     let notificationCenter = UNUserNotificationCenter.current()
-
+    
     notificationCenter.setNotificationCategories([eventCategory])
-
+    
     notificationCenter.getNotificationCategories { categories in
         for category in categories {
             NSLog("Category \(category.identifier) was registered")
@@ -84,17 +80,17 @@ func registerNotificationCategories() {
 
 func sendUserNotification(_ title: String, _ text: String) {
     requestNotificationAuthorization() // By the apple best practices
-
+    
     NSLog("Send notification: \(title) - \(text)")
     let center = UNUserNotificationCenter.current()
-
+    
     let content = UNMutableNotificationContent()
     content.title = title
     content.body = text
     
-
+    
     let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
-
+    
     center.add(request) { error in
         if let error = error {
             NSLog("%@", "request \(request.identifier) could not be added because of error \(error)")
@@ -122,16 +118,16 @@ func notificationsEnabled() -> Bool {
     let center = UNUserNotificationCenter.current()
     let group = DispatchGroup()
     group.enter()
-
+    
     var correctAlertStyle = false
     var notificationsEnabled = false
-
+    
     center.getNotificationSettings { notificationSettings in
         correctAlertStyle = notificationSettings.alertStyle == UNAlertStyle.alert || notificationSettings.alertStyle == UNAlertStyle.banner
         notificationsEnabled = notificationSettings.authorizationStatus != UNAuthorizationStatus.denied
         group.leave()
     }
-
+    
     group.wait()
     return correctAlertStyle && notificationsEnabled
 }
@@ -141,7 +137,7 @@ func notificationsEnabled() -> Bool {
  */
 func sendNotification(_ title: String, _ text: String) {
     requestNotificationAuthorization() // By the apple best practices
-
+    
     if notificationsEnabled() {
         sendUserNotification(title, text)
     } else {
@@ -154,13 +150,13 @@ func sendNotification(_ title: String, _ text: String) {
  */
 func displayAlert(title: String, text: String) {
     NSLog("Display alert: \(title) - \(text)")
-
+    
     let userAlert = NSAlert()
     userAlert.messageText = title
     userAlert.informativeText = text
     userAlert.alertStyle = NSAlert.Style.informational
     userAlert.addButton(withTitle: "general_ok")
-
+    
     userAlert.runModal()
 }
 

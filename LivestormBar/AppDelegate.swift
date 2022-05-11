@@ -18,9 +18,10 @@ var noteTakingWindow: NSWindow! = nil
 var OnboardingWindow: NSWindow! = nil
 let OAuth2AppDidReceiveCallbackNotification = NSNotification.Name(rawValue: "OAuth2AppDidReceiveCallback")
 
-let loader = GoogleLoader()
 
-let em = evenManager()
+
+let userCalendar = UserCalendar()
+
 
 var statusBarItem: StatusBarItemController!
 var isPreferencesWindowOpened = false
@@ -28,23 +29,30 @@ var isPreferencesWindowOpened = false
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDelegate {
-
+    @Default(.email) var email
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         statusBarItem = StatusBarItemController()
         statusBarItem.setAppDelegate(appdelegate: self)
         
-        loader.oauth2.authConfig.authorizeContext = self
+        GoogleOauth2.authConfig.authorizeContext = self
+        
+        
+        GoogleOauth2.authConfig.authorizeEmbedded = true
+        GoogleOauth2.logger = OAuth2DebugLogger(.debug)
         NotificationCenter.default.removeObserver(self, name: OAuth2AppDidReceiveCallbackNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleRedirect(_:)), name: OAuth2AppDidReceiveCallbackNotification, object: nil)
         
-        _ = Timer.scheduledTimer(timeInterval: 30.0, target: self, selector: #selector(self.updateEvents), userInfo: nil, repeats: true)
+        
         
         registerNotificationCategories()
         UNUserNotificationCenter.current().delegate = self
         
-        self.updateEvents()
-        
+        if Defaults[.email] != nil {
+            userCalendar.fetchEvents(calendarID: Defaults[.email]!)
+            _ = Timer.scheduledTimer(timeInterval: 30.0, target: self, selector: #selector(self.updateEvents), userInfo: nil, repeats: true)
+        }
+
         KeyboardShortcuts.onKeyUp(for: .openNextEvent) { [self] in
             openNextEvent()
         }
@@ -54,6 +62,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         }
         
         requestNotificationAuthorization()
+        
+       
     }
     
     
@@ -79,14 +89,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         NSWorkspace.shared.open(URL(string: linkToOpen)!)
     }
     
-    @objc
-    func updateEvents() {
-        NSLog("Firing updateEvents")
-        if Defaults[.email] != nil {
-            NSLog("Do fetch events")
-            em.fetchEvents()
-        }
-    }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
@@ -96,8 +98,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
     
     func openNextEvent () {
         let now = Date()
-        for event in em.eventsArray {
-            if now < event.start!.dateTime!  || (event.start!.dateTime! < now && now < event.end!.dateTime!) {
+        for event in userCalendar.classicEvents {
+            if now < event.start.dateTime!  || (event.start.dateTime! < now && now < event.end.dateTime!) {
                 print(event.extractedLink!)
                 if event.extractedLink! != "" {
                     NSWorkspace.shared.open(URL(string: event.extractedLink!)!)
@@ -106,6 +108,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
                 }
                 return
             }
+        }
+    }
+    
+    @objc
+    func updateEvents(){
+        if Defaults[.email] != nil {
+            userCalendar.fetchEvents(calendarID: Defaults[.email]!)
         }
     }
     
@@ -137,7 +146,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         if let url = notification.object as? URL {
             NSLog("Handling redirect...")
             do {
-                try loader.oauth2.handleRedirectURL(url)
+                try GoogleOauth2.handleRedirectURL(url)
             }
             catch let error {
                 NSLog("handleRedirect: \(error)")

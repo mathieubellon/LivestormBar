@@ -15,8 +15,12 @@
 "connect_your_calendar" = "Connectez-vous à votre agenda";
 "connection_to_default_calendar" = "Connexion au calendrier par défaut :";
 "disconnect" = "Déconnecter";
+"event_starts_now" = "commence maintenant !! 🔥";
+"event_starts_in_1mn" = "commence dans 1 mn!";
+"event_starts_in_5mn" = "commence dans 5 mn!";
+"event_starts_in_10mn" = "commence dans 10 mn!";
 "force_refresh_events" = "Recharger les évènements";
-"greeting_app_installed" = "Livestorm correctement installé 🎉";
+"greeting_app_installed" = "Livestorm est installé 🎉";
 "keyboard_shortcuts" = "Raccourcis clavier";
 "launch_app_at_login" = "Lancer l'application à l'ouverture de session";
 "more_actions" = "Plus d'actions";
