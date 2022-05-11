@@ -48,6 +48,8 @@ struct SettingsTab: View {
             Spacer()
             LaunchAtLoginSection()
             Spacer()
+            DisplaySection()
+            Spacer()
             CreditsSection(updaterViewModel: updaterViewModel)
           
         }.padding()
@@ -67,12 +69,28 @@ struct LaunchAtLoginSection: View{
     }
 }
 
+struct DisplaySection: View{
+    @Default(.showEventNameInMenubar) var showEventNameInMenubar
+    
+    var body: some View{
+        VStack(alignment: .leading){
+            Text("display").fontWeight(.bold).lineSpacing(10.0)
+            Toggle("show_event_name_in_menubar", isOn: $showEventNameInMenubar)
+                .onChange(of: showEventNameInMenubar) { _ in
+                    statusBarItem.updateMenu()
+                }
+            
+        }
+    }
+}
+
 struct NotificationsSection: View{
     
     @Default(.userWantsNotificationsAtEventStart) var userWantsNotificationsAtEventStart
     @Default(.userWantsNotifications1mnBeforeEventStart) var userWantsNotifications1mnBeforeEventStart
     @Default(.userWantsNotifications5mnBeforeEventStart) var userWantsNotifications5mnBeforeEventStart
     @Default(.userWantsNotifications10mnBeforeEventStart) var userWantsNotifications10mnBeforeEventStart
+
     
     func checkNotificationSettings() -> (Bool, Bool) {
         var noAlertStyle = false

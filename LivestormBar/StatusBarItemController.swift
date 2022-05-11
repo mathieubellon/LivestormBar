@@ -109,14 +109,23 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
                 self.createEventMenuItem(meeting)
             }
             
-            button.title = " \(currentOne.summary!) (\(eventEndsIn))"
+            if Defaults[.showEventNameInMenubar] {
+                button.title = " \(currentOne.summary!) (\(eventEndsIn))"
+            }else{
+                button.title = ""
+            }
+
         }else if  userCalendar.getNextEvent() != nil {
   
             let remainingString = formatter.string(from: userCalendar.getNextEvent()?.remainingTime ?? 0.0)
             let nextMeeting = NSLocalizedString("next_in", comment: "") + " " + remainingString!
             self.createSectionTitle(text:nextMeeting)
             self.createEventMenuItem(userCalendar.getNextEvent()!)
-            button.title = " \(userCalendar.getNextEvent()?.summary ?? "no title")" + " " + (NSLocalizedString("in", comment: "")) + " " + remainingString!
+            if Defaults[.showEventNameInMenubar] {
+                button.title = " \(userCalendar.getNextEvent()?.summary ?? "no title")" + " " + (NSLocalizedString("in", comment: "")) + " " + remainingString!
+            }else{
+                button.title = ""
+            }
         }
         
         // title in param

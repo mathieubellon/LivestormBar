@@ -52,3 +52,5 @@
 "next_in" = "A venir dans";
 "in" = "dans";
 "end_in" = "termine dans";
+"show_event_name_in_menubar" = "Afficher l'événement suivant ou actuel dans la barre de menus";
+"display" = "Affichage";

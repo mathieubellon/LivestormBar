@@ -18,20 +18,8 @@ extension Defaults.Keys {
     static let userWantsNotifications5mnBeforeEventStart = Key<Bool>("userWantsNotifications5mnBeforeEventStart", default:false)
     static let userWantsNotifications10mnBeforeEventStart = Key<Bool>("userWantsNotifications10mnBeforeEventStart", default:false)
     static let isOnboardingDone = Key<Bool>("isOnboardingDone", default: false)
+    static let showEventNameInMenubar = Key<Bool>("showEventNameInMenubar", default: false)
 }
 
-//
-//let observer = Defaults.observe(.username) { change in
-//    // Initial event
-//    print(change.oldValue)
-//    //=> false
-//    print(change.newValue)
-//    //=> false
-//
-//    // First actual event
-//    print(change.oldValue)
-//    //=> false
-//    print(change.newValue)
-//    //=> true
-//}
+
 

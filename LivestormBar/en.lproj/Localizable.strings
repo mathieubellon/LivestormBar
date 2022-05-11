@@ -51,3 +51,5 @@
 "next_in" = "Coming next in";
 "in" = "in";
 "end_in" = "ends in";
+"show_event_name_in_menubar" = "Show next or current event in menubar";
+"display" = "Display";
