@@ -178,7 +178,6 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         )
         eventMenuItem.isEnabled = true
         
-        debugPrint(event.extractedLink)
         if event.extractedLink != "" {
             eventMenuItem.image = NSImage(named: "link")!
             eventMenuItem.image?.size = NSSize(width: 14, height: 14)

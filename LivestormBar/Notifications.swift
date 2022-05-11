@@ -42,16 +42,16 @@ func scheduleEventNotification(event: CalendarItem, notificationTime:Double, bod
     center.add(request) { error in
         if let error = error {
             NSLog("%@", "request \(request.identifier) could not be added because of error \(error)")
+        }else{
+            print("""
+--------------------
+\(request.content.title) --- Notification message: \(body)
+""")
         }
     }
 }
 
-//else{
-//    NSLog("""
-//--------------------
-//\(request.content.title) --- Notification message: \(body)
-//""")
-//}
+
 
 func registerNotificationCategories() {
     let acceptAction = UNNotificationAction(identifier: "JOIN_ACTION",

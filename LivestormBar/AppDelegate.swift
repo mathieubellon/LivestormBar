@@ -100,7 +100,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         let now = Date()
         for event in userCalendar.classicEvents {
             if now < event.start.dateTime!  || (event.start.dateTime! < now && now < event.end.dateTime!) {
-                print(event.extractedLink!)
                 if event.extractedLink! != "" {
                     NSWorkspace.shared.open(URL(string: event.extractedLink!)!)
                 }else{
