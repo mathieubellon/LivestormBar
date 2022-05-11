@@ -57,10 +57,13 @@ class UserCalendar {
                             NSLog("Event is neither Classic nor AllDay: \(item)")
                         }
                     }
-
+                    
+                    
+                    // Warning: Do not change the order of these functions
+                    // Refacto to prevent that from happening
                     self.sortEventsArray()
-                    self.setNotifications()
                     self.extractMeetingLink()
+                    self.setNotifications()
                     statusBarItem.updateMenu()
                 }catch{
                     NSLog("Error decoding events: \(error)")
