@@ -31,10 +31,6 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         self.statusItemMenu.delegate = self
         enableButtonAction()
         
-        // On launch we detect if app will be hidden and deactivate the settings
-        if self.statusItem.button!.window?.occlusionState.contains(.visible) == false {
-            Defaults[.showEventNameInMenubar] = false
-        }
         // During app life detect if app will be hidden and act to prevent that
         NotificationCenter.default.addObserver(forName: NSWindow.didChangeOcclusionStateNotification, object: self.button.window, queue: nil) { _ in
             // We don't want to report when you manually make it invisible.
@@ -106,6 +102,26 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
         }
     }
     
+    func shortenTitleForMenu(title: String) -> String {
+        enum statusbarEventTitleLengthLimits {
+            static let min = 5
+            static let max = 55
+        }
+
+        enum TitleTruncationRules {
+            static let excludeAtEnds = CharacterSet.whitespacesAndNewlines
+        }
+        
+        var eventTitle = title.trimmingCharacters(in: TitleTruncationRules.excludeAtEnds)
+        if eventTitle.count > 30 {
+            let index = eventTitle.index(eventTitle.startIndex, offsetBy: 20)
+            eventTitle = String(eventTitle[...index]).trimmingCharacters(in: TitleTruncationRules.excludeAtEnds)
+            eventTitle += "..."
+        }
+
+        return eventTitle
+    }
+    
     func updateMenu(){
         self.statusItemMenu.autoenablesItems = false
         self.statusItemMenu.removeAllItems()
@@ -130,7 +146,9 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
             }
             
             if Defaults[.showEventNameInMenubar] {
-                button.title = " \(currentOne.summary!) (\(eventEndsIn))"
+                let shortSummary = shortenTitleForMenu(title: currentOne.summary!)
+                let titleString = " \(shortSummary) (\(eventEndsIn))"
+                button.title = titleString
             }else{
                 button.title = ""
             }
@@ -142,7 +160,12 @@ class StatusBarItemController: NSObject, NSMenuDelegate {
             self.createSectionTitle(text:nextMeeting)
             self.createEventMenuItem(userCalendar.getNextEvent()!)
             if Defaults[.showEventNameInMenubar] {
-                button.title = " \(userCalendar.getNextEvent()?.summary ?? "no title")" + " " + (NSLocalizedString("in", comment: "")) + " " + remainingString!
+                var shortSummary =  "no title"
+                if userCalendar.getNextEvent()?.summary != nil {
+                    shortSummary = shortenTitleForMenu(title: userCalendar.getNextEvent()!.summary!)
+                }
+                
+                button.title = " \(shortSummary)" + " " + (NSLocalizedString("in", comment: "")) + " " + remainingString!
             }else{
                 button.title = ""
             }

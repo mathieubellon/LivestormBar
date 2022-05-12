@@ -110,6 +110,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCenterDele
         }
     }
     
+    // I don't understand why scheduledTimer do not accept anything outside this class
+    // So force to do this proxy
     @objc
     func updateEvents(){
         if Defaults[.email] != nil {

@@ -51,7 +51,7 @@
 "you_are_not_connected" = "Vous n'êtes pas connecté";
 "next_in" = "A venir dans";
 "in" = "dans";
-"end_in" = "termine dans";
+"end_in" = "reste";
 "show_event_name_in_menubar" = "Afficher l'événement suivant ou actuel dans la barre de menus";
 "display" = "Affichage";
 "alert_app_will_be_hidden" = "Ce paramètre ne s'activera pas si on détecte que l'app va être cachée par MacOS en prenant trop de place - Maintenez votre bouton de commande puis faites glisser l'application vers la droite et réessayez.";
