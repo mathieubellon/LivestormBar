@@ -8,7 +8,6 @@
 import SwiftUI
 import OAuth2
 import Defaults
-import Alamofire
 
 let ud = UserDefaults.standard
 
@@ -134,22 +133,20 @@ func oauthDanceLaunch(){
 //    let urlComponents = URLComponents()
     let url = baseURL.appendingPathComponent(path)
     
-    
-    AF.request(url, interceptor: OAuth2RetryHandler(oauth2: GoogleOauth2), requestModifier: { $0.timeoutInterval = 5 }).validate().response() {response in
-        switch response.result {
-        case .success(let data):
-            do {
-                let user = try JSONDecoder().decode(UserInfo.self, from: data!)
-                print("USERINFO : \(user)")
-                Defaults[.picture] = user.picture
-                Defaults[.email] = user.email
-                Defaults[.username] = user.name
-                userCalendar.fetchEvents(calendarID: user.email)
-            }catch{
-                NSLog("Error decoding JSON")
-            }
-        case .failure(let error):
-            NSLog("Error requesting UserInfo : \(error)")
+
+    let req = GoogleOauth2.request(forURL: url)
+    let loader = OAuth2DataLoader(oauth2: GoogleOauth2)
+    loader.alsoIntercept403 = true
+    loader.perform(request: req) { response in
+        do {
+            let user = try JSONDecoder().decode(UserInfo.self, from: response.data!)
+            print("USERINFO : \(user)")
+            Defaults[.picture] = user.picture
+            Defaults[.email] = user.email
+            Defaults[.username] = user.name
+            userCalendar.fetchEvents(calendarID: user.email)
+        }catch{
+            NSLog("Error decoding JSON")
         }
     }
 }

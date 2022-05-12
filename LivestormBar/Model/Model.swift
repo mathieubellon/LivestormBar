@@ -8,7 +8,6 @@
 import SwiftUI
 import OAuth2
 import Defaults
-import Alamofire
 
 
 class UserCalendar {
@@ -39,14 +38,19 @@ class UserCalendar {
         NSLog("url Components: \(urlComponents.url!)")
         self.classicEvents = []
         self.allDayEvents = []
-        AF.request(urlComponents.url!, interceptor: OAuth2RetryHandler(oauth2: GoogleOauth2), requestModifier: { $0.timeoutInterval = 5 }).validate().response() { response in
-            switch response.result {
-            case .success(let data):
-                do{
-                    let decoder = JSONDecoder()
-                    decoder.dateDecodingStrategy = .iso8601
-                    let allItems = try decoder.decode(CalendarItems.self, from: data!)
-    
+        
+
+        let req = GoogleOauth2.request(forURL: urlComponents.url!)
+
+
+        let loader = OAuth2DataLoader(oauth2: GoogleOauth2)
+        loader.alsoIntercept403 = true
+        loader.perform(request: req) { response in
+            do {
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .iso8601
+                let allItems = try decoder.decode(CalendarItems.self, from: response.data!)
+                DispatchQueue.main.async {
                     for item in allItems.items {
                         if item.start.date != nil {
                             // If it has only a date prop. it is an all day event
@@ -57,21 +61,23 @@ class UserCalendar {
                             NSLog("Event is neither Classic nor AllDay: \(item)")
                         }
                     }
-                    
-                    
                     // Warning: Do not change the order of these functions
                     // Refacto to prevent that from happening
                     self.sortEventsArray()
                     self.extractMeetingLink()
                     self.setNotifications()
                     statusBarItem.updateMenu()
-                }catch{
+                }
+            }
+            catch let error {
+                DispatchQueue.main.async {
                     NSLog("Error decoding events: \(error)")
                 }
-            case .failure(let error):
-                NSLog("Error requesting events: \(error)")
             }
         }
+        
+        
+        
     }
     
     
