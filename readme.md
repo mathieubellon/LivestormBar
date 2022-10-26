@@ -11,7 +11,7 @@ A MacOs menubar that allow you to quickly jump into your next meeting
 - [Support](#support)
 - [Contributing](#contributing)
 
-## Installation
+## Installation --
 
 [Click here to download the last release](https://github.com/livestorm/LivestormBar/releases/download/v0.9-beta-1/LivestormBar.app.zip)
 
