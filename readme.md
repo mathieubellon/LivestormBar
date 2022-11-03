@@ -1,6 +1,6 @@
 # LivestormBar
 
-A MacOs menubar that allow you to quickly jump into your next meeting so cool
+A MacOs menubar that allow you to quickly jump into your next meetin
 
 ![alt text](https://raw.githubusercontent.com/livestorm/LivestormBar/main/livestormbar0502.png?token=GHSAT0AAAAAABUBBGZ6PB4R3NYYYFT33LWUYTSUSTA)
 
